@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Web_Music.Models.TIN_MOI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenTM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL_img)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL_link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LuotTruyCap)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenTM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGian)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URL_img)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.URL_link)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GhiChu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LuotTruyCap)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaTM }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaTM }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaTM })
+        </td>
+    </tr>
+}
+
+</table>

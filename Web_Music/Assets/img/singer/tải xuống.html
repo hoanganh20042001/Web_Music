@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<link rel="alternate" href="https://pablintino.com/en/how-to-setup-powerdns-with-replication/" hreflang="en" />
+<link rel="alternate" href="https://pablintino.com/como-configurar-pdns-replicado/" hreflang="es" />
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.7.2 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>How to setup PowerDNS with replication - pablintino</title>
+	<link rel="canonical" href="https://pablintino.com/en/how-to-setup-powerdns-with-replication/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:locale:alternate" content="es_ES" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="How to setup PowerDNS with replication - pablintino" />
+	<meta property="og:description" content="In this post I&#8217;d like to give you a simple step-by-step guide on how to setup a replicated PDNS server that can be used, for example, as on-premise Kubernetes DNS server with external-dns. But first&#8230; What is PowerDNS PowerDNS is an authoritative/recursive DNS, server developed under GPL, that can a wide range of backends to store [&hellip;]" />
+	<meta property="og:url" content="https://pablintino.com/en/how-to-setup-powerdns-with-replication/" />
+	<meta property="og:site_name" content="pablintino" />
+	<meta property="article:published_time" content="2022-01-29T14:02:18+00:00" />
+	<meta property="article:modified_time" content="2022-02-02T16:20:03+00:00" />
+	<meta property="og:image" content="https://pablintino.com/wp-content/uploads/2022/01/powerdns.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="500" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="pablintino" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="pablintino" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="8 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/#article","isPartOf":{"@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/"},"author":{"name":"pablintino","@id":"https://pablintino.com/en/inicio/#/schema/person/04fa26b902cbaccc8c6c359e661e213d"},"headline":"How to setup PowerDNS with replication","datePublished":"2022-01-29T14:02:18+00:00","dateModified":"2022-02-02T16:20:03+00:00","mainEntityOfPage":{"@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/"},"wordCount":811,"commentCount":0,"publisher":{"@id":"https://pablintino.com/en/inicio/#/schema/person/04fa26b902cbaccc8c6c359e661e213d"},"image":{"@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/#primaryimage"},"thumbnailUrl":"https://pablintino.com/wp-content/uploads/2022/01/powerdns.jpg","articleSection":["Sin categoría"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://pablintino.com/en/how-to-setup-powerdns-with-replication/#respond"]}]},{"@type":"WebPage","@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/","url":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/","name":"How to setup PowerDNS with replication - pablintino","isPartOf":{"@id":"https://pablintino.com/en/inicio/#website"},"primaryImageOfPage":{"@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/#primaryimage"},"image":{"@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/#primaryimage"},"thumbnailUrl":"https://pablintino.com/wp-content/uploads/2022/01/powerdns.jpg","datePublished":"2022-01-29T14:02:18+00:00","dateModified":"2022-02-02T16:20:03+00:00","breadcrumb":{"@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://pablintino.com/en/how-to-setup-powerdns-with-replication/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/#primaryimage","url":"https://pablintino.com/wp-content/uploads/2022/01/powerdns.jpg","contentUrl":"https://pablintino.com/wp-content/uploads/2022/01/powerdns.jpg","width":1200,"height":500},{"@type":"BreadcrumbList","@id":"https://pablintino.com/en/how-to-setup-powerdns-with-replication/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Portada","item":"https://pablintino.com/en/inicio/"},{"@type":"ListItem","position":2,"name":"How to setup PowerDNS with replication"}]},{"@type":"WebSite","@id":"https://pablintino.com/en/inicio/#website","url":"https://pablintino.com/en/inicio/","name":"pablintino","description":"Pablo&#039;s Rodriguez Nava Blog","publisher":{"@id":"https://pablintino.com/en/inicio/#/schema/person/04fa26b902cbaccc8c6c359e661e213d"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://pablintino.com/en/inicio/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":["Person","Organization"],"@id":"https://pablintino.com/en/inicio/#/schema/person/04fa26b902cbaccc8c6c359e661e213d","name":"pablintino","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://pablintino.com/en/inicio/#/schema/person/image/","url":"https://pablintino.com/wp-content/uploads/2022/01/avatar.jpg","contentUrl":"https://pablintino.com/wp-content/uploads/2022/01/avatar.jpg","width":600,"height":586,"caption":"pablintino"},"logo":{"@id":"https://pablintino.com/en/inicio/#/schema/person/image/"},"sameAs":["https://pablintino.com","https://www.instagram.com/pablintino/","https://www.linkedin.com/in/pablintino/"],"url":"https://pablintino.com/en/author/pablintino/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="pablintino &raquo; Feed" href="https://pablintino.com/en/feed/" />
+<link rel="alternate" type="application/rss+xml" title="pablintino &raquo; Comments Feed" href="https://pablintino.com/en/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="pablintino &raquo; How to setup PowerDNS with replication Comments Feed" href="https://pablintino.com/en/how-to-setup-powerdns-with-replication/feed/" />
+<script>
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/pablintino.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style>
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://pablintino.com/wp-includes/css/dist/block-library/style.min.css?ver=6.0.3' media='all' />
+<style id='global-styles-inline-css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel='stylesheet' id='hello-elementor-css'  href='https://pablintino.com/wp-content/themes/hello-elementor/style.min.css?ver=2.6.1' media='all' />
+<link rel='stylesheet' id='hello-elementor-theme-style-css'  href='https://pablintino.com/wp-content/themes/hello-elementor/theme.min.css?ver=2.6.1' media='all' />
+<link rel='stylesheet' id='elementor-frontend-css'  href='https://pablintino.com/wp-content/plugins/elementor/assets/css/frontend-lite.min.css?ver=3.7.8' media='all' />
+<link rel='stylesheet' id='elementor-post-5-css'  href='https://pablintino.com/wp-content/uploads/elementor/css/post-5.css?ver=1665321864' media='all' />
+<link rel='stylesheet' id='elementor-icons-css'  href='https://pablintino.com/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.16.0' media='all' />
+<link rel='stylesheet' id='elementor-pro-css'  href='https://pablintino.com/wp-content/plugins/elementor-pro/assets/css/frontend-lite.min.css?ver=3.7.3' media='all' />
+<link rel='stylesheet' id='elementor-global-css'  href='https://pablintino.com/wp-content/uploads/elementor/css/global.css?ver=1665321865' media='all' />
+<link rel='stylesheet' id='elementor-post-822-css'  href='https://pablintino.com/wp-content/uploads/elementor/css/post-822.css?ver=1665377638' media='all' />
+<link rel='stylesheet' id='elementor-post-36-css'  href='https://pablintino.com/wp-content/uploads/elementor/css/post-36.css?ver=1665321866' media='all' />
+<link rel='stylesheet' id='elementor-post-49-css'  href='https://pablintino.com/wp-content/uploads/elementor/css/post-49.css?ver=1665329764' media='all' />
+<link rel='stylesheet' id='elementor-post-955-css'  href='https://pablintino.com/wp-content/uploads/elementor/css/post-955.css?ver=1665377638' media='all' />
+<link rel='stylesheet' id='google-fonts-1-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRubik%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.0.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-shared-0-css'  href='https://pablintino.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-solid-css'  href='https://pablintino.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-brands-css'  href='https://pablintino.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min.css?ver=5.15.3' media='all' />
+<script src='https://pablintino.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script src='https://pablintino.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<link rel="https://api.w.org/" href="https://pablintino.com/wp-json/" /><link rel="alternate" type="application/json" href="https://pablintino.com/wp-json/wp/v2/posts/822" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://pablintino.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://pablintino.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 6.0.3" />
+<link rel='shortlink' href='https://pablintino.com/?p=822' />
+<link rel="alternate" type="application/json+oembed" href="https://pablintino.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpablintino.com%2Fen%2Fhow-to-setup-powerdns-with-replication%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://pablintino.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpablintino.com%2Fen%2Fhow-to-setup-powerdns-with-replication%2F&#038;format=xml" />
+<link rel="icon" href="https://pablintino.com/wp-content/uploads/2022/01/favicon-16x16-1.png" sizes="32x32" />
+<link rel="icon" href="https://pablintino.com/wp-content/uploads/2022/01/favicon-16x16-1.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://pablintino.com/wp-content/uploads/2022/01/favicon-16x16-1.png" />
+<meta name="msapplication-TileImage" content="https://pablintino.com/wp-content/uploads/2022/01/favicon-16x16-1.png" />
+</head>
+<body class="post-template-default single single-post postid-822 single-format-standard elementor-default elementor-kit-5 elementor-page elementor-page-822 elementor-page-955">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg>
+<a class="skip-link screen-reader-text" href="#content">
+	Skip to content</a>
+
+		<div data-elementor-type="header" data-elementor-id="36" class="elementor elementor-36 elementor-location-header">
+								<header class="elementor-section elementor-top-section elementor-element elementor-element-53cb6f99 elementor-section-full_width elementor-section-height-min-height elementor-section-content-middle elementor-section-stretched elementor-section-height-default elementor-section-items-middle" data-id="53cb6f99" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky&quot;:&quot;top&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-custom">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-72a324ba" data-id="72a324ba" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-c54668c elementor-widget elementor-widget-heading" data-id="c54668c" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.7.8 - 02-10-2022 */
+.elementor-heading-title{padding:0;margin:0;line-height:1}.elementor-widget-heading .elementor-heading-title[class*=elementor-size-]>a{color:inherit;font-size:inherit;line-height:inherit}.elementor-widget-heading .elementor-heading-title.elementor-size-small{font-size:15px}.elementor-widget-heading .elementor-heading-title.elementor-size-medium{font-size:19px}.elementor-widget-heading .elementor-heading-title.elementor-size-large{font-size:29px}.elementor-widget-heading .elementor-heading-title.elementor-size-xl{font-size:39px}.elementor-widget-heading .elementor-heading-title.elementor-size-xxl{font-size:59px}</style><h1 class="elementor-heading-title elementor-size-default"><a href="https://pablintino.com/en/inicio/">PABLINTINO</a></h1>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-4bf8cf93" data-id="4bf8cf93" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-3ce837ad elementor-nav-menu--stretch elementor-widget__width-auto elementor-nav-menu__text-align-center elementor-nav-menu--dropdown-tablet elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="3ce837ad" data-element_type="widget" data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+			<link rel="stylesheet" href="https://pablintino.com/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css">			<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-background e--animation-sweep-right">
+				<ul id="menu-1-3ce837ad" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-831"><a href="https://pablintino.com/en/inicio/" class="elementor-item">Homepage</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-851"><a href="https://pablintino.com/en/posts/" class="elementor-item">Posts</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-830"><a href="https://pablintino.com/en/projects/" class="elementor-item">Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-881"><a href="https://pablintino.com/en/about-me/" class="elementor-item">About me</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-903"><a href="https://pablintino.com/en/contact/" class="elementor-item">Contact</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a target="_blank" rel="noopener" href="https://github.com/pablintino" class="elementor-item">GitHub</a></li>
+<li class="pll-parent-menu-item menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-832"><a href="#pll_switcher" class="elementor-item elementor-item-anchor"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAmVBMVEViZsViZMJiYrf9gnL8eWrlYkjgYkjZYkj8/PujwPybvPz4+PetraBEgfo+fvo3efkydfkqcvj8Y2T8UlL8Q0P8MzP9k4Hz8/Lu7u4DdPj9/VrKysI9fPoDc/EAZ7z7IiLHYkjp6ekCcOTk5OIASbfY/v21takAJrT5Dg6sYkjc3Nn94t2RkYD+y8KeYkjs/v7l5fz0dF22YkjWvcOLAAAAgElEQVR4AR2KNULFQBgGZ5J13KGGKvc/Cw1uPe62eb9+Jr1EUBFHSgxxjP2Eca6AfUSfVlUfBvm1Ui1bqafctqMndNkXpb01h5TLx4b6TIXgwOCHfjv+/Pz+5vPRw7txGWT2h6yO0/GaYltIp5PT1dEpLNPL/SdWjYjAAZtvRPgHJX4Xio+DSrkAAAAASUVORK5CYII=" alt="English" width="16" height="11" style="width: 16px; height: 11px;" /><span style="margin-left:0.3em;">English</span></a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="lang-item lang-item-13 lang-item-es lang-item-first menu-item menu-item-type-custom menu-item-object-custom menu-item-832-es"><a href="https://pablintino.com/como-configurar-pdns-replicado/" hreflang="es-ES" lang="es-ES" class="elementor-sub-item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAflBMVEX/AAD9AAD3AADxAADrAAD/eXn9bGz8YWH8WVn6UVH5SEj5Pz/3NDT0Kir9/QD+/nL+/lT18lDt4Uf6+j/39zD39yf19R3n5wDxflXsZ1Pt4Y3x8zr0wbLs1NXz8xPj4wD37t3jmkvsUU/Bz6nrykm3vJ72IiL0FBTyDAvhAABEt4UZAAAAX0lEQVR4AQXBQUrFQBBAwXqTDkYE94Jb73+qfwVRcYxVQRBRToiUfoaVpGTrtdS9SO0Z9FR9lVy/g5c99+dKl30N5uxPuviexXEc9/msC7TOkd4kHu/Dlh4itCJ8AP4B0w4Qwmm7CFQAAAAASUVORK5CYII=" alt="Español" width="16" height="11" style="width: 16px; height: 11px;" /><span style="margin-left:0.3em;">Español</span></a></li>
+</ul>
+</li>
+</ul>			</nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true">
+				<ul id="menu-2-3ce837ad" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-831"><a href="https://pablintino.com/en/inicio/" class="elementor-item" tabindex="-1">Homepage</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-851"><a href="https://pablintino.com/en/posts/" class="elementor-item" tabindex="-1">Posts</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-830"><a href="https://pablintino.com/en/projects/" class="elementor-item" tabindex="-1">Projects</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-881"><a href="https://pablintino.com/en/about-me/" class="elementor-item" tabindex="-1">About me</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-903"><a href="https://pablintino.com/en/contact/" class="elementor-item" tabindex="-1">Contact</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a target="_blank" rel="noopener" href="https://github.com/pablintino" class="elementor-item" tabindex="-1">GitHub</a></li>
+<li class="pll-parent-menu-item menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-832"><a href="#pll_switcher" class="elementor-item elementor-item-anchor" tabindex="-1"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAmVBMVEViZsViZMJiYrf9gnL8eWrlYkjgYkjZYkj8/PujwPybvPz4+PetraBEgfo+fvo3efkydfkqcvj8Y2T8UlL8Q0P8MzP9k4Hz8/Lu7u4DdPj9/VrKysI9fPoDc/EAZ7z7IiLHYkjp6ekCcOTk5OIASbfY/v21takAJrT5Dg6sYkjc3Nn94t2RkYD+y8KeYkjs/v7l5fz0dF22YkjWvcOLAAAAgElEQVR4AR2KNULFQBgGZ5J13KGGKvc/Cw1uPe62eb9+Jr1EUBFHSgxxjP2Eca6AfUSfVlUfBvm1Ui1bqafctqMndNkXpb01h5TLx4b6TIXgwOCHfjv+/Pz+5vPRw7txGWT2h6yO0/GaYltIp5PT1dEpLNPL/SdWjYjAAZtvRPgHJX4Xio+DSrkAAAAASUVORK5CYII=" alt="English" width="16" height="11" style="width: 16px; height: 11px;" /><span style="margin-left:0.3em;">English</span></a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="lang-item lang-item-13 lang-item-es lang-item-first menu-item menu-item-type-custom menu-item-object-custom menu-item-832-es"><a href="https://pablintino.com/como-configurar-pdns-replicado/" hreflang="es-ES" lang="es-ES" class="elementor-sub-item" tabindex="-1"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAflBMVEX/AAD9AAD3AADxAADrAAD/eXn9bGz8YWH8WVn6UVH5SEj5Pz/3NDT0Kir9/QD+/nL+/lT18lDt4Uf6+j/39zD39yf19R3n5wDxflXsZ1Pt4Y3x8zr0wbLs1NXz8xPj4wD37t3jmkvsUU/Bz6nrykm3vJ72IiL0FBTyDAvhAABEt4UZAAAAX0lEQVR4AQXBQUrFQBBAwXqTDkYE94Jb73+qfwVRcYxVQRBRToiUfoaVpGTrtdS9SO0Z9FR9lVy/g5c99+dKl30N5uxPuviexXEc9/msC7TOkd4kHu/Dlh4itCJ8AP4B0w4Qwmm7CFQAAAAASUVORK5CYII=" alt="Español" width="16" height="11" style="width: 16px; height: 11px;" /><span style="margin-left:0.3em;">Español</span></a></li>
+</ul>
+</li>
+</ul>			</nav>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-0c9d118" data-id="0c9d118" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-0b92ee6 elementor-search-form--skin-minimal elementor-widget elementor-widget-search-form" data-id="0b92ee6" data-element_type="widget" data-settings="{&quot;skin&quot;:&quot;minimal&quot;}" data-widget_type="search-form.default">
+				<div class="elementor-widget-container">
+			<link rel="stylesheet" href="https://pablintino.com/wp-content/plugins/elementor-pro/assets/css/widget-theme-elements.min.css">		<form class="elementor-search-form" role="search" action="https://pablintino.com/en/" method="get">
+									<div class="elementor-search-form__container">
+									<div class="elementor-search-form__icon">
+						<i aria-hidden="true" class="fas fa-search"></i>						<span class="elementor-screen-only">Search</span>
+					</div>
+								<input placeholder="Search..." class="elementor-search-form__input" type="search" name="s" title="Search" value="">
+															</div>
+		</form>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</header>
+						</div>
+				<div data-elementor-type="single-post" data-elementor-id="955" class="elementor elementor-955 elementor-location-single post-822 post type-post status-publish format-standard has-post-thumbnail hentry category-sin-categoria">
+								<section class="elementor-section elementor-top-section elementor-element elementor-element-5b0fac51 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5b0fac51" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-172c9be4" data-id="172c9be4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-03bb3f4 elementor-widget elementor-widget-theme-post-featured-image elementor-widget-image" data-id="03bb3f4" data-element_type="widget" data-widget_type="theme-post-featured-image.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.7.8 - 02-10-2022 */
+.elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img[src$=".svg"]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block}</style>												<img src="https://pablintino.com/wp-content/uploads/elementor/thumbs/powerdns-pjgjmnk61a6okppxs1ywtpe56yrj2yycd5pxd8bxfo.jpg" title="powerdns" alt="powerdns" />															</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-5885ea5 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="5885ea5" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-66 elementor-inner-column elementor-element elementor-element-eae2adc" data-id="eae2adc" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-546639e elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading" data-id="546639e" data-element_type="widget" data-widget_type="theme-post-title.default">
+				<div class="elementor-widget-container">
+			<h1 class="elementor-heading-title elementor-size-default">How to setup PowerDNS with replication</h1>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-7572284" data-id="7572284" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-5a50ba8 elementor-align-right elementor-widget elementor-widget-post-info" data-id="5a50ba8" data-element_type="widget" data-widget_type="post-info.default">
+				<div class="elementor-widget-container">
+			<link rel="stylesheet" href="https://pablintino.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">		<ul class="elementor-inline-items elementor-icon-list-items elementor-post-info">
+								<li class="elementor-icon-list-item elementor-repeater-item-368e632 elementor-inline-item" itemprop="datePublished">
+						<a href="https://pablintino.com/en/2022/01/29/">
+											<span class="elementor-icon-list-icon">
+								<i aria-hidden="true" class="fas fa-calendar"></i>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-date">
+										January 29, 2022					</span>
+									</a>
+				</li>
+				<li class="elementor-icon-list-item elementor-repeater-item-aa3db3e elementor-inline-item" itemprop="commentCount">
+						<a href="https://pablintino.com/en/how-to-setup-powerdns-with-replication/#respond">
+											<span class="elementor-icon-list-icon">
+								<i aria-hidden="true" class="far fa-comment-dots"></i>							</span>
+									<span class="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-comments">
+										No Comments					</span>
+									</a>
+				</li>
+				</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-21616f70 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="21616f70" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2d64dcb9" data-id="2d64dcb9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-9a5e3f2 elementor-widget elementor-widget-theme-post-content" data-id="9a5e3f2" data-element_type="widget" data-widget_type="theme-post-content.default">
+				<div class="elementor-widget-container">
+					<div data-elementor-type="wp-post" data-elementor-id="822" class="elementor elementor-822">
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-5facbb4 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5facbb4" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5797f15" data-id="5797f15" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-1869020 elementor-widget elementor-widget-text-editor" data-id="1869020" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.7.8 - 02-10-2022 */
+.elementor-widget-text-editor.elementor-drop-cap-view-stacked .elementor-drop-cap{background-color:#818a91;color:#fff}.elementor-widget-text-editor.elementor-drop-cap-view-framed .elementor-drop-cap{color:#818a91;border:3px solid;background-color:transparent}.elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap{margin-top:8px}.elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap-letter{width:1em;height:1em}.elementor-widget-text-editor .elementor-drop-cap{float:left;text-align:center;line-height:1;font-size:50px}.elementor-widget-text-editor .elementor-drop-cap-letter{display:inline-block}</style>				<div><div>In this post I&#8217;d like to give you a simple step-by-step guide on how to setup a replicated PDNS server that can be used, for example, as on-premise Kubernetes DNS server with external-dns.</div><div> </div><div>But first&#8230;</div></div>						</div>
+				</div>
+				<div class="elementor-element elementor-element-3409531 elementor-widget elementor-widget-heading" data-id="3409531" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">What is PowerDNS</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-ec66cb0 elementor-widget elementor-widget-text-editor" data-id="ec66cb0" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<div><div>PowerDNS is an authoritative/recursive DNS, server developed under GPL, that can a wide range of backends to store DNS zones:</div><ul><li>Relational databases</li><li>BIND zone files</li><li>LDAP</li></ul><div>One useful <span class="TextRun SCXW201923115 BCX2" lang="EN-US" xml:lang="EN-US" data-contrast="auto"><span class="NormalTextRun SCXW201923115 BCX2">functionality</span> </span> of PDNS is the control and monitoring web API, that is quite well documented, and that enables full control over zones manipulation with external tools and automations, kubernetes external-dns, etc.</div></div>						</div>
+				</div>
+				<div class="elementor-element elementor-element-60b2aea elementor-widget elementor-widget-heading" data-id="60b2aea" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Environment</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-202f8c0 elementor-widget elementor-widget-text-editor" data-id="202f8c0" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<div><div>The environment is quite simple as is only composed by two freshly installed Debian 11 virtual machines.</div></div>						</div>
+				</div>
+				<div class="elementor-element elementor-element-c3a4ff7 elementor-widget elementor-widget-image" data-id="c3a4ff7" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img width="768" height="561" src="https://pablintino.com/wp-content/uploads/2022/01/schematic-768x561.png" class="attachment-medium_large size-medium_large" alt="" loading="lazy" srcset="https://pablintino.com/wp-content/uploads/2022/01/schematic-768x561.png 768w, https://pablintino.com/wp-content/uploads/2022/01/schematic-300x219.png 300w, https://pablintino.com/wp-content/uploads/2022/01/schematic-1024x748.png 1024w, https://pablintino.com/wp-content/uploads/2022/01/schematic-16x12.png 16w, https://pablintino.com/wp-content/uploads/2022/01/schematic.png 1480w" sizes="(max-width: 768px) 100vw, 768px" />															</div>
+				</div>
+				<div class="elementor-element elementor-element-167b86f elementor-widget elementor-widget-heading" data-id="167b86f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Setup</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-8290167 elementor-widget elementor-widget-text-editor" data-id="8290167" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<div><div>The installation here described is completely manual. I don&#8217;t recommend this way of installing and configuring PDNS unless you are practicing with a test environment or are trying to have a first contact with this kind of setups. For real applications the process should be automated and hardening measures should be applied to enforce security.</div></div>						</div>
+				</div>
+				<div class="elementor-element elementor-element-3d07ca3 pbtn-elementor-toggle-open elementor-widget elementor-widget-toggle" data-id="3d07ca3" data-element_type="widget" data-widget_type="toggle.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.7.8 - 02-10-2022 */
+.elementor-toggle{text-align:left}.elementor-toggle .elementor-tab-title{font-weight:700;line-height:1;margin:0;padding:15px;border-bottom:1px solid #d4d4d4;cursor:pointer;outline:none}.elementor-toggle .elementor-tab-title .elementor-toggle-icon{display:inline-block;width:1em}.elementor-toggle .elementor-tab-title .elementor-toggle-icon svg{-webkit-margin-start:-5px;margin-inline-start:-5px;width:1em;height:1em}.elementor-toggle .elementor-tab-title .elementor-toggle-icon.elementor-toggle-icon-right{float:right;text-align:right}.elementor-toggle .elementor-tab-title .elementor-toggle-icon.elementor-toggle-icon-left{float:left;text-align:left}.elementor-toggle .elementor-tab-title .elementor-toggle-icon .elementor-toggle-icon-closed{display:block}.elementor-toggle .elementor-tab-title .elementor-toggle-icon .elementor-toggle-icon-opened{display:none}.elementor-toggle .elementor-tab-title.elementor-active{border-bottom:none}.elementor-toggle .elementor-tab-title.elementor-active .elementor-toggle-icon-closed{display:none}.elementor-toggle .elementor-tab-title.elementor-active .elementor-toggle-icon-opened{display:block}.elementor-toggle .elementor-tab-content{padding:15px;border-bottom:1px solid #d4d4d4;display:none}@media (max-width:767px){.elementor-toggle .elementor-tab-title{padding:12px}.elementor-toggle .elementor-tab-content{padding:12px 10px}}.e-container>.elementor-widget-toggle{width:var(--container-widget-width,100%)}</style>		<div class="elementor-toggle" role="tablist">
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-6391" class="elementor-tab-title" data-tab="1" role="tab" aria-controls="elementor-tab-content-6391" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-exclamation-triangle"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-exclamation-triangle"></i></span>
+													</span>
+												<a href="" class="elementor-toggle-title">Notice</a>
+					</div>
+
+					<div id="elementor-tab-content-6391" class="elementor-tab-content elementor-clearfix" data-tab="1" role="tabpanel" aria-labelledby="elementor-tab-title-6391"><p><span data-contrast="auto">This article can be followed using any Linux distribution. At first glance there shouldn&#8217;t be any issues by using a Debian based distribution that uses apt-packages, despite of the fact that repository URLs change, but keep in mind that if you use a RHEL based distribution</span> more adjustments could be needed.</p></div>
+				</div>
+								</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-cd1fa17 elementor-widget elementor-widget-heading" data-id="cd1fa17" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Pre-requirements</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-264c1ec elementor-widget elementor-widget-text-editor" data-id="264c1ec" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>All the steps of this section should be applied to both nodes, the master and the slave.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-4a7a01d elementor-widget elementor-widget-text-editor" data-id="4a7a01d" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>To simplify the setup we will install the DB alongside PDNS, but, keep in mind that the is recommended to have both services on separate machines.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-c4ef81e elementor-widget elementor-widget-code-highlight" data-id="c4ef81e" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash ">
+				<code readonly="true" class="language-bash">
+					<xmp>sudo apt-get install software-properties-common dirmngr apt-transport-https -y
+sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
+sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://ams2.mirrors.digitalocean.com/mariadb/repo/10.5/debian bullseye main'
+sudo apt update
+sudo apt install mariadb-server -y
+
+# Just secure the root user and remove samnple data
+sudo mysql_secure_installation</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-506bc7a elementor-widget elementor-widget-text-editor" data-id="506bc7a" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>We will need to modify MariaDB&#8217;s configuration to change how it generate replication events to the one that only takes into account a ROW change. You can checkout the official documentation on how binlog works <a href="https://dev.mysql.com/doc/refman/8.0/en/binary-log.html">here</a>.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-21b0e75 elementor-widget elementor-widget-code-highlight" data-id="21b0e75" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash ">
+				<code readonly="true" class="language-bash">
+					<xmp>sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+	#Add this line under the [mysqld] tag
+	binlog-format=ROW
+
+# Restart the DB to apply changes
+sudo systemctl restart mariadb
+
+# Enable on-boot start of the DB
+sudo systemctl enable mariadb</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-999d62e elementor-widget elementor-widget-text-editor" data-id="999d62e" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Create the PDNS database, user, privileges and load the schema.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-bdeaf76 elementor-widget elementor-widget-code-highlight" data-id="bdeaf76" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash ">
+				<code readonly="true" class="language-bash">
+					<xmp>mysql -u root -p
+MariaDB [(none)]> show variables like 'binlog_format'; # Asegurate de que haya cambiado a row
+MariaDB [(none)]> create database powerdns;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON powerdns.* TO 'powerdns'@'localhost' IDENTIFIED BY 'yourdatabasepassword';
+MariaDB [(none)]> exit;
+
+curl https://raw.githubusercontent.com/PowerDNS/pdns/rel/auth-4.5.x/modules/gmysqlbackend/schema.mysql.sql | mysql --user=root --password=<ROOT-PASSWORD from mysql_secure-installation> --database=powerdns</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-71b35ba elementor-widget elementor-widget-text-editor" data-id="71b35ba" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>We will install PDNS from its repos instead of the Debian ones to be able to install a specific version, 4.5 in this example, instead of the distribution selected one.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-9f4913a elementor-widget elementor-widget-code-highlight" data-id="9f4913a" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash ">
+				<code readonly="true" class="language-bash">
+					<xmp># Add PDNS PGP keys and packet repsitories
+sudo nano /etc/apt/sources.list.d/pdns.list
+deb [arch=amd64] http://repo.powerdns.com/ubuntu focal-auth-45 main
+deb [arch=amd64] http://repo.powerdns.com/ubuntu focal-rec-45 main
+
+sudo nano /etc/apt/preferences.d/pdns
+Package: pdns-*
+Pin: origin repo.powerdns.com
+Pin-Priority: 600
+
+curl https://repo.powerdns.com/FD380FBB-pub.asc | sudo apt-key add -
+
+# Install PDNS Authoritative Server, Recursor and MySQL/MariaDB connector
+sudo apt-get update && sudo apt-get install pdns-server pdns-recursor pdns-backend-mysql -y</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-c0013b3 elementor-widget elementor-widget-heading" data-id="c0013b3" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Master node preparation</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-d43c89b elementor-widget elementor-widget-text-editor" data-id="d43c89b" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Now that both server already have the common configuration and packages installed it&#8217;s time to start configuring the master node. To do so, we start configuring replication at MariaDB master by modifying its configuration file with the following changes.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-62a3ac8 elementor-widget elementor-widget-code-highlight" data-id="62a3ac8" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+# Add/modify the following lines
+bind-address = 0.0.0.0
+server-id = 1
+log_bin = /var/log/mysql/mysql-bin.log
+expire_logs_days = 10
+max_binlog_size = 100M
+binlog_do_db = powerdns
+
+# Restart MariaDB to reload config
+sudo systemctl restart mariadb</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-0ab633d elementor-widget elementor-widget-text-editor" data-id="0ab633d" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Next, we create the user used by the database for replication and,, at the same time, we will write down the position of the binlog that we will use later to configure replication in the slave node, as that value will tell the DB in which position of the binlog it should start to replicate.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-5844d99 elementor-widget elementor-widget-code-highlight" data-id="5844d99" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="10" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>mysql -u root -p
+
+# Create replication user and give permissions
+MariaDB [(none)]> GRANT REPLICATION SLAVE ON *.* TO 'pdns-secondary'@'<SECONDARY_SERVER_IP>' IDENTIFIED BY '<SECRET_PASSWORD>';
+MariaDB [(none)]> FLUSH PRIVILEGES;
+MariaDB [(none)]> show master status;
+
+## Demo output of the status command. Just write down the position value
+	+------------------+----------+--------------+------------------+
+	| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |
+	+------------------+----------+--------------+------------------+
+	| mysql-bin.000001 |      634 | powerdns     |                  |
+	+------------------+----------+--------------+------------------+</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-1cc7a4b elementor-widget elementor-widget-text-editor" data-id="1cc7a4b" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Finally, we only need to configure PDNS Authoritative and Recursor with the following changes in their configuration files. There&#8217;s no need to remove the entire file, just ensure that the parameters proposed here contain the expected values.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-ad783a4 elementor-widget elementor-widget-code-highlight" data-id="ad783a4" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>sudo nano /etc/powerdns/pdns.conf
+
+# If you plan to use the API then enable it and webserver too
+api=yes
+api-key=<SECRET-API-KEY>
+webserver=yes
+
+# The IP of the interface where PDNS web server will listen
+webserver-address=192.168.1.6   # Master IP address
+# Explicit allow request to API/web server from this IPs
+webserver-allow-from=192.168.1.0/24
+
+# In which which port will we listen to DNS requests
+local-port=5300
+
+# This is the master node
+master=yes
+slave=no
+
+# Database parameters
+launch=gmysql
+gmysql-host=127.0.0.1
+gmysql-user=powerdns
+gmysql-password=<POWERDNS-MARIDB-PASSWORD>
+gmysql-dbname=powerdns
+
+# Reload PDNS configuration
+sudo systemctl restart pdns.service</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-ca5d86f elementor-widget elementor-widget-text-editor" data-id="ca5d86f" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>There are two points in the previous configuration that are worth mentioning:</p><ul><li><b>local-port=5300:</b> DNS request that arrive to servers (both, master and slave) are handled by the recursor, not the authoritative server, so that&#8217;s why recursors are the ones that listen on the standard DNS port 53. Authoritative servers will be requested only from the recursors on the same instance if a DNS request for their owned zone arrives. Saying that, any free port is valid to be assigned to the authoritative server, 5300 in this case.</li><li><b>api=yes</b> and <b>webserver=yes:</b> This post is the product of the need of owning a DNS server that can be easily integrated with kubernetes <a href="https://github.com/kubernetes-sigs/external-dns">external-dns</a>. With PDNS API the process is straightforward and only the IP of the server and the API key are needed. If you are not planning to use the API or the monitoring portal feel free to comment out those options.</li></ul>						</div>
+				</div>
+				<div class="elementor-element elementor-element-2fece3e elementor-widget elementor-widget-text-editor" data-id="2fece3e" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Recursor configuration is far easier and can be summarized as the following.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-cc17b76 elementor-widget elementor-widget-code-highlight" data-id="cc17b76" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>sudo nano /etc/powerdns/recursor.conf
+
+# IP of the interface used to listen DNS requests
+local-address=192.168.1.6
+
+# Forward requests of *.subdomain.example.com to the Authoritative server
+forward-zones=subdomain.example.com=127.0.0.1:5300
+
+# Rest of queries goes to google DNSs
+forward-zones-recurse=.=8.8.8.8
+local-port=53
+dnssec=off
+
+# Reload PDNS recursor configuration
+sudo systemctl restart pdns-recursor.service </xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-21cbe05 elementor-widget elementor-widget-heading" data-id="21cbe05" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Slave preparation</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-b4164bf elementor-widget elementor-widget-text-editor" data-id="b4164bf" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>In the slave node the first step is to change MariaDB config to increment the server identifier and the binglog and database used for replication.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-fc597ae elementor-widget elementor-widget-code-highlight" data-id="fc597ae" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>server-id=2
+bind-address = 0.0.0.0
+relay-log=slave-relay-bin
+relay-log-index=slave-relay-bin.index
+replicate-do-db=powerdns
+
+# Restart MariaDB to reload config
+sudo systemctl restart mariadb</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-17e0a6c elementor-widget elementor-widget-text-editor" data-id="17e0a6c" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>To start the replication process we need to command an explicit start in MariaDB shell. At this point we should tell MariaDB the binlog position that we wrote down previously when we configured the master node.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-b6fc59f elementor-widget elementor-widget-code-highlight" data-id="b6fc59f" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>mysql -u root -p
+
+MariaDB [(none)]> change master to master_host='<PRIMARY_SERVER_IP>', master_user='pdns-secondary', master_password='<SECRET_PASSWORD>', master_log_file='mysql-bin.000001', master_log_pos=<POSITION>;
+MariaDB [(none)]> start slave;
+
+# If all is OK this will show "Waiting for master to send event"
+MariaDB [(none)]> show slave status </xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-fe0ea66 elementor-widget elementor-widget-text-editor" data-id="fe0ea66" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Previous step gave us a fully configured database that replicates. All that remains is to configure the slave PDNS with the following file for the Authoritative server.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-6480a81 elementor-widget elementor-widget-code-highlight" data-id="6480a81" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>sudo nano /etc/powerdns/pdns.conf
+
+# If you plan to use the API then enable it and webserver too
+api=yes
+api-key=<SECRET-API-KEY>
+webserver=yes
+
+# The IP of the interface where PDNS web server will listen
+webserver-address=192.168.1.6    # Slave IP address
+# Explicit allow request to API/web server from this IPs
+webserver-allow-from=192.168.1.0/24
+
+# In which which port will we listen to DNS requests
+local-port=5300
+
+# This is the master node
+master=no   # This change is important is the slave
+slave=yes   # This change is important is the slave
+
+# Database parameters
+launch=gmysql
+gmysql-host=127.0.0.1
+gmysql-user=powerdns
+gmysql-password=<POWERDNS-MARIDB-PASSWORD>
+gmysql-dbname=powerdns
+
+# Reload PDNS configuration
+sudo systemctl restart pdns.service</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-56ca2f3 elementor-widget elementor-widget-text-editor" data-id="56ca2f3" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>To wind up the configuration process we can configure the slave recursor with the following configuration.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-6eaee5e elementor-widget elementor-widget-code-highlight" data-id="6eaee5e" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp>sudo nano /etc/powerdns/recursor.conf
+
+# IP of the interface used to listen DNS requests
+local-address=192.168.1.6    # Slave IP address
+
+# Forward requests of *.subdomain.example.com to the Authoritative server
+forward-zones=subdomain.example.com=127.0.0.1:5300
+
+# Rest of queries goes to google DNSs
+forward-zones-recurse=.=8.8.8.8
+local-port=53
+dnssec=off
+
+# Reload PDNS recursor configuration
+sudo systemctl restart pdns-recursor.service </xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-3201750 elementor-widget elementor-widget-heading" data-id="3201750" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Testing</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-e5bdab6 elementor-widget elementor-widget-text-editor" data-id="e5bdab6" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><span class="TextRun  BCX2 SCXW157676797" lang="EN-US" xml:lang="EN-US" data-contrast="auto"><span class="NormalTextRun  BCX2 SCXW157676797">At this point we have both PDNS server up and running so it is time to check that all is working as expected </span><span class="NormalTextRun  BCX2 SCXW157676797">with the help of the </span><em><span class="NormalTextRun SpellingErrorV2  BCX2 SCXW157676797">pdnsutil</span></em><span class="NormalTextRun  BCX2 SCXW157676797"> tool to create and edit our DNS zone in the authoritative server. With </span><em><span class="NormalTextRun SpellingErrorV2  BCX2 SCXW157676797">nslookup</span></em><span class="NormalTextRun  BCX2 SCXW157676797"> we will verify that the DNS entries that we will </span><span class="NormalTextRun SpellingErrorV2  BCX2 SCXW157676797">create</span><span class="NormalTextRun  BCX2 SCXW157676797"> are properly resolving. IN the master node:</span></span></p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-d644fa4 elementor-widget elementor-widget-code-highlight" data-id="d644fa4" data-element_type="widget" data-widget_type="code-highlight.default">
+				<div class="elementor-widget-container">
+					<div class="prismjs-default copy-to-clipboard ">
+			<pre data-line="" class="highlight-height language-bash line-numbers">
+				<code readonly="true" class="language-bash">
+					<xmp># Create our sample zone (this zone is the one that we delegate to out authoritative server)
+sudo pdnsutil create-zone subdomain.example.com
+
+# Add the NSs server entries
+sudo pdnsutil add-record subdomain.example.com @ NS ns1.subdomain.example.com
+sudo pdnsutil add-record subdomain.example.com @ NS ns2.subdomain.example.com
+# Provide de A records for the NSs
+sudo pdnsutil add-record subdomain.example.com ns1 A 192.168.1.6
+sudo pdnsutil add-record subdomain.example.com ns2 A 192.168.1.7
+
+# Verify that the zone seems to be as expected
+sudo pdnsutil list-zone subdomain.example.com
+
+# Verify no errors in the zone
+sudo pdnsutil check-all-zones
+
+# The nslookup to the slave should answer with the A record of ourselfs if replication is OK
+nslookup ns1.subdomain.example.com 192.168.1.7
+Server:		192.168.1.7
+Address:	192.168.1.7#53
+
+Non-authoritative answer:
+Name:	ns1.subdomain.example.com
+Address: 192.168.1.6</xmp>
+				</code>
+			</pre>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+							</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-4e26a1bb elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4e26a1bb" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-4b978656" data-id="4b978656" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-738bce81 elementor-widget elementor-widget-heading" data-id="738bce81" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Share:</h2>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-296effb9" data-id="296effb9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-5fafb961 elementor-share-buttons--skin-framed elementor-share-buttons--align-right elementor-share-buttons-mobile--align-center elementor-share-buttons--shape-rounded elementor-share-buttons--view-icon-text elementor-grid-0 elementor-share-buttons--color-official elementor-widget elementor-widget-share-buttons" data-id="5fafb961" data-element_type="widget" data-widget_type="share-buttons.default">
+				<div class="elementor-widget-container">
+			<link rel="stylesheet" href="https://pablintino.com/wp-content/plugins/elementor-pro/assets/css/widget-share-buttons.min.css">		<div class="elementor-grid">
+								<div class="elementor-grid-item">
+						<div class="elementor-share-btn elementor-share-btn_linkedin" tabindex="0" aria-label="Share on linkedin">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-linkedin" aria-hidden="true"></i>							</span>
+																						<div class="elementor-share-btn__text">
+																			<span class="elementor-share-btn__title">
+										LinkedIn									</span>
+																	</div>
+													</div>
+					</div>
+									<div class="elementor-grid-item">
+						<div class="elementor-share-btn elementor-share-btn_reddit" tabindex="0" aria-label="Share on reddit">
+															<span class="elementor-share-btn__icon">
+								<i class="fab fa-reddit" aria-hidden="true"></i>							</span>
+																						<div class="elementor-share-btn__text">
+																			<span class="elementor-share-btn__title">
+										Reddit									</span>
+																	</div>
+													</div>
+					</div>
+						</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-f3a26f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f3a26f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6d004bb3" data-id="6d004bb3" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-47e1dcd6 elementor-widget elementor-widget-post-comments" data-id="47e1dcd6" data-element_type="widget" data-widget_type="post-comments.theme_comments">
+				<div class="elementor-widget-container">
+			<section id="comments" class="comments-area">
+
+	
+
+	<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/en/how-to-setup-powerdns-with-replication/#respond" style="display:none;">Cancel reply</a></small></h2><form action="https://pablintino.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message" aria-hidden="true">Required fields are marked <span class="required" aria-hidden="true">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required" aria-hidden="true">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required" aria-hidden="true">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required" aria-hidden="true">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='822' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="ca1ac1bae1" /></p><p style="display: none !important;"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="11"/><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	
+</section><!-- .comments-area -->
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-4368e8b5 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4368e8b5" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-75322a60" data-id="75322a60" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-55a47d5b elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="55a47d5b" data-element_type="widget" data-widget_type="divider.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.7.8 - 02-10-2022 */
+.elementor-widget-divider{--divider-border-style:none;--divider-border-width:1px;--divider-color:#2c2c2c;--divider-icon-size:20px;--divider-element-spacing:10px;--divider-pattern-height:24px;--divider-pattern-size:20px;--divider-pattern-url:none;--divider-pattern-repeat:repeat-x}.elementor-widget-divider .elementor-divider{display:-webkit-box;display:-ms-flexbox;display:flex}.elementor-widget-divider .elementor-divider__text{font-size:15px;line-height:1;max-width:95%}.elementor-widget-divider .elementor-divider__element{margin:0 var(--divider-element-spacing);-ms-flex-negative:0;flex-shrink:0}.elementor-widget-divider .elementor-icon{font-size:var(--divider-icon-size)}.elementor-widget-divider .elementor-divider-separator{display:-webkit-box;display:-ms-flexbox;display:flex;margin:0;direction:ltr}.elementor-widget-divider--view-line_icon .elementor-divider-separator,.elementor-widget-divider--view-line_text .elementor-divider-separator{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.elementor-widget-divider--view-line_icon .elementor-divider-separator:after,.elementor-widget-divider--view-line_icon .elementor-divider-separator:before,.elementor-widget-divider--view-line_text .elementor-divider-separator:after,.elementor-widget-divider--view-line_text .elementor-divider-separator:before{display:block;content:"";border-bottom:0;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;border-top:var(--divider-border-width) var(--divider-border-style) var(--divider-color)}.elementor-widget-divider--element-align-left .elementor-divider .elementor-divider-separator>.elementor-divider__svg:first-of-type{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:100;flex-shrink:100}.elementor-widget-divider--element-align-left .elementor-divider-separator:before{content:none}.elementor-widget-divider--element-align-left .elementor-divider__element{margin-left:0}.elementor-widget-divider--element-align-right .elementor-divider .elementor-divider-separator>.elementor-divider__svg:last-of-type{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:100;flex-shrink:100}.elementor-widget-divider--element-align-right .elementor-divider-separator:after{content:none}.elementor-widget-divider--element-align-right .elementor-divider__element{margin-right:0}.elementor-widget-divider:not(.elementor-widget-divider--view-line_text):not(.elementor-widget-divider--view-line_icon) .elementor-divider-separator{border-top:var(--divider-border-width) var(--divider-border-style) var(--divider-color)}.elementor-widget-divider--separator-type-pattern{--divider-border-style:none}.elementor-widget-divider--separator-type-pattern.elementor-widget-divider--view-line .elementor-divider-separator,.elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:after,.elementor-widget-divider--separator-type-pattern:not(.elementor-widget-divider--view-line) .elementor-divider-separator:before,.elementor-widget-divider--separator-type-pattern:not([class*=elementor-widget-divider--view]) .elementor-divider-separator{width:100%;min-height:var(--divider-pattern-height);-webkit-mask-size:var(--divider-pattern-size) 100%;mask-size:var(--divider-pattern-size) 100%;-webkit-mask-repeat:var(--divider-pattern-repeat);mask-repeat:var(--divider-pattern-repeat);background-color:var(--divider-color);-webkit-mask-image:var(--divider-pattern-url);mask-image:var(--divider-pattern-url)}.elementor-widget-divider--no-spacing{--divider-pattern-size:auto}.elementor-widget-divider--bg-round{--divider-pattern-repeat:round}.rtl .elementor-widget-divider .elementor-divider__text{direction:rtl}.e-container>.elementor-widget-divider{width:var(--container-widget-width,100%);--flex-grow:var(--container-widget-flex-grow,0)}</style>		<div class="elementor-divider">
+			<span class="elementor-divider-separator">
+						</span>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-2128f62f elementor-widget elementor-widget-heading" data-id="2128f62f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Related Posts</h2>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+						</div>
+				<div data-elementor-type="footer" data-elementor-id="49" class="elementor elementor-49 elementor-location-footer">
+								<footer class="elementor-section elementor-top-section elementor-element elementor-element-30e95ffa elementor-section-height-min-height elementor-section-boxed elementor-section-height-default elementor-section-items-middle" data-id="30e95ffa" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-4856a86" data-id="4856a86" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-3fb4dd04 elementor-widget elementor-widget-heading" data-id="3fb4dd04" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">© 2020 - 2022 Pablo Rodriguez Nava,  All rights reserved.</p>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-1ab18ca8" data-id="1ab18ca8" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-1dd3a4d7 e-grid-align-right e-grid-align-mobile-center elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons" data-id="1dd3a4d7" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.7.8 - 02-10-2022 */
+.elementor-widget-social-icons.elementor-grid-0 .elementor-widget-container,.elementor-widget-social-icons.elementor-grid-mobile-0 .elementor-widget-container,.elementor-widget-social-icons.elementor-grid-tablet-0 .elementor-widget-container{line-height:1;font-size:0}.elementor-widget-social-icons:not(.elementor-grid-0):not(.elementor-grid-tablet-0):not(.elementor-grid-mobile-0) .elementor-grid{display:inline-grid}.elementor-widget-social-icons .elementor-grid{grid-column-gap:var(--grid-column-gap,5px);grid-row-gap:var(--grid-row-gap,5px);grid-template-columns:var(--grid-template-columns);-webkit-box-pack:var(--justify-content,center);-ms-flex-pack:var(--justify-content,center);justify-content:var(--justify-content,center);justify-items:var(--justify-content,center)}.elementor-icon.elementor-social-icon{font-size:var(--icon-size,25px);line-height:var(--icon-size,25px);width:calc(var(--icon-size, 25px) + (2 * var(--icon-padding, .5em)));height:calc(var(--icon-size, 25px) + (2 * var(--icon-padding, .5em)))}.elementor-social-icon{--e-social-icon-icon-color:#fff;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;background-color:#818a91;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center;cursor:pointer}.elementor-social-icon i{color:var(--e-social-icon-icon-color)}.elementor-social-icon svg{fill:var(--e-social-icon-icon-color)}.elementor-social-icon:last-child{margin:0}.elementor-social-icon:hover{opacity:.9;color:#fff}.elementor-social-icon-android{background-color:#a4c639}.elementor-social-icon-apple{background-color:#999}.elementor-social-icon-behance{background-color:#1769ff}.elementor-social-icon-bitbucket{background-color:#205081}.elementor-social-icon-codepen{background-color:#000}.elementor-social-icon-delicious{background-color:#39f}.elementor-social-icon-deviantart{background-color:#05cc47}.elementor-social-icon-digg{background-color:#005be2}.elementor-social-icon-dribbble{background-color:#ea4c89}.elementor-social-icon-elementor{background-color:#d30c5c}.elementor-social-icon-envelope{background-color:#ea4335}.elementor-social-icon-facebook,.elementor-social-icon-facebook-f{background-color:#3b5998}.elementor-social-icon-flickr{background-color:#0063dc}.elementor-social-icon-foursquare{background-color:#2d5be3}.elementor-social-icon-free-code-camp,.elementor-social-icon-freecodecamp{background-color:#006400}.elementor-social-icon-github{background-color:#333}.elementor-social-icon-gitlab{background-color:#e24329}.elementor-social-icon-globe{background-color:#818a91}.elementor-social-icon-google-plus,.elementor-social-icon-google-plus-g{background-color:#dd4b39}.elementor-social-icon-houzz{background-color:#7ac142}.elementor-social-icon-instagram{background-color:#262626}.elementor-social-icon-jsfiddle{background-color:#487aa2}.elementor-social-icon-link{background-color:#818a91}.elementor-social-icon-linkedin,.elementor-social-icon-linkedin-in{background-color:#0077b5}.elementor-social-icon-medium{background-color:#00ab6b}.elementor-social-icon-meetup{background-color:#ec1c40}.elementor-social-icon-mixcloud{background-color:#273a4b}.elementor-social-icon-odnoklassniki{background-color:#f4731c}.elementor-social-icon-pinterest{background-color:#bd081c}.elementor-social-icon-product-hunt{background-color:#da552f}.elementor-social-icon-reddit{background-color:#ff4500}.elementor-social-icon-rss{background-color:#f26522}.elementor-social-icon-shopping-cart{background-color:#4caf50}.elementor-social-icon-skype{background-color:#00aff0}.elementor-social-icon-slideshare{background-color:#0077b5}.elementor-social-icon-snapchat{background-color:#fffc00}.elementor-social-icon-soundcloud{background-color:#f80}.elementor-social-icon-spotify{background-color:#2ebd59}.elementor-social-icon-stack-overflow{background-color:#fe7a15}.elementor-social-icon-steam{background-color:#00adee}.elementor-social-icon-stumbleupon{background-color:#eb4924}.elementor-social-icon-telegram{background-color:#2ca5e0}.elementor-social-icon-thumb-tack{background-color:#1aa1d8}.elementor-social-icon-tripadvisor{background-color:#589442}.elementor-social-icon-tumblr{background-color:#35465c}.elementor-social-icon-twitch{background-color:#6441a5}.elementor-social-icon-twitter{background-color:#1da1f2}.elementor-social-icon-viber{background-color:#665cac}.elementor-social-icon-vimeo{background-color:#1ab7ea}.elementor-social-icon-vk{background-color:#45668e}.elementor-social-icon-weibo{background-color:#dd2430}.elementor-social-icon-weixin{background-color:#31a918}.elementor-social-icon-whatsapp{background-color:#25d366}.elementor-social-icon-wordpress{background-color:#21759b}.elementor-social-icon-xing{background-color:#026466}.elementor-social-icon-yelp{background-color:#af0606}.elementor-social-icon-youtube{background-color:#cd201f}.elementor-social-icon-500px{background-color:#0099e5}.elementor-shape-rounded .elementor-icon.elementor-social-icon{border-radius:10%}.elementor-shape-circle .elementor-icon.elementor-social-icon{border-radius:50%}</style>		<div class="elementor-social-icons-wrapper elementor-grid">
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-github elementor-repeater-item-0e0e4a1" href="https://github.com/pablintino" target="_blank">
+						<span class="elementor-screen-only">Github</span>
+						<i class="fab fa-github"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-1488a26" href="https://www.instagram.com/pablintino/" target="_blank">
+						<span class="elementor-screen-only">Instagram</span>
+						<i class="fab fa-instagram"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-de63dbc" href="https://www.linkedin.com/in/pablintino/" target="_blank">
+						<span class="elementor-screen-only">Linkedin</span>
+						<i class="fab fa-linkedin"></i>					</a>
+				</span>
+					</div>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</footer>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-b147c66 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="b147c66" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2b91c1b" data-id="2b91c1b" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-0b7546e elementor-widget elementor-widget-html" data-id="0b7546e" data-element_type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+			<script> 
+jQuery(document).ready(function($) { 
+setTimeout(function() { 
+    var toggleElement = $('.pbtn-elementor-toggle-open');
+    var toggleHeader = toggleElement.find('.elementor-toggle-item :first-child');
+    var toggleData = toggleElement.find('.elementor-toggle-item :nth-child(2)');
+    if(toggleHeader.length > 0 && toggleData.length > 0 && !toggleHeader.hasClass('.elementor-active')){
+        toggleData.css({ display: "block",  "border-bottom": "0px" });
+        toggleHeader.addClass('elementor-active');
+        toggleData.addClass('elementor-active');
+        toggleData.removeAttr('hidden');
+        toggleHeader.attr({ 'tabindex': 0,
+                            'aria-selected': true,
+                            'aria-expanded': true});
+    }
+}, 100); 
+}); 
+</script>		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+						</div>
+		
+<link rel='stylesheet' id='elementor-icons-fa-regular-css'  href='https://pablintino.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/regular.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='prismjs_style-css'  href='https://pablintino.com/wp-content/plugins/elementor-pro/assets/css/modules/code-highlight.min.css?ver=1.23.0' media='' />
+<script src='https://pablintino.com/wp-content/themes/hello-elementor/assets/js/hello-frontend.min.js?ver=1.0.0' id='hello-theme-frontend-js'></script>
+<script src='https://pablintino.com/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.0.1' id='smartmenus-js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-core.min.js?ver=1.23.0' id='prismjs_core-js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js?ver=1.23.0' id='prismjs_loader-js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js?ver=1.23.0' id='prismjs_normalize-js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js?ver=1.23.0' id='prismjs_toolbar-js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js?ver=1.23.0' id='prismjs_copy_to_clipboard-js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/line-numbers/prism-line-numbers.min.js?ver=1.23.0' id='prismjs_line_numbers-js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/line-highlight/prism-line-highlight.min.js?ver=1.23.0' id='prismjs_line_highlight-js'></script>
+<script src='https://pablintino.com/wp-includes/js/comment-reply.min.js?ver=6.0.3' id='comment-reply-js'></script>
+<script defer src='https://pablintino.com/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1665319893' id='akismet-frontend-js'></script>
+<script src='https://pablintino.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.7.3' id='elementor-pro-webpack-runtime-js'></script>
+<script src='https://pablintino.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.7.8' id='elementor-webpack-runtime-js'></script>
+<script src='https://pablintino.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.7.8' id='elementor-frontend-modules-js'></script>
+<script src='https://pablintino.com/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9' id='regenerator-runtime-js'></script>
+<script src='https://pablintino.com/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script src='https://pablintino.com/wp-includes/js/dist/hooks.min.js?ver=c6d64f2cb8f5c6bb49caca37f8828ce3' id='wp-hooks-js'></script>
+<script src='https://pablintino.com/wp-includes/js/dist/i18n.min.js?ver=ebee46757c6a411e38fd079a7ac71d94' id='wp-i18n-js'></script>
+<script id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script id='elementor-pro-frontend-js-before'>
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/pablintino.com\/wp-admin\/admin-ajax.php","nonce":"4b975d78d6","urls":{"assets":"https:\/\/pablintino.com\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/pablintino.com\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/pablintino.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script src='https://pablintino.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.7.3' id='elementor-pro-frontend-js'></script>
+<script src='https://pablintino.com/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2' id='elementor-waypoints-js'></script>
+<script src='https://pablintino.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.1' id='jquery-ui-core-js'></script>
+<script id='elementor-frontend-js-before'>
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Extra","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Extra","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.7.8","is_static":false,"experimentalFeatures":{"e_dom_optimization":true,"e_optimized_assets_loading":true,"e_optimized_css_loading":true,"a11y_improvements":true,"additional_custom_breakpoints":true,"e_import_export":true,"e_hidden_wordpress_widgets":true,"theme_builder_v2":true,"hello-theme-header-footer":true,"landing-pages":true,"elements-color-picker":true,"favorite-widgets":true,"admin-top-bar":true,"page-transitions":true,"notes":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/pablintino.com\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","hello_header_logo_type":"title","hello_header_menu_layout":"horizontal","hello_footer_logo_type":"logo"},"post":{"id":822,"title":"How%20to%20setup%20PowerDNS%20with%20replication%20-%20pablintino","excerpt":"","featuredImage":"https:\/\/pablintino.com\/wp-content\/uploads\/2022\/01\/powerdns-1024x427.jpg"}};
+</script>
+<script src='https://pablintino.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.7.8' id='elementor-frontend-js'></script>
+<script src='https://pablintino.com/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.7.3' id='pro-elements-handlers-js'></script>
+<script src='https://pablintino.com/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.7.3' id='e-sticky-js'></script>
+<script type='text/javascript'>
+(function() {
+				var expirationDate = new Date();
+				expirationDate.setTime( expirationDate.getTime() + 31536000 * 1000 );
+				document.cookie = "pll_language=en; expires=" + expirationDate.toUTCString() + "; path=/; secure; SameSite=Lax";
+			}());
+</script>
+
+</body>
+</html>
+
+<!-- Page generated by LiteSpeed Cache 5.2.1 on 2022-11-02 16:55:49 -->
