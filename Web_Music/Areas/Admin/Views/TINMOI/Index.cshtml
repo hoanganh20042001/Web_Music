@@ -13,49 +13,33 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TenTM)
+            Image
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ThoiGian)
+            Event
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.URL_img)
+            Access times
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.URL_link)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LuotTruyCap)
-        </th>
+       
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TenTM)
+            <img class="img" src="@Url.Content(item.URL_img)" style="width:70px;height:70px;margin:5px;"/>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ThoiGian)
+           @item.TenTM
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.URL_img)
+           @item.LuotTruyCap
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.URL_link)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GhiChu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LuotTruyCap)
-        </td>
+       
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MaTM }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaTM }) |
+            @Html.ActionLink("Detail", "Detail", new { id=item.MaTM }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.MaTM })
         </td>
     </tr>

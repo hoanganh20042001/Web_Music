@@ -14,12 +14,12 @@ namespace Web_Music.Function
         public string TrinhBay { set; get; }
         public string number { set; get; }
         public string Time { set; get; }
-        public bool Active { set; get; }
+       
         public BaiHatF()
         {
 
             this.TrinhBay = "";
-            this.Active = false;
+            
 
 
         }
@@ -30,7 +30,7 @@ namespace Web_Music.Function
             this.TrinhBay = TrinhBay;
             this.number = number;
             this.Time = Time;
-            this.Active = false;
+            
 
         }
         //public void setstt()

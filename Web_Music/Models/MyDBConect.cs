@@ -139,11 +139,6 @@ namespace Web_Music.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<NGHE_SI>()
-                .Property(e => e.MaNhom)
-                .IsFixedLength()
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NGHE_SI>()
                 .HasMany(e => e.THEO_DOI)
                 .WithRequired(e => e.NGHE_SI)
                 .WillCascadeOnDelete(false);

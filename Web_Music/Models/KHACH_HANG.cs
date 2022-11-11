@@ -56,7 +56,8 @@ namespace Web_Music.Models
         [Key]
         [StringLength(10)]
         public string MaKH { get; set; }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ALbum> ALbums { get; set; }
 

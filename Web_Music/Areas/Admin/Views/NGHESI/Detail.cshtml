@@ -9,11 +9,12 @@
 <h2>Detail</h2>
 
 <div>
-    <h4>NGHE_SI</h4>
+    <h4>SINGER</h4>
     <hr />
   
     <table class="table">
         <tr>
+            <th>ID</th>
             <th>
                 Name
             </th>
@@ -29,47 +30,46 @@
             <th>
                 Stage Name
             </th>
-
+            <th>Follower</th>
 
             <th>@ViewBag.qs</th>
         </tr>
 
-        @foreach (var item in ViewBag.NgheSi)
-        {
-            <img src = `${@item.URL_img}` />
+        
+            <img src="@Url.Content(ViewBag.NgheSi.URL_img)" style="height:200px;width:200px;margin:10px;" />
             <tr>
-
+<td>@ViewBag.NgheSi.mans</td>
 
 
 
                 <td>
-                     @item.TenNS
+                     @ViewBag.NgheSi.TenNS
                 </td>
                 <td>
-                    @item.NgaySinh
+                    @ViewBag.NgheSi.NgaySinh
                 </td>
                 <td>
-                    @item.QueQuan
+                    @ViewBag.NgheSi.QueQuan
                 </td>
 
 
                 <td>
-                    @item.GT
-                </td>
-
-                <td>
-                    @item.NgheDanh
+                    @ViewBag.NgheSi.GT
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.mans }) |
+                    @ViewBag.NgheSi.NgheDanh
+                </td>
+                <td>@ViewBag.NgheSi.TheoDoi</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = ViewBag.NgheSi.mans }) |
                  
                 </td>
             </tr>
-        }
+        
 
     </table>
-
+</div>
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>

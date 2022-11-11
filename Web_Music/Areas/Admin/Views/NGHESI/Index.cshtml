@@ -16,37 +16,47 @@
         ViewBag.Title = "Index";
         Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
     }
-
-
-
    
     @{
         var list = ViewBag.list;
 
     }
 <div class="content">
-    <button onclick="if ( true) { location.href='/Admin/NGHESI/Create' }">Create</button>
+   
+    <div class="sidebar-search">
+        <form class="input-group custom-search-form" action="~/Admin/NGHESI/Search">
+            <input type="text" class="form-control"  placeholder="Search..." name="search">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </form>                    
+        <div>
+            <button onclick="if ( true) { location.href='/Admin/NGHESI/Create' }">Create</button>
+        </div>
+    </div>
     <div class="list-item">
-
-        @for (int i = 0; i < ViewBag.size - 1; i++)
+      
+        @foreach(var item in Model)
         {
 
             <div class="item">
                 <div class="item-content">
-                    <img class="img" src="@Url.Content(list[0].URL_img)" />
-                    <p class="text">@list[0].NgheDanh</p>
+                    <img class="img" src="@Url.Content(item.URL_img)" />
+                    <p class="text">@item.NgheDanh</p>
                 </div>
                 <div class="btn">
-                    <button class="btn-item btn-detail" onclick="if ( true) { location.href='/Admin/NGHESI/Detail?id=@list[0].mans' }" )>Detail</button>
-                    <button class="btn-item btn-edit" onclick="if ( true) { location.href='/Admin/NGHESI/Edit?id=@list[0].mans' }" )>Edit</button>
-                    <button class="btn-item btn-delete" href="#" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href='/Admin/NGHESI/Delete?id=@list[0].mans' }">Delete</button>
+                    <button class="btn-item btn-detail" onclick="if ( true) { location.href='/Admin/NGHESI/Detail?id=@item.mans' }" )>Detail</button>
+                    <button class="btn-item btn-edit" onclick="if ( true) { location.href='/Admin/NGHESI/Edit?id=@item.mans' }" )>Edit</button>
+                    <button class="btn-item btn-delete" href="#" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href='/Admin/NGHESI/Delete?id=@item].mans' }">Delete</button>
 
 
                 </div>
             </div>
 
 
-            list.Remove(list[0]);
+            //list.Remove(list[0]);
         }
 
     </div>

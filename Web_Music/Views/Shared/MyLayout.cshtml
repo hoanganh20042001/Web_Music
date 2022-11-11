@@ -91,7 +91,12 @@
                         <div class="user-avt">
                             <img src="~/Assets/img/imgMain/snow.png" />
                         </div>
-                        <div class="user-name">Linh Chi</div>
+                        <div class="user-name">
+                            @if (Session["MaKH"] != null)
+                            {
+                                <p>@Session["TenKH"].ToString()</p>
+                            }
+                        </div>
                         <a href=""><i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>

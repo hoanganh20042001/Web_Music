@@ -63,13 +63,13 @@
                         <div class="icon-close dangky">
                             <i class="ti-close"></i>
                         </div>
-                         @Html.Action("DangKi","Introduce",null)
+                        @*@Html.Action("DangKi","Introduce",null)*@
                         @*<div class="sign-group">
                             <div class="sign-header">
 
                                 <h3 class="sign-heading">Đăng ký </h3>
                             </div>
-                            
+
                             <div class="sign-form">
                                 <div class="sign-form-group">
                                     <i class="ti-user"></i><input type="text" class="sign-form-input"
@@ -99,12 +99,12 @@
         </div>
         <!-- end nomal -->
         <!-- end dang ky -->
-        <div class="modal dangnhap">
+        @*<div class="modal dangnhap">
             <div class="modal_overlay"></div>
             <div class="modal_body">
-                <!--  begin modal-inner  -->
+                  begin modal-inner
                 <div class="modal_inner">
-                    <!-- form login .. -->
+                     form login ..
                     <div class="greeting">
                         <div class="greeting_group">
                             <h3 id="h">Chào mừng bạn đến với CNTT2.MUSIC</h3>
@@ -115,7 +115,7 @@
                             </p>
                         </div>
                     </div>
-                    <!-- sign -->
+                     sign
                     <div class="sign">
                         <div class="icon-close dangnhap">
                             <i class="ti-close"></i>
@@ -158,32 +158,97 @@
                         </div>
 
                     </div>
+                     end sign
+
+                </div>
+            </div>
+        </div>*@
+        <div class="modal dangnhap" action="~/Introduce/DangNhap">
+            <div class="modal_overlay"></div>
+            <div class="modal_body">
+                <!--  begin modal-inner  -->
+                <div class="modal_inner">
+                    <!-- form login .. -->
+                    <div class="greeting">
+                        <div class="greeting_group">
+                            <h3 id="h">Chào mừng bạn đến với CNTT2.MUSIC</h3>
+                            <p id="intro">
+                                Cung cấp nhạc, podcast và video ký thuật số
+                                cho phép bạn truy cập hàng triệu bài hát và các nội dung
+                                khác của các nghệ sĩ trên thế giới.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- sign -->
+                    <form class="sign">
+                        <div class="icon-close dangnhap">
+                            <i class="ti-close"></i>
+                        </div>
+
+                        <div class="sign-group">
+
+                            <div class="sign-header">
+
+                                <h3 class="sign-heading">Đăng nhập </h3>
+                            </div>
+
+                            <div class="sign-form">
+                                <div class="sign-form-group">
+                                    <i class="ti-user"></i><input type="text" class="sign-form-input"
+                                                                  placeholder="Nhập vào tên tài khoản" name="UserName">
+                                </div>
+                                <div class="sign-form-group">
+                                    <i class="ti-lock"></i><input type="text" class="sign-form-input"
+                                                                  placeholder="Nhập vào mật khẩu" name="Pass">
+                                </div>
+
+                                <div class="sign-check1">
+                                    <i class="ti-check"></i><label class="sign-radio">
+                                        Nhớ tài
+                                        khoản
+                                    </label>
+                                </div>
+                                <div class="sign-check1"><label class="sign-radio "> Quên mật khẩu?</label></div>
+
+
+                            </div>
+                            <div class="sign-control">
+                                <div><button type="submit" class="btn">Xác nhận </button></div>
+                                @*<div><button class="btn btn-dangky">Đăng ký </button></div>*@
+
+
+
+                            </div>
+                        </div>
+
+                    </form>
                     <!-- end sign -->
 
                 </div>
             </div>
         </div>
+
         <!-- end dang nhap -->
         <!--Phúc Hưng-->
-
+        @*@Html.Action("DangNhap","Introduce")*@
         <div class="slider">
             @*<style>
-                    @keyframes fade {
-                        from {
-                            opacity: .4
-                        }
-
-                        to {
-                            opacity: 1
-                        }
+                @keyframes fade {
+                    from {
+                        opacity: .4
                     }
 
-                    @media only screen and (max-width: 300px) {
-                        .text {
-                            font-size: 11px
-                        }
+                    to {
+                        opacity: 1
                     }
-                </style>*@
+                }
+
+                @media only screen and (max-width: 300px) {
+                    .text {
+                        font-size: 11px
+                    }
+                }
+            </style>*@
             <div class="slideshow-container">
                 <div class="mySlides">
                     <div class="numbertext nd1">Hôm nay nghe gì ?</div>
@@ -219,25 +284,25 @@
             </div>
             <script src="/Assets/javaScript/Slide.js"></script>
             <!-- <script>
-                let slideIndex = 0;
-                showSlides();
-                function showSlides() {
-                  let i;
-                  let slides = document.getElementsByClassName("mySlides");
-                  let dots = document.getElementsByClassName("dot");
-                  for (i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";
-                  }
-                  slideIndex++;
-                  if (slideIndex > slides.length) {slideIndex = 1}
-                  for (i = 0; i < dots.length; i++) {
-                    dots[i].className = dots[i].className.replace(" active", "");
-                  }
-                  slides[slideIndex-1].style.display = "block";
-                  dots[slideIndex-1].className += " active";
-                  setTimeout(showSlides, 2000); // Change image every 2 seconds
-                }
-                </script> -->
+            let slideIndex = 0;
+            showSlides();
+            function showSlides() {
+              let i;
+              let slides = document.getElementsByClassName("mySlides");
+              let dots = document.getElementsByClassName("dot");
+              for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+              }
+              slideIndex++;
+              if (slideIndex > slides.length) {slideIndex = 1}
+              for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              slides[slideIndex-1].style.display = "block";
+              dots[slideIndex-1].className += " active";
+              setTimeout(showSlides, 2000); // Change image every 2 seconds
+            }
+            </script> -->
         </div>
         <h1 class="albums">Albums hay nhất</h1>
         <div class="album">
@@ -463,40 +528,40 @@
         </div>
 
         <!-- Mạnh Hùng
-        <div class="info">
-            <h1>Thông tin</h1>
-            <div class="slideshow-container">
+    <div class="info">
+        <h1>Thông tin</h1>
+        <div class="slideshow-container">
 
-                <div class="mySlidesHung fadeHung">
+            <div class="mySlidesHung fadeHung">
 
-                    <img src="/Assets/img/nền/slider2.jpg" style="width:100%;">
-
-                </div>
-
-                <div class="mySlidesHung fadeHung">
-
-                    <img src="/Assets/img/nền/slider3.jpg" style="width:100%">
-
-                </div>
-
-                <div class="mySlidesHung fadeHung">
-
-                    <img src="/Assets/img/nền/slider4.jpg" style="width:100%">
-
-                </div>
-
-                <a class="prev" onclick="plusSlides(-1)">❮</a>
-                <a class="next" onclick="plusSlides(1)">❯</a>
+                <img src="/Assets/img/nền/slider2.jpg" style="width:100%;">
 
             </div>
-            <br>
 
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
+            <div class="mySlidesHung fadeHung">
+
+                <img src="/Assets/img/nền/slider3.jpg" style="width:100%">
+
             </div>
-        </div> -->
+
+            <div class="mySlidesHung fadeHung">
+
+                <img src="/Assets/img/nền/slider4.jpg" style="width:100%">
+
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+
+        </div>
+        <br>
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div> -->
 
 
         <div class="Footer" style="display: flex;">
@@ -525,70 +590,70 @@
             </div>
 
             <!-- <script>
-                const loginBtn = document.querySelector('.btn-js-dangnhap')
-                const modal = document.querySelector('.modal.dangnhap')
-                const modalClose = document.querySelector('.icon-close.dangnhap')
-                const modalClose1 = document.querySelector('.icon-close.dangky')
-                const loginBtn1 = document.querySelector('.btn-js-dangky')
-                const modal1 = document.querySelector('.modal.dangky')
-                function showLogin() {
-                    modal.classList.add('open')
+            const loginBtn = document.querySelector('.btn-js-dangnhap')
+            const modal = document.querySelector('.modal.dangnhap')
+            const modalClose = document.querySelector('.icon-close.dangnhap')
+            const modalClose1 = document.querySelector('.icon-close.dangky')
+            const loginBtn1 = document.querySelector('.btn-js-dangky')
+            const modal1 = document.querySelector('.modal.dangky')
+            function showLogin() {
+                modal.classList.add('open')
 
+            }
+
+
+            function showLogin1() {
+                modal1.classList.add('open')
+
+            }
+            function hideShowLogin1() {
+                modal1.classList.remove('open')
+
+            }
+            function hideShowLogin() {
+                modal.classList.remove('open')
+
+            }
+            function dangnhap() { showLogin(); hideShowLogin1() }
+            function dangky() { showLogin1(); hideShowLogin() }
+            loginBtn.addEventListener('click', dangnhap)
+            // loginBtn.addEventListener('click',hideShowLogin1)
+
+            loginBtn1.addEventListener('click', dangky)
+            modalClose1.addEventListener('click', hideShowLogin1)
+            modalClose.addEventListener('click', hideShowLogin)
+            document.querySelector('.btn.btn-dangnhap').addEventListener('click', dangnhap)
+            document.querySelector('.btn.btn-dangky').addEventListener('click', dangky)
+
+            // Manh hung slider
+            let slideIndexH = 1;
+            showSlides(slideIndexH);
+
+            function plusSlides(n) {
+                showSlides(slideIndexH += n);
+            }
+
+            function currentSlide(n) {
+                showSlides(slideIndexH = n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("mySlidesHung");
+                let dots = document.getElementsByClassName("dot");
+                if (n > slides.length) { slideIndexH = 1 }
+                if (n < 1) { slideIndexH = slides.length }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
                 }
-
-
-                function showLogin1() {
-                    modal1.classList.add('open')
-
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
                 }
-                function hideShowLogin1() {
-                    modal1.classList.remove('open')
+                slides[slideIndexH - 1].style.display = "block";
+                dots[slideIndexH - 1].className += " active";
+            }
 
-                }
-                function hideShowLogin() {
-                    modal.classList.remove('open')
-
-                }
-                function dangnhap() { showLogin(); hideShowLogin1() }
-                function dangky() { showLogin1(); hideShowLogin() }
-                loginBtn.addEventListener('click', dangnhap)
-                // loginBtn.addEventListener('click',hideShowLogin1)
-
-                loginBtn1.addEventListener('click', dangky)
-                modalClose1.addEventListener('click', hideShowLogin1)
-                modalClose.addEventListener('click', hideShowLogin)
-                document.querySelector('.btn.btn-dangnhap').addEventListener('click', dangnhap)
-                document.querySelector('.btn.btn-dangky').addEventListener('click', dangky)
-
-                // Manh hung slider
-                let slideIndexH = 1;
-                showSlides(slideIndexH);
-
-                function plusSlides(n) {
-                    showSlides(slideIndexH += n);
-                }
-
-                function currentSlide(n) {
-                    showSlides(slideIndexH = n);
-                }
-
-                function showSlides(n) {
-                    let i;
-                    let slides = document.getElementsByClassName("mySlidesHung");
-                    let dots = document.getElementsByClassName("dot");
-                    if (n > slides.length) { slideIndexH = 1 }
-                    if (n < 1) { slideIndexH = slides.length }
-                    for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";
-                    }
-                    for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
-                    }
-                    slides[slideIndexH - 1].style.display = "block";
-                    dots[slideIndexH - 1].className += " active";
-                }
-
-            </script> -->
+        </script> -->
             <script src="/Assets/javaScript/Login.js"></script>
             <script src="/Assets/javaScript/Index.js"></script>
         </div>

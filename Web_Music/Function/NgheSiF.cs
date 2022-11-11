@@ -22,9 +22,9 @@ namespace Web_Music.Function
             int value = db.Database.SqlQuery<int>("SELECT count(*) FROM nghe_si").SingleOrDefault();
             return value;
         }
-        public List<NGHE_SI> ListBrand(string ID)
+        public NGHE_SI ListBrand(string ID)
         {
-            var result = db.NGHE_SI.Where(p => p.mans == ID).ToList();
+            var result = db.NGHE_SI.Where(p => p.mans == ID).SingleOrDefault();
             return result;
         }
         public string AutoID()

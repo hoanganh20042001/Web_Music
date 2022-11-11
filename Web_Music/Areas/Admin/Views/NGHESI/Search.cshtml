@@ -1,0 +1,72 @@
+﻿
+@model IEnumerable<Web_Music.Models.NGHE_SI>
+@section Head{
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="~/Assets/css/admin.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+          rel="stylesheet">
+
+}
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+
+
+@{
+    var list = ViewBag.list;
+
+}
+<div class="content">
+
+    <div class="sidebar-search">
+        <form class="input-group custom-search-form" action="~/Admin/NGHESI/Search">
+            <input type="text" class="form-control" id="input" placeholder="Search..." name="search">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </form>
+        <div>
+            <button onclick="if ( true) { location.href='/Admin/NGHESI/Create' }">Create</button>
+        </div>
+    </div>
+    <script>
+        var input = document.getElementById("input");
+        input.nodeValue =@ViewBag.search;
+    </script>
+    <div class="list-item">
+
+        @foreach (var item in Model)
+        {
+
+            <div class="item">
+                <div class="item-content">
+                    <img class="img" src="@Url.Content(item.URL_img)" />
+                    <p class="text">@item.NgheDanh</p>
+                </div>
+                <div class="btn">
+                    <button class="btn-item btn-detail" onclick="if ( true) { location.href='/Admin/NGHESI/Detail?id=@item.mans' }" )>Detail</button>
+                    <button class="btn-item btn-edit" onclick="if ( true) { location.href='/Admin/NGHESI/Edit?id=@item.mans' }" )>Edit</button>
+                    <button class="btn-item btn-delete" href="#" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href='/Admin/NGHESI/Delete?id=@item].mans' }">Delete</button>
+
+
+                </div>
+            </div>
+
+
+            //list.Remove(list[0]);
+        }
+
+    </div>
+</div>
+

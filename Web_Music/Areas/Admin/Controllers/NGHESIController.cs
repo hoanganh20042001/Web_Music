@@ -6,26 +6,45 @@ using System.Web;
 using System.Web.Mvc;
 using Web_Music.Models;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using Web_Music.Function;
-
-
+using System.Collections.Generic;
+using Web_Music.Areas.Admin.Controllers;
 
 namespace Web_Music.Areas.Admin.Controllers
 {
-    public class NGHESIController : Controller
+    public class NGHESIController : BaseController
     {
         MyDBConect db = new MyDBConect();
         // GET: Admin/NGHESI
+        public List<NGHE_SI> list_ns;
+        
         public ActionResult Index()
         {
-
-            var nghesi = new NgheSiF();
-            var list = nghesi.ListAll();
-            ViewBag.size = nghesi.Count();
-            ViewBag.result = list.Remove(list[0]);
-            ViewBag.list = list;
+            var list = new NgheSiF().ListAll();
             return View(list);
+        }
+        //[HttpPost]
+        public ActionResult Search(string search)
+        {
+            ViewBag.search = search;
+            if(search=="")
+            {
+                return RedirectToAction("Index");
+            }
+            string se = "%" + search + "%";
+            //var list = nghesi.ListAll();
+            //ViewBag.size = nghesi.Count();
+            //ViewBag.result = list.Remove(list[0]);
+            //ViewBag.list = list;
+            var list = db.NGHE_SI.SqlQuery("select * from NGhe_si where nghedanh like @se", new SqlParameter("@se", se)).ToList();
+            return View(list);
+
+
+
+
+
         }
         //[HttpGet]
         public ActionResult Create()
@@ -36,7 +55,7 @@ namespace Web_Music.Areas.Admin.Controllers
         }
         [HttpPost]
 
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create(NGHE_SI Model)
         {
 
@@ -54,8 +73,8 @@ namespace Web_Music.Areas.Admin.Controllers
             //try
             //{
                 //if (ModelState.IsValid)
-                //ViewBag.MaNhom = new SelectList(db.NHOMs, "MaNhom", "TenNhom");
-                var item = new NgheSiF();
+                    //ViewBag.MaNhom = new SelectList(db.NHOMs, "MaNhom", "TenNhom");
+                    var item = new NgheSiF();
                     Model.mans = item.AutoID();
                    
                 if (Model.ImageUpload != null)
@@ -80,16 +99,14 @@ namespace Web_Music.Areas.Admin.Controllers
                 //    db.SaveChanges();
                 //}
                      return RedirectToAction("Index");
-                    
-                    //    ModelState.AddModelError("", "Insert item Unsucessfully");
-                    //}
-                //}
-                ////return View(Model);
+
+                //ModelState.AddModelError("", "Insert item Unsucessfully");
             //}
+               
             //catch
             //{
             //    return View();
-            //}
+            //  }
         }
         [HttpGet]
 

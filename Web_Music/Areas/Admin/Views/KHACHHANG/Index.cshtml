@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Web_Music.Models.KHACH_HANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+
+        <th>
+           Hình ảnh
+        </th>
+        <th>
+            Tên khách hàng
+        </th>
+        
+        <th>
+            Địa chỉ
+        </th>
+       
+        <th>
+            Căn cước công dân
+        </th>
+      
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+               <img src="@Url.Content(item.URL_img)" style="width:70px;height:50px;margin:5px"/>
+            </td>
+            <td>
+                @item.TenKH
+            </td>
+            <td>
+               @item.DiaChi
+            </td>
+            <td>
+               @item.CCCD
+            </td>
+            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaKH }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaKH }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaKH })
+            </td>
+        </tr>
+    }
+
+</table>

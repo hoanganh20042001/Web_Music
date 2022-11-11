@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Web_Music.Areas.Admin.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,7 +8,7 @@ using Web_Music.Models;
 
 namespace Web_Music.Areas.Admin.Controllers
 {
-    public class SANPHAMController : Controller
+    public class SANPHAMController : BaseController
     {
         MyDBConect db = new MyDBConect();
         // GET: Admin/SANPHAM

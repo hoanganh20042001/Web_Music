@@ -31,6 +31,13 @@ namespace Web_Music.Controllers
             //db.SaveChanges();
             return PartialView();
         }
+       
+        public ActionResult DangNhap(KHACH_HANG Model)
+        {
+            Session["User"] = Model.UserName;
+            Session["Pass"] = Model.Pass;
+            return RedirectToAction("Index", "Home");
+        }
      //   [HttpPost]
      //public ActionResult DangNhap()
         
