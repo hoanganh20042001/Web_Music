@@ -182,13 +182,13 @@
     </Compile>
     <Compile Include="Models\ADMIN.cs" />
     <Compile Include="Models\ALbum.cs" />
-    <Compile Include="Models\DS_SP.cs" />
     <Compile Include="Models\KHACH_HANG.cs" />
     <Compile Include="Models\LoginClientModel.cs" />
     <Compile Include="Models\MyDBConect.cs" />
     <Compile Include="Models\NGHE.cs" />
     <Compile Include="Models\NGHE_SI.cs" />
     <Compile Include="Models\SAN_PHAM.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\THEO_DOI.cs" />
     <Compile Include="Models\TIN_MOI.cs" />
     <Compile Include="Models\TRINH_BAY.cs" />
