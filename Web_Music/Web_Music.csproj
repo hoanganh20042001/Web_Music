@@ -296,6 +296,7 @@
     <Content Include="Assets\Calendar.html" />
     <Content Include="Assets\Calendar_NewRealese.html" />
     <Content Include="Assets\css\admin.css" />
+    <Content Include="Assets\css\admin1.css" />
     <Content Include="Assets\css\Albums.css" />
     <Content Include="Assets\css\Artist.css" />
     <Content Include="Assets\css\calendar.css" />
@@ -306,6 +307,8 @@
     <Content Include="Assets\css\main.css" />
     <Content Include="Assets\css\new.css" />
     <Content Include="Assets\css\responsiveMain.css" />
+    <Content Include="Assets\css\sb-admin-2.css" />
+    <Content Include="Assets\css\sb-admin-2.min.css" />
     <Content Include="Assets\css\StyleArtistNews.css" />
     <Content Include="Assets\css\styleHeader.css" />
     <Content Include="Assets\css\StyleInfoFooter.css" />
