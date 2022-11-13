@@ -3,7 +3,8 @@
 
 @{
     ViewBag.Title = "newSong";
-    Layout = "~/Views/shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+
     MyDBConect db = new MyDBConect();
     var ds = from i in db.DS_SP
              where i.MaAl == Session["MaAl"]
@@ -71,7 +72,8 @@
                         <div class="song-contents">
 
                             <i class="fa-sharp fa-solid fa-music"></i>
-                            <img src="~/Giới thiệu/nền/8.jpg" />
+                            
+                            <img src="~/Assets/img/nền/8.jpg" />
                             <div class="song-content-title">
                                 <h3 value="MaSP">@sanPham.TenSP</h3>
 
