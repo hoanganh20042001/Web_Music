@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web_Music.Function;
 using Web_Music.Models;
 
 namespace Web_Music.Controllers
@@ -60,23 +61,22 @@ namespace Web_Music.Controllers
         public ActionResult listSong(string MaAl)
         {
             // thanh
-
             Session["MaAl"] = MaAl;
-          
-            Session["name"] = db.ALbums.Find(MaAl).TenAlbum.ToString();// thanh
 
-            //ViewBag.name = a.TenAlbum.ToString();
+            var list = new SongInAlbum().SP(MaAl.ToString());
+            ViewBag.list = list;
+            ViewBag.size = list.Count;
+            return View();
 
-            var list = (from item in db.DS_SP
-                        where item.MaAl == MaAl
-                        select item).ToList();
-            return View(list);
         }
         public ActionResult newSong()
         {
-           
-            List<SAN_PHAM> list = db.SAN_PHAM.ToList();
-            return View(list);
+
+            var list = new SanPhamF().SP();
+            ViewBag.list = list;
+            ViewBag.size = list.Count;
+            return View();
+
 
         }
         public ActionResult AddToAlbum(String MaSP)

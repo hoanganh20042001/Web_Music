@@ -1,37 +1,131 @@
-﻿@model IEnumerable<Web_Music.Models.DS_SP>
+﻿@model IEnumerable<Web_Music.Models.SAN_PHAM>
 @using Web_Music.Models
 
 @{
-    ViewBag.Title = "listSong";
+    ViewBag.Title = "ListSong";
     Layout = "~/Views/Shared/MyLayout.cshtml";
+
     MyDBConect db = new MyDBConect();
+
+
 }
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="/Giao diện giới thiệu/css/styleMain.css">
-<link rel="stylesheet" href="/Giao diện giới thiệu/css/responsiveMain.css">
-<link rel="stylesheet" href="/Giới thiệu/imgMain/">
-<link href="~/Assets/css/favoriteSong.css" rel="stylesheet" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
-      rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@section Head{
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+
+    <link href="~/Assets/css/responsiveMain.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="~/Assets/css/styleMain.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+          rel="stylesheet">
+}
+@*@{
+        var list = ViewBag.list;
+        //int size = ViewBag.size;
+    }*@
+<script>
+    const musics = [];
+</script>
+@{
+    var list = ViewBag.list;
+    var size = ViewBag.size;
+    for (var i = 0; i < size; i++)
+    {
+        <script>
+             musics.push({
+                id:@list[0].stt,
+                number:"@list[0].number",
+                file:"@list[0].SP.SP_URL",
+                title:"@list[0].SP.TenSP",
+                artist:"@list[0].TrinhBay",
+                time:"@list[0].Time",
+                active:false,
+             })
+        </script>
+        {
+            list.Remove(list[0]);
+        }
+    }
+}
+
+@section Script{
 
 
-<!--
-    =======================NAVBAR==========================
--->
-<!--
-    ====================MAIN_CONTENT=====================
--->
+    <script>
+        /*const musics = [];*/
+        //musics.push({
+        //    id: 0,
+        //    number: '01',
+        //    file: 'assests_mp3_ntt.mp3',
+        //    title: 'Ngày tận thế',
+        //    artist: 'Tóc Tiên',
+        //    time: '3:52',
+        //    active: false,
+        //})
+        @*@{
+            var list = ViewBag.list;
+            //int size = ViewBag.size;
+        }*@
+        @*var i = 0;
+            for ( i = 0; i < 5; i++) {
+             musics.push({
+                id:@list[0].stt,
+                number:"@list[0].number",
+                file:"@list[0].SP.SP_URL",
+                title:"@list[0].SP.TenSP",
+                artist:"@list[0].TrinhBay",
+                time:"@list[0].Time",
+                active:false,
+             })
+                @{list.Remove(list[0]); }
+
+
+   }*@
+    @*do {
+        musics.push({
+                id:@list[0].stt,
+                number:"@list[0].number",
+                file:"@list[0].SP.SP_URL",
+                title:"@list[0].SP.TenSP",
+                artist:"@list[0].TrinhBay",
+                time:"@list[0].Time",
+                active:false,
+             })
+    }*@
+    @*while (@list.Remove(list[0]));*@
+          @*musics.push({
+                id:@ViewBag.list[0].stt,
+                number:"@ViewBag.list[0].number",
+                file:"@ViewBag.list[0].SP.SP_URL",
+                title:"@ViewBag.list[0].SP.TenSP",
+                artist:"@ViewBag.list[0].TrinhBay",
+                time:"@ViewBag.list[0].Time",
+                active:false,
+          })
+         musics.push({
+                id:@ViewBag.list[1].stt,
+                number:"@ViewBag.list[1].number",
+                file:"@ViewBag.list[1].SP.SP_URL",
+                title:"@ViewBag.list[1].SP.TenSP",
+                artist:"@ViewBag.list[1].TrinhBay",
+                time:"@ViewBag.list[1].Time",
+                active:false,
+         })
+        musics.push({
+                id:@ViewBag.list[2].stt,
+                number:"@ViewBag.list[2].number",
+                file:"@ViewBag.list[2].SP.SP_URL",
+                title:"@ViewBag.list[2].SP.TenSP",
+                artist:"@ViewBag.list[2].TrinhBay",
+                time:"@ViewBag.list[2].Time",
+                active:false,
+          })*@
+        @*musics.push(@ViewBag.list)*@
+
+    </script>
+    <script src="/Assets/javaScript/main.js"></script>
+}
 <div id="main-content">
     <header>
         <nav class="main-content__header-nav">
@@ -44,82 +138,137 @@
         </div>
     </header>
 
-    <body>
-        <div class="box-scroll">
-            <h1 class="contain pt-5 header-content">@Session["name"]</h1>
-            <a href="/Album/newSong?MaAl=@Session["MaAl"]"> create </a>
-            <div class="song-container">
-                @foreach (var item in Model)
-                {
+    <p class="main-content__des">
+        What's hot<span>
+            <img src="/Assets/img/imgMain/fire.png" alt="" width="16px"
+                 height="17px">
+        </span>
+    </p>
+    <div class="main-content__trend">
 
-                    var listsp = (from sp in db.SAN_PHAM
-                                  where sp.MaSP == item.MaSP
-                                  select sp).ToList();
-
-                    foreach (var sanPham in listsp)
-                    {
-                        <div class="row-song">
-                            <span class="want-play">
-                                <i class="fa-regular fa-circle-play "></i>
-                                <a href="/Album/deleteSong?MaSP=@sanPham.MaSP">delete</a>
-                            </span>
-                            <div class="song-contents">
-
-                                <i class="fa-sharp fa-solid fa-music"></i>
-                               
-                                <img src="~/Assets/img/nền/8.jpg" />
-
-                                <div class="song-content-title">
-                                    <h3>@sanPham.TenSP</h3>
-                                    <p>Phan Mạnh Quỳnh</p>
-                                </div>
-                            </div>
-
-                            <div class="favourite-song">
-                                <i class="fa-sharp fa-solid fa-heart"></i>
-                                <p>03.30s</p>
-                            </div>
-                        </div>
-
-                    }
-
-
-
-                }
-
+        <div class="main-content__trend-title">Trending</div>
+        <div class="main-content__trend-more btn-hover">
+            More
+            <span><i class="fas fa-chevron-right"></i></span>
+        </div>
+    </div>
+    <div class="main-content__banner">
+        <p class="main-content__banner-artist">Artist</p>
+        <h4 class="main-content__banner-des">On Top Of The World</h4>
+        <div class="main-content__banner-btn">
+            <button class="play-btn">PLAY</button>
+            <button class="follow-btn">FOLLOW</button>
+        </div>
+        <span class="main-content__view">
+            Monthly listeners
+            <p>50.000</p>
+        </span>
+    </div>
+    @Html.Action("MenuSP", "Home", null)
+    <div class="play-song">
+        <div class="play-control">
+            <div class="play-control__act">
+                <i class="far fa-heart" id='heart'></i>
+                <i class="fas fa-music"></i>
+                <i class="fas fa-expand-alt"></i>
             </div>
+            <div class="play-control__main">
+                <i class="fas fa-redo-alt play-repeat"></i>
+                <i class="fas fa-fast-backward play-backward main-icon"></i>
+                <!-- <i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i> -->
+                <span class="play-inner">
+                    <i class="fas fa-play-circle play-icon main-icon main-icon--big"></i>
+                </span>
+                <i class="fas fa-fast-forward play-forward main-icon"></i>
+                <i class="fas fa-random shuffle-song"></i>
+            </div>
+            <div class="play-control__volume">
+                <i class="fas fa-volume-mute"></i>
+                <input type="range" id="volume" class="volume" value="1" min="0" max="1" step="0.1">
+                <i class="fas fa-volume-up"></i>
+            </div>
+        </div>
+        <div class="play-seekbar">
+            <div class="timer__left">0:00</div>
+            <input type="range" name="range" id="range" class="range" />
+            <audio src="/Assets/mp3/assests_mp3_ntt.mp3" id="song"></audio>
+            <div class="timer__right">3.00</div>
+        </div>
+    </div>
+</div>
 
+<!--
+    ====================SIDE-BAR=========================
+-->
+<div id="sidebar">
+    <div class="sidebar__shortcuts">
+        <p class="sidebar__shortcuts-title">
+            Shortcuts
+        </p>
+        <div class="sidebar__shortcuts-items">
+            <span class="sidebar__shortcuts-item">
+                Chill
+                <img src="/Assets/img/imgMain/snow.png" alt="">
+            </span>
+            <span class="sidebar__shortcuts-item">
+                Hot
+                <img src="/Assets/img/imgMain/star.png" alt="">
+            </span>
+            <span class="sidebar__shortcuts-item">
+                Piano instrumental
+                <img src="/Assets/img/imgMain/piano.png" alt="">
+            </span>
+            <span class="sidebar__shortcuts-item">
+                Jazz
+                <img src="/Assets/img/imgMain/jazz.png" alt="">
+            </span>
+            <span class="/Assets/sidebar__shortcuts-item">
+                Acoustic
+                <img src="/Assets/img/imgMain/ghitar.png" alt="">
+            </span>
+        </div>
+    </div>
+
+    <div class="sidebar__favorite">
+        <p class="sidebar__favorite-title">Favorite Artists</p>
+        ARTIST 1
+        <div class="sidebar__favorite-list">
+            <div class="artist-info__avt">
+                <img src="/Assets/img/imgMain/tóc-tiên.jpg" alt="">
+            </div>
+            <div class="artist-info">
+                <h4 class="artist-info__name">Tóc Tiên</h4>
+                <p class="artist-info__song">6 songs in library</p>
+            </div>
+            <i class="fas fa-ellipsis-h"></i>
         </div>
 
+        ARTIST 2
+        <div class="sidebar__favorite-list">
+            <div class="artist-info__avt">
+                <img src="/Assets/img/imgMain/min.jpg" alt="">
+            </div>
+            <div class="artist-info">
+                <h4 class="artist-info__name">Min</h4>
+                <p class="artist-info__song">5 songs in library</p>
+            </div>
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+    </div>
 
-
-    </body>
-
-
-</div>>
-
-<script>
-    var slideIndex = 1;
-    showDivs(slideIndex);
-
-    function plusDivs(n) {
-        showDivs(slideIndex += n);
-    }
-
-    function showDivs(n) {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        if (n > x.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = x.length }
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        x[slideIndex - 1].style.display = "block";
-    }
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/Giao diện giới thiệu/javaScript/main.js"></script>
+    <div class="sidebar__suggest-album">
+        <div class="suggest-album">
+            <div class="suggest-album__img-container">
+                <img src="/Assets/img/imgMain/ngô-lan-hương.jpg" alt="">
+            </div>
+            <div class="suggest-album__content">
+                <div class="suggest-album__info">
+                    <h4>Anh muốn đưa em về không</h4>
+                    <p>Ngô Lan Hương</p>
+                </div>
+                <i class="far fa-plus-square"></i>
+            </div>
+        </div>
+    </div>
+</div>
 

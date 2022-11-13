@@ -166,6 +166,7 @@
     <Compile Include="Function\KhachHangF.cs" />
     <Compile Include="Function\NgheSiF.cs" />
     <Compile Include="Function\SanPhamF.cs" />
+    <Compile Include="Function\SongInAlbum.cs" />
     <Compile Include="Function\SP.cs" />
     <Compile Include="Function\TaiKhoan.cs" />
     <Compile Include="Function\TinMoiF.cs" />
