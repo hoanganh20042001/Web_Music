@@ -58,10 +58,7 @@ namespace Web_Music.Models
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ALbum>()
-                .Property(e => e.MaDS)
-                .IsFixedLength()
-                .IsUnicode(false);
+        
 
             modelBuilder.Entity<DS_SP>()
                 .Property(e => e.MaAl)

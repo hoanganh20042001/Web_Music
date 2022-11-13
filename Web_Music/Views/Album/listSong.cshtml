@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Web_Music.Models.DS_SP>
-    @using Web_Music.Models
+@using Web_Music.Models
 
 @{
     ViewBag.Title = "listSong";
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/Giao diện giới thiệu/css/styleMain.css">
 <link rel="stylesheet" href="/Giao diện giới thiệu/css/responsiveMain.css">
 <link rel="stylesheet" href="/Giới thiệu/imgMain/">
-<link rel="stylesheet" href="/Giao diện giới thiệu/css/favoriteSong.css">
+<link href="~/Assets/css/favoriteSong.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
       rel="stylesheet">
@@ -51,7 +51,7 @@
             <div class="song-container">
                 @foreach (var item in Model)
                 {
-                   
+
                     var listsp = (from sp in db.SAN_PHAM
                                   where sp.MaSP == item.MaSP
                                   select sp).ToList();
@@ -97,23 +97,23 @@
 </div>>
 
 <script>
-        var slideIndex = 1;
-        showDivs(slideIndex);
+    var slideIndex = 1;
+    showDivs(slideIndex);
 
-        function plusDivs(n) {
-          showDivs(slideIndex += n);
-        }
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
 
-        function showDivs(n) {
-          var i;
-          var x = document.getElementsByClassName("mySlides");
-          if (n > x.length) {slideIndex = 1}
-          if (n < 1) {slideIndex = x.length}
-          for (i = 0; i < x.length; i++) {
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
             x[i].style.display = "none";
-          }
-          x[slideIndex-1].style.display = "block";
         }
+        x[slideIndex - 1].style.display = "block";
+    }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

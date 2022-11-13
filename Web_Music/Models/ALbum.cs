@@ -23,12 +23,6 @@ namespace Web_Music.Models
         [Key]
         [StringLength(10)]
         public string MaAl { get; set; }
-
-        [StringLength(10)]
-        public string MaDS { get; set; }
-
-        public virtual DS_SP DS_SP { get; set; }
-
         public virtual KHACH_HANG KHACH_HANG { get; set; }
     }
 }

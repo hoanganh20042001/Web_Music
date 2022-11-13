@@ -17,5 +17,8 @@ namespace Web_Music.Models
         [Column(Order = 1)]
         [StringLength(10)]
         public string MaSP { get; set; }
+        public virtual ALbum ALbum{ get; set; }
+
+        public virtual SAN_PHAM SAN_PHAM { get; set; }
     }
 }
