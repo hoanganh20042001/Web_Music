@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Web_Music.Models.SAN_PHAM>
+@using Web_Music.Models
+
+@{
+    ViewBag.Title = "newSong";
+    Layout = "~/Views/shared/_Layout.cshtml";
+    MyDBConect db = new MyDBConect();
+    var ds = from i in db.DS_SP
+             where i.MaAl == Session["MaAl"]
+             select i;
+
+}
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/Giao diện giới thiệu/css/styleMain.css">
+<link rel="stylesheet" href="/Giao diện giới thiệu/css/responsiveMain.css">
+<link rel="stylesheet" href="/Giới thiệu/imgMain/">
+<link rel="stylesheet" href="/Giao diện giới thiệu/css/favoriteSong.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<!--
+    =======================NAVBAR==========================
+-->
+<!--
+    ====================MAIN_CONTENT=====================
+
+-->
+
+<div id="main-content">
+    <header>
+        <nav class="main-content__header-nav">
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-right"></i>
+        </nav>
+        <div class="main-content__search-form">
+            <i class="fas fa-search search-btn"></i>
+            <input type="text" class="search-input" placeholder="Search for artist, songs.....">
+        </div>
+    </header>
+
+    <body>
+        <div class="box-scroll">
+            <h1 class="contain pt-5 header-content"> List SONG </h1>
+
+
+            <div class="song-container">
+
+
+                @foreach (var sanPham in Model)
+                {
+
+
+                    <div class="row-song">
+                        <span class="want-play">
+                            <i class="fa-regular fa-circle-play "></i>
+                            <a class="add" href="/Album/AddToAlbum?MaSP=@sanPham.MaSP"> &#43</a>
+
+                        </span>
+                        <div class="song-contents">
+
+                            <i class="fa-sharp fa-solid fa-music"></i>
+                            <img src="~/Giới thiệu/nền/8.jpg" />
+                            <div class="song-content-title">
+                                <h3 value="MaSP">@sanPham.TenSP</h3>
+
+                                <p>Phan Mạnh Quỳnh</p>
+                            </div>
+                        </div>
+
+                        <div class="favourite-song">
+                            <i class="fa-sharp fa-solid fa-heart"></i>
+                            <p>03.30s</p>
+                        </div>
+                    </div>
+
+                }
+
+
+
+
+
+            </div>
+
+        </div>
+
+
+
+    </body>
+
+
+</div>>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/Giao diện giới thiệu/javaScript/main.js"></script>
+
+
+

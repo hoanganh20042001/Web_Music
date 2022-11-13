@@ -2796,6 +2796,10 @@
     <Content Include="Views\Introduce\DangNhap.cshtml" />
     <Content Include="Views\CreateAcc\Create.cshtml" />
     <Content Include="Views\LoginClient\Index.cshtml" />
+    <Content Include="Views\Album\Album.cshtml" />
+    <Content Include="Views\Album\createAlbum.cshtml" />
+    <Content Include="Views\Album\listSong.cshtml" />
+    <Content Include="Views\Album\newSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

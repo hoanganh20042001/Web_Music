@@ -64,7 +64,7 @@ namespace Web_Music.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<DS_SP>()
-                .Property(e => e.MaDS)
+                .Property(e => e.MaAl)
                 .IsFixedLength()
                 .IsUnicode(false);
 
