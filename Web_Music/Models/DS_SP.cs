@@ -11,14 +11,11 @@ namespace Web_Music.Models
         [Key]
         [Column(Order = 0)]
         [StringLength(10)]
-        public string MaAl { get; set; }
+        public string MaAL { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [StringLength(10)]
         public string MaSP { get; set; }
-        public virtual ALbum ALbum{ get; set; }
-
-        public virtual SAN_PHAM SAN_PHAM { get; set; }
     }
 }

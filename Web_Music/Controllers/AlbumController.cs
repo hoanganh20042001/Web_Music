@@ -46,7 +46,7 @@ namespace Web_Music.Controllers
         {
            
             var ds = (from sp in db.DS_SP
-                      where sp.MaAl == MaAlbum
+                      where sp.MaAL == MaAlbum
                       select sp).ToList();
             foreach (var i in ds)
             {
@@ -84,7 +84,7 @@ namespace Web_Music.Controllers
            
             DS_SP model = new DS_SP();
             model.MaSP = MaSP;
-            model.MaAl = (string)Session["MaAL"];
+            model.MaAL = (string)Session["MaAL"];
             if (db.DS_SP.Any(x => x.MaSP != model.MaSP))
             {
                 ViewBag.thongbao = " this song is readly";

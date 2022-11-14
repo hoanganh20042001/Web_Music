@@ -17,7 +17,7 @@ namespace Web_Music.Models
             THEO_DOI = new HashSet<THEO_DOI>();
             TRUY_CAP_TM = new HashSet<TRUY_CAP_TM>();
             YEU_THICH = new HashSet<YEU_THICH>();
-            URL_img= "~/Assets/img/KH/add.png";
+            URL_img = "~/Assets/img/KH/add.png";
         }
 
         [Required]

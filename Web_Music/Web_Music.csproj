@@ -177,6 +177,7 @@
     </Compile>
     <Compile Include="Models\ADMIN.cs" />
     <Compile Include="Models\ALbum.cs" />
+    <Compile Include="Models\DS_SP.cs" />
     <Compile Include="Models\KHACH_HANG.cs" />
     <Compile Include="Models\LoginClientModel.cs" />
     <Compile Include="Models\MyDBConect.cs" />
