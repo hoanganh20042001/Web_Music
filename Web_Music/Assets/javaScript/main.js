@@ -117,7 +117,7 @@ function resetSong(dir) {
             <p class=" playlist__number">${j === dir ? '<i class="fas fa-volume-up"></i>' : `${musics[j].number}`}</p>
             <p class=" playlist__title">${musics[j].title}</p>
             <p class=" playlist__artist">${musics[j].artist}</p>
-            <p class=" playlist__time">${musics[j].time}</p>
+            <p class=" playlist__time">${musics[j].time}<a herf ="">+</a></p>
         </div>`)
     }
 }
