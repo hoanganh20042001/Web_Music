@@ -5,6 +5,7 @@ namespace Web_Music.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web;
 
     public partial class KHACH_HANG
     {
@@ -16,6 +17,7 @@ namespace Web_Music.Models
             THEO_DOI = new HashSet<THEO_DOI>();
             TRUY_CAP_TM = new HashSet<TRUY_CAP_TM>();
             YEU_THICH = new HashSet<YEU_THICH>();
+            URL_img= "~/Assets/img/KH/add.png";
         }
 
         [Required]
@@ -72,5 +74,7 @@ namespace Web_Music.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<YEU_THICH> YEU_THICH { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

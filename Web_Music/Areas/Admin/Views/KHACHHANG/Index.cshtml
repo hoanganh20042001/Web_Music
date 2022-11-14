@@ -2,41 +2,50 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>SINGER</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Projects</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <div class="sidebar-search" style="display:inline-flex;margin:10px">
+        <form class="input-group custom-search-form" action="~/Admin/NGHESI/Search">
+            <input type="text" class="form-control" placeholder="Search..." name="search">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </form>
+        <div>
+            <button class="btn btn-primary btn-sm" style="font-size:17px; margin:2px 150px;" onclick="if ( true) { location.href='/Admin/KHACHHANG/Create' }">Create</button>
+        </div>
+    </div>
 
-<table class="table">
-    <tr>
+    <!-- Main content -->
+    <section class="content">
 
-        <th>
-           Hình ảnh
-        </th>
-        <th>
-            Tên khách hàng
-        </th>
-        
-        <th>
-            Địa chỉ
-        </th>
-       
-        <th>
-            Căn cước công dân
-        </th>
-      
-        
-        <th></th>
-    </tr>
+        <!-- Default box -->
+        <div class="card" style="overflow-y:scroll;">
+            @*<div class="card-header">
 
-    @foreach (var item in Model)
-    {
-        <tr>
 
+<<<<<<< Updated upstream
             <td>
                <img src="@Url.Content(item.URL_img)" style="width:70px;height:50px;margin:5px"/>
             </td>
@@ -57,5 +66,97 @@
             </td>
         </tr>
     }
+=======
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>*@
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">
+                                #
+                            </th>
+                            <th style="width:10%">
+                                Image
+                            </th>
+                            <th style="width: 20%">
+                                Name
+                            </th>
+                            <th>
+                                Phone
+                            </th>
+                            <th style="width: 8%" class="text-center">
+                                Sex
+                            </th>
+                            <th style="width: 30%">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-</table>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    #
+                                </td>
+                                <td>
+
+                                    <li class="list-inline-item">
+                                        <img alt="Avatar" class="table-avatar" src="@Url.Content(item.URL_img)">
+                                    </li>
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        @item.TenKH
+>>>>>>> Stashed changes
+
+                                    </ul>
+                                </td>
+                                <td class="project_progress">
+                                    @*<div class="progress progress-sm">
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                            </div>
+                                        </div>
+                                        <small>
+                                            57% Complete
+                                        </small>*@
+                                    @item.SDT
+                                </td>
+                                <td class="project-state">
+                                    @item.GT
+                                    @*<span class="badge badge-success">Success</span>*@
+                                </td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href='/Admin/KHACHHANG/Detail?id=@item.MaKH'>
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href='/Admin/KHACHHANG/Edit?id=@item.MaKH'>
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href = '/Admin/KHACHHANG/Delete?id=@item.MaKH' }">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
