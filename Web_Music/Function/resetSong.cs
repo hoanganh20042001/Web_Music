@@ -7,16 +7,16 @@ using System.Web.Mvc;
 using Web_Music.Models;
 namespace Web_Music.Function
 {
-    public class SongInAlbum
+    public class resetSong
 
     {
         MyDBConect db = new MyDBConect();
         List<BaiHatF> ListAll = new List<BaiHatF>();
         public List<BaiHatF> SP(string MaAl)
         {
-            
+
             List<string> masp = new List<string>();
-            masp = db.Database.SqlQuery<string>("select masp from DS_SP where MaAl=@MaAl",new SqlParameter("@MaAl",MaAl)).ToList();
+            masp = db.Database.SqlQuery<string>("select masp from san_Pham where masp not in (select masp from DS_SP where MaAl=@MaAl)", new SqlParameter("@MaAl", MaAl)).ToList();
             //BaiHatF bh = new BaiHatF();
             int sum = db.Database.SqlQuery<int>("select count(masp) from san_pham").SingleOrDefault();
             //int value = int.Parse(db.Database.SqlQuery<string>("SELECT max(RIGHT(MAsp, 8)) FROM san_pham").SingleOrDefault().ToString());
@@ -31,7 +31,6 @@ namespace Web_Music.Function
                 List<string> casi = new List<string>();
                 casi = db.Database.SqlQuery<string>("select nghedanh from nghe_si ns join trinh_bay tb on tb.mans=ns.mans where masp=@masp", new SqlParameter("@masp", item)).ToList();
                 bh.number = index.ToString();
-                bh.MaSP = item.ToString();
                 foreach (string i in casi)
                 {
                     if (bh.TrinhBay == "")

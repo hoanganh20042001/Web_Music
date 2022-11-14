@@ -69,10 +69,10 @@ namespace Web_Music.Controllers
             return View();
 
         }
-        public ActionResult newSong()
+        public ActionResult newSong( string MaAl)
         {
 
-            var list = new SanPhamF().SP();
+            var list = new resetSong().SP(MaAl);
             ViewBag.list = list;
             ViewBag.size = list.Count;
             return View();

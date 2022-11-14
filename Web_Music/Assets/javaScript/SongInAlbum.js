@@ -1,4 +1,4 @@
-const playBtn = document.querySelector('.play-inner');
+﻿const playBtn = document.querySelector('.play-inner');
 const nextBtn = document.querySelector('.play-forward');
 const prevBtn = document.querySelector('.play-backward');
 const song = document.getElementById('song');
@@ -96,7 +96,7 @@ for (var i = 0; i < musics.length; i++) {
             <p class=" playlist__number">${i === indexSong ? '<i class="fas fa-volume-up"></i>' : `${musics[i].number}`}</p>
             <p class=" playlist__title">${musics[i].title}</p>
             <p class=" playlist__artist">${musics[i].artist}</p>
-            <p class=" playlist__time">${musics[i].time}</p>
+            <p class=" playlist__time">${musics[i].time}<a herf ="/Album/deleteSong?MaSP=musics[j].MaSP">+</a></p>
         </div>`)
 }
 //==============================================
@@ -107,7 +107,7 @@ function resetSong(dir) {
     playList.innerHTML = `
     <div class="playlist playlist-list__title">
         <p class="playlist__number">#</p>
-        <p class="playlist__title">TITLE</p>
+        <p class="playlist__title">TITLE hkjbkh</p>
         <p class="playlist__artist">ARTIST</p>
         <p class="playlist__time">TIME</p>
     </div>`;
@@ -117,7 +117,7 @@ function resetSong(dir) {
             <p class=" playlist__number">${j === dir ? '<i class="fas fa-volume-up"></i>' : `${musics[j].number}`}</p>
             <p class=" playlist__title">${musics[j].title}</p>
             <p class=" playlist__artist">${musics[j].artist}</p>
-            <p class=" playlist__time">${musics[j].time}<a herf ="">+</a></p>
+            <p class=" playlist__time">${musics[j].time}</p>
         </div>`)
     }
 }

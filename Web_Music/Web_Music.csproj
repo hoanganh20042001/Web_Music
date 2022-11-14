@@ -165,6 +165,7 @@
     <Compile Include="Function\BaiHatF.cs" />
     <Compile Include="Function\KhachHangF.cs" />
     <Compile Include="Function\NgheSiF.cs" />
+    <Compile Include="Function\resetSong.cs" />
     <Compile Include="Function\SanPhamF.cs" />
     <Compile Include="Function\SongInAlbum.cs" />
     <Compile Include="Function\SP.cs" />
@@ -425,6 +426,7 @@
     <Content Include="Assets\javaScript\sb-admin-2.min.js" />
     <Content Include="Assets\javaScript\slide.js" />
     <Content Include="Assets\javaScript\Song.js" />
+    <Content Include="Assets\javaScript\SongInAlbum.js" />
     <Content Include="Assets\javaScript\uploadImg.js" />
     <Content Include="Assets\main.html" />
     <Content Include="Assets\mp3\assests_mp3_catena.mp3" />
