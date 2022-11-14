@@ -14,6 +14,7 @@ namespace Web_Music.Function
         public string TrinhBay { set; get; }
         public string number { set; get; }
         public string Time { set; get; }
+        public string MaSP { set; get; }
        
         public BaiHatF()
         {

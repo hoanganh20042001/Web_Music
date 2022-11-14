@@ -10,7 +10,6 @@
     width: 100%;
     height: 100%;
     margin-top: 15px;
-
 }
 
 #main {
@@ -26,29 +25,34 @@
 
 ::-webkit-scrollbar {
     width: 0;
-
 }
 
+.contain pt-5 header-content {
+    padding: 10pt;
+}
 
 .song-container {
-    display: flex;
+    display: block;
     flex-direction: column;
-   
-    
+    margin-top: 20px;
 }
-.song-container h3 {
-    font-weight: normal;
-    color:black;
-}
-.song-container p {
-    color: #535F73;
-}
-.song-container .song-subscrise{
-    color: #535F73;
-}
-.song-container .favourite-song i{
-    color: #47026e;
-}
+
+    .song-container h3 {
+        font-weight: normal;
+        color: black;
+    }
+
+    .song-container p {
+        color: #535F73;
+    }
+
+    .song-container .song-subscrise {
+        color: #535F73;
+    }
+
+    .song-container .favourite-song i {
+        color: red;
+    }
 
 .row-song {
     display: flex;
@@ -58,13 +62,14 @@
 }
 
 .row-song {
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     padding: 4px 4px 8px 16px;
 }
-.want-play{
+
+.want-play {
     width: 75%;
     /* height: 100%; */
-    position:absolute;
+    position: absolute;
     color: #ffff;
     font-size: 20px;
     border-radius: 5px;
@@ -73,11 +78,12 @@
     cursor: pointer;
     /* text-align: center; */
     padding: 20px 40px;
-   
 }
+
 .row-song:hover .want-play {
     display: block;
 }
+
 .row-song::before .want-play {
     display: block;
 }
@@ -87,16 +93,17 @@
     width: 40%;
 }
 
-.song-contents img{
-    width: 50px;
-    margin-right: 12px;
-    border-radius: 10px;
-}
+    .song-contents img {
+        width: 50px;
+        margin-right: 12px;
+        border-radius: 10px;
+    }
 
 .song-subscrise {
-   /* text-align: center; */
+    /* text-align: center; */
     line-height: 50px;
     width: 40%;
+    font-size: large;
 }
 
 .favourite-song {
@@ -104,24 +111,27 @@
     align-items: center;
 }
 
-.favourite-song i{
-    display: inline-block;
-    margin-top: 0;
-}
+    .favourite-song i {
+        display: inline-block;
+        margin-top: 0;
+    }
 
 .fa-sharp {
-    margin-top:20px;
+    margin-top: 20px;
     line-height: 50px;
     margin-right: 12px;
-    color: rgb(218, 175, 231);
-    font-size: 20px ;
+    color: red;
+    font-size: 20px;
 }
+
 .footers {
     position: fixed;
     bottom: 0;
     right: 0;
     left: 260px;
-   
-   
-   
- }
+}
+.add {
+   width: 50px; 
+   height: 50px;
+   font-size: 30px;
+}

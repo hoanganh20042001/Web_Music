@@ -1,0 +1,180 @@
+﻿@model List<Web_Music.Models.ALbum>
+
+@{
+    ViewBag.Title = "Album";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+
+}
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/Giao diện giới thiệu/css/styleMain.css">
+<link rel="stylesheet" href="/Giao diện giới thiệu/css/responsiveMain.css">
+<link rel="stylesheet" href="/Giới thiệu/imgMain/">
+<link href="~/Assets/css/Albums.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet">
+<script>
+    function hamDropdown() {
+        document.querySelector(".content_dropdown").classList.toggle("hienThi");
+    }
+    window.onclick = function (e) {
+        if (!e.target.matches('.want-alter')) {
+            var noiDungDropdown = document.querySelector(".content_dropdown");
+            if (noiDungDropdown.classList.contains('hienThi')) {
+                noiDungDropdown.classList.remove('hienThi');
+            }
+        }
+    }
+</script>
+
+
+<!--
+    =======================NAVBAR==========================
+-->
+<!--
+    ====================MAIN_CONTENT=====================
+-->
+
+<div id="main-content">
+    <header>
+        <nav class="main-content__header-nav">
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-right"></i>
+        </nav>
+        <div class="main-content__search-form">
+            <i class="fas fa-search search-btn"></i>
+            <input type="text" class="search-input" placeholder="Search for artist, songs.....">
+        </div>
+    </header>
+
+
+    <div class="box-scroll">
+        <h1 class="contain pt-5 header-content albums">Albums</h1>
+        <div>
+            @Html.ActionLink("Create Album", "createAlbum")
+        </div>
+        <div class="contant ">
+            @{
+                var item = Model;
+            }
+
+            @for (int i = 0; i < item.Count(); i = i + 2)
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+
+                            <span class="want-play">
+                                <i class="fa-regular fa-circle-play "></i>
+
+                            </span>
+                            
+                            <img src="~/Assets/img/album/kill thí love.jpg"  class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <a class="card-title" href="/Album/listSong?MaAl=@item[i].MaAl">@item[i].TenAlbum</a>
+
+                            </div>
+                            <div class="dropdown">
+                                @*@{
+            var name = item[i].TenAlbum;
+            var kh = item[i].MaKH;
+
+                }*@
+                                <div class="dropdown">
+
+                                    <a class="want-alter  " onclick="hamDropdown()">&#8230;</a>
+                                    <div class="content_dropdown">
+                                        <a href="/Album/Delete?MaAlbum=@item[i].MaAl" class="want-delete dropdown-menu">Delete</a>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        @if (item.Count() > i + 1)
+                        {
+
+                            <div class="card">
+                                <span class="want-play">
+                                    <i class="fa-regular fa-circle-play "></i>
+
+                                </span>
+                                <img src="/Giới thiệu/Artist/charlie-01.png" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <a class="card-title" href="/Album/listSong?MaAl=@item[i+1].MaAl">@item[i + 1].TenAlbum</a>
+
+                                </div>
+                                <div class="dropdown">
+                                    @*@{
+                                        var name = item[i+1].TenAlbum;
+                                        var kh = item[i+1].MaKH;
+
+                                            }*@
+                                    <div class="dropdown">
+
+                                        <a class="want-alter  " onclick="hamDropdown()">&#8230;</a>
+                                        <div class="content_dropdown">
+                                            <a href="/Album/Delete?MaAlbum=@item[i+1].MaAl" class="want-delete dropdown-menu">Delete</a>
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+                        }
+                        else
+                        {
+
+                        }
+
+                    </div>
+                </div>
+
+            }
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
