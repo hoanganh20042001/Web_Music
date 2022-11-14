@@ -191,6 +191,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\AdminAssets\adminlte.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\all.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\all.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\brands.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\brands.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\fontawesome.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\fontawesome.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\regular.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\regular.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\solid.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\solid.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\svg-with-js.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\svg-with-js.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\v4-shims.css" />
+    <Content Include="Areas\Admin\AdminAssets\css\v4-shims.min.css" />
+    <Content Include="Areas\Admin\AdminAssets\webfonts\fa-brands-400.svg" />
+    <Content Include="Areas\Admin\AdminAssets\webfonts\fa-regular-400.svg" />
+    <Content Include="Areas\Admin\AdminAssets\webfonts\fa-solid-900.svg" />
     <Content Include="Areas\Admin\Content\dist\css\sb-admin-2.css" />
     <Content Include="Areas\Admin\Content\dist\css\sb-admin-2.min.css" />
     <Content Include="Areas\Admin\Content\dist\js\sb-admin-2.js" />
@@ -2749,17 +2767,11 @@
     <Content Include="Assets\scss\_navs.scss" />
     <Content Include="Assets\scss\_utilities.scss" />
     <Content Include="Assets\scss\_variables.scss" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.6.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.6.1.js" />
-    <Content Include="Scripts\jquery-3.6.1.min.js" />
-    <Content Include="Scripts\jquery-3.6.1.slim.js" />
-    <Content Include="Scripts\jquery-3.6.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

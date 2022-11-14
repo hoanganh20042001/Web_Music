@@ -55,7 +55,7 @@ namespace Web_Music.Areas.Admin.Controllers
         }
         [HttpPost]
 
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(NGHE_SI Model)
         {
 
@@ -70,22 +70,25 @@ namespace Web_Music.Areas.Admin.Controllers
             ////}
             //return View(Model);
 
-            //try
-            //{
-                //if (ModelState.IsValid)
+            try
+            {
+                if (ModelState.IsValid)
+                {
                     //ViewBag.MaNhom = new SelectList(db.NHOMs, "MaNhom", "TenNhom");
                     var item = new NgheSiF();
                     Model.mans = item.AutoID();
-                   
-                if (Model.ImageUpload != null)
-                {
-                    string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
-                    string extension = Path.GetExtension(Model.ImageUpload.FileName);
-                    Model.URL_img = "~/Assets/img/singer/"+fileName + extension;
-                    Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/singer/"), fileName));
+
+                    if (Model.ImageUpload != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
+                        string extension = Path.GetExtension(Model.ImageUpload.FileName);
+                        Model.URL_img = "~/Assets/img/singer/" + fileName + extension;
+                        Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/singer/"), fileName));
+                    }
+                    var result = item.Insert(Model);
+                    return RedirectToAction("Index");
                 }
-                var result = item.Insert(Model);
-                
+
                 //if (url_img!=null && url_img.ContentLength > 0)
                 //{
                 //    //int id = int.Parse(db.NGHE_SIs.ToList().Last().mans.ToString());
@@ -98,15 +101,15 @@ namespace Web_Music.Areas.Admin.Controllers
                 //    Model.URL_img = _FileName;
                 //    db.SaveChanges();
                 //}
-                     return RedirectToAction("Index");
+                return View();
 
                 //ModelState.AddModelError("", "Insert item Unsucessfully");
-            //}
-               
-            //catch
-            //{
-            //    return View();
-            //  }
+            }
+
+            catch
+            {
+                return View();
+            }
         }
         [HttpGet]
 
@@ -192,8 +195,11 @@ namespace Web_Music.Areas.Admin.Controllers
             //ViewBag.qs = qs.ToString();
             var result = item.ListBrand(id);
             //ViewBag.img = item.Find(id).URL_img;
-            ViewBag.NgheSi = result;
-            return View();
+            //ViewBag.NgheSi = result;
+            var sp = new SanPhamF();
+            var newsp = sp.ListSP(id);
+            ViewBag.sp = newsp;
+            return View(result);
         }
 
     }
