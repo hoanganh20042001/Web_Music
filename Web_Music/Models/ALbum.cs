@@ -29,7 +29,10 @@ namespace Web_Music.Models
         [Key]
         [StringLength(10)]
         public string MaAl { get; set; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> thanh
         public virtual KHACH_HANG KHACH_HANG { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
