@@ -25,6 +25,7 @@ namespace Web_Music.Areas.Admin.Controllers
             var list = new NgheSiF().ListAll();
             return View(list);
         }
+       
         //[HttpPost]
         public ActionResult Search(string search)
         {
