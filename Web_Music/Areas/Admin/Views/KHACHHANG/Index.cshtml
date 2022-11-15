@@ -44,34 +44,6 @@
         <div class="card" style="overflow-y:scroll;">
             @*<div class="card-header">
 
-
-<<<<<<< Updated upstream
-            <td>
-               <img src="@Url.Content(item.URL_img)" style="width:70px;height:50px;margin:5px"/>
-            </td>
-            <td>
-                @item.TenKH
-            </td>
-            <td>
-               @item.DiaChi
-            </td>
-            <td>
-               @item.CCCD
-            </td>
-            
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.MaKH }) |
-        @Html.ActionLink("Details", "Details", new { id = item.MaKH }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.MaKH })*@
-
-                <button class="btn-item btn-detail" onclick="if (true) { location.href = '/Admin/KHACHHANG/Detail?id=@item.MaKH' }" )>Detail</button>
-                <button class="btn-item btn-edit" onclick="if (true) { location.href = '/Admin/KHACHHANG/Edit?id=@item.MaKH' }" )>Edit</button>
-                <button class="btn-item btn-delete" href="#" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href = '/Admin/KHACHHANG/Delete?id=@item.MaKH' }">Delete</button>
-
-            </td>
-        </tr>
-    }
-=======
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>
@@ -121,7 +93,6 @@
                                 <td>
                                     <ul class="list-inline">
                                         @item.TenKH
->>>>>>> Stashed changes
 
                                     </ul>
                                 </td>

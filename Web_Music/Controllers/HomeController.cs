@@ -30,6 +30,7 @@ namespace Web_Music.Controllers
         {
             var list = new SanPhamF().Search(value);
             ViewBag.list = list;
+            ViewBag.size = list.Count;
             return View();
         }
         public ActionResult MenuSP()
