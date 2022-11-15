@@ -25,6 +25,13 @@ namespace Web_Music.Controllers
         
             
         }
+        [HttpPost]
+        public ActionResult Index(string value)
+        {
+            var list = new SanPhamF().Search(value);
+            ViewBag.list = list;
+            return View();
+        }
         public ActionResult MenuSP()
         {
             //var list = (from sp in db.SAN_PHAM.ToList()

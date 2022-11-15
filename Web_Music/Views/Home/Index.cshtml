@@ -127,10 +127,12 @@
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-right"></i>
             </nav>
-            <div class="main-content__search-form">
-                <i class="fas fa-search search-btn"></i>
-                <input type="text" class="search-input" placeholder="Search for artist, songs.....">
-            </div>
+            <form class="main-content__search-form" action="/Home/Index" method="post">
+                @*<button><i class="fas fa-search search-btn"></i></button>*@
+
+                <input type="text" class="search-input" placeholder="Search for artist, songs....." name="value">
+                <button type="submit"><i class="fas fa-search search-btn"></i></button>
+            </form>
         </header>
 
         <p class="main-content__des">
