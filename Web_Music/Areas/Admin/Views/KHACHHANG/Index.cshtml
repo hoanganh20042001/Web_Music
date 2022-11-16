@@ -24,7 +24,7 @@
         </div><!-- /.container-fluid -->
     </section>
     <div class="sidebar-search" style="display:inline-flex;margin:10px">
-        <form class="input-group custom-search-form" action="~/Admin/NGHESI/Search">
+        <form class="input-group custom-search-form" action="~/Admin/KHACHHANG/Index" method="post">
             <input type="text" class="form-control" placeholder="Search..." name="search">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit">
@@ -63,13 +63,13 @@
                             <th style="width:10%">
                                 Image
                             </th>
-                            <th style="width: 20%">
+                            <th style="width: 30%" class="text-center">
                                 Name
                             </th>
                             <th>
                                 Phone
                             </th>
-                            <th style="width: 8%" class="text-center">
+                            <th style="width: 10%" class="text-center">
                                 Sex
                             </th>
                             <th style="width: 30%">
@@ -107,7 +107,7 @@
                                     @item.SDT
                                 </td>
                                 <td class="project-state">
-                                    @item.GT
+                                    @((item.GT.ToString()=="True")? "Male":"Female")
                                     @*<span class="badge badge-success">Success</span>*@
                                 </td>
                                 <td class="project-actions text-right">

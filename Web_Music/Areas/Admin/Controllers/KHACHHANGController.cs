@@ -25,6 +25,12 @@ namespace Web_Music.Areas.Admin.Controllers
             var list = new KhachHangF().ListAll();
             return View(list);
         }
+        [HttpPost]
+        public ActionResult Index(string ma)
+        {
+            var list = new KhachHangF().Search(ma);
+            return View(list);
+        }
 
         // GET: Admin/KHACH_HANG/Details/5
         public ActionResult Detail(string id)
@@ -88,8 +94,8 @@ namespace Web_Music.Areas.Admin.Controllers
             var result = item.Insert(Model);
             return RedirectToAction("Index");
         }
-        [HttpGet]
-
+     
+      
         public ActionResult Edit(string id)
         {
             var item = new KhachHangF();

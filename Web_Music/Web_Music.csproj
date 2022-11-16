@@ -2769,6 +2769,7 @@
     <Content Include="Assets\scss\_navs.scss" />
     <Content Include="Assets\scss\_utilities.scss" />
     <Content Include="Assets\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\KHACHHANG\Detail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -1,130 +1,135 @@
 ﻿@model Web_Music.Models.NGHE_SI
-
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm("Create","NGHESI",FormMethod.Post,new {enctype="multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Singer</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model=>model.mans)
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.mans, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.mans, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mans, "", new { @class = "text-danger" })
+<form class="content-wrapper" action="~/Admin/NGHESI/Create" method="post">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Project Add</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Project Add</li>
+                    </ol>
+                </div>
             </div>
-        </div>*@
+        </div><!-- /.container-fluid -->
+    </section>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Singer name</label>
-            @*@Html.LabelFor(model => model.TenNS, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TenNS, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenNS, "", new { @class = "text-danger" })
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">General</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">Name</label>
+                            <input type="text" id="inputName" class="form-control" name="TenNS">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Address</label>
+                            <input type="text" id="inputName" class="form-control" name="QueQuan">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inputStatus">Status</label>
+                            <select id="inputStatus" class="form-control custom-select" name="GT">
+                                <option selected disabled value="True">Male</option>
+                                <option value="False">Female</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Stage name</label>
+                            <input type="text" id="inputName" class="form-control" name="NgheDanh">
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
             </div>
-        </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">General</h3>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Date of brith</label>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">Address</label>
+                            <input type="text" id="inputEstimatedBudget" class="form-control" name="DiaChi">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Phone</label>
+                            <input type="date" id="inputSpentBudget" class="form-control" name="NgaySinh">
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">Email</label>
+                            <input type="text" id="inputEstimatedBudget" class="form-control" name="Email">
+                        </div>
 
-            @*@Html.LabelFor(model => model.NgaySinh, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+
+                            <div class="input-group">
+                                <img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+
+                            </div>
+                            @*<div class="form-group">
+
+                                    <label for="exampleInputFile">File input</label>
+                                    <div class="input-group">
+
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
+
+                                    </div>
+                                </div>*@
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.QueQuan, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-2">Address</label>
-
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.QueQuan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.QueQuan, "", new { @class = "text-danger" })
+            <div class="row ">
+                <div class="col-12">
+                    <a href="~/Admin/KHACHHANG/Index" class="btn btn-secondary" style="margin-right:400px;">Cancel</a>
+                    <input type="submit" value="Create" class="btn btn-success float-right">
+                </div>
             </div>
-        </div>
+    </section>
+    <!-- /.content -->
+</form>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.NS_URL, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NS_URL, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NS_URL, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group">
-        @*@Html.LabelFor(model => model.GT, htmlAttributes: new { @class = "control-label col-md-2" } )*@
-        <label class="control-label col-md-2">Sex</label>
-
-       
-            <div class="checkbox">
-       
-                @Html.EditorFor(model => model.GT)
-                @*@Html.ValidationMessageFor(model => model.GT, "", new { @class = "form-control" })*@
-            </div>
-        </div>
-   
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Note</label>
-
-            @*@Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <!--<div class="form-group">-->
-            @*@Html.LabelFor(model => model.TheoDoi, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <!--<label class="control-label col-md-2">Lượt theo doi</label>
-
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TheoDoi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TheoDoi, "", new { @class = "text-danger" })
-            </div>
-        </div>-->
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Stage name</label>
-
-        @*@Html.LabelFor(model => model.NgheDanh, htmlAttributes: new { @class = "control-label col-md-2" })*@
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NgheDanh, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NgheDanh, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @*@Html.LabelFor(model => model.URL_img, htmlAttributes: new { @class = "control-label col-md-2" })*@
-        <label class="control-label col-md-2">Avatar</label>
-
-        <div class="col-md-10">
-            @*@Html.EditorFor(model => model.URL_img, new { htmlAttributes = new { @class = "form-control" } })*@
-            <img src="@Url.Content(Model.URL_img)" style="height:200px;width:200px;margin:10px;" id="previewImage" />
-            <input type="file" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
-            @Html.ValidationMessageFor(model => model.URL_img, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-   
-  </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

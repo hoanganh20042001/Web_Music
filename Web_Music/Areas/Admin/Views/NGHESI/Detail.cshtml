@@ -38,29 +38,29 @@
                                      alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">@Model.NgheDanh</h3>
+                            <h3 class="profile-username text-center">@Model.TenKH</h3>
 
-                            <p class="text-muted text-center">@Model.TenNS</p>
+                            
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Followers</b> <a class="float-right">@Model.TheoDoi</a>
+                                    <b>CCCD</b> <a class="float-right">@Model.CCCD</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Date of brith</b> <a class="float-right">@(Model.NgaySinh.ToString().Substring(0,10))</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Address</b> <a class="float-right">@Model.QueQuan</a>
+                                    <b>Address</b> <a class="float-right">@Model.DiaChi/a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Sex</b> <a class="float-right">@((Model.GT.ToString()=="True")? "Nam":"Nữ")</a>
+                                    <b>Sex</b> <a class="float-right">@((Model.GT.ToString()=="True")? "Male" : "Female")</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Note</b> <a class="float-right">@Model.GhiChu</a>
                                 </li>
                             </ul>
 
-                            <a href="@Url.Content("~/Admin/NGHESI/Index")" class="btn btn-primary btn-block"><b>Home</b></a>
+                            <a href="@Url.Content("~/Admin/KHACHHANG/Index")" class="btn btn-primary btn-block"><b>Home</b></a>
                         </div>
                         <!-- /.card-body -->
                     </div>
