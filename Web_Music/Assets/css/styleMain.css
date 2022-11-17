@@ -441,7 +441,7 @@ a {
     border-radius: .8rem;
     padding: 1rem 1rem;
     transform: scale(1.02);
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 .playlist-list__content {
     

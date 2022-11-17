@@ -32,17 +32,19 @@
     var size = ViewBag.size;
     for (var i = 0; i < size; i++)
     {
-        <script>
+    <script>
              musics.push({
                 id:@list[0].stt,
                 number:"@list[0].number",
                 file:"@list[0].SP.SP_URL",
                 title:"@list[0].SP.TenSP",
                 artist:"@list[0].TrinhBay",
-                time:"@list[0].Time",
-                active:false,
+                 time: "@list[0].Time",
+                 MaSP:"@list[0].MaSP",
+                 active: false,
+
              })
-        </script>
+    </script>
         {
             list.Remove(list[0]);
         }
@@ -124,7 +126,7 @@
         @*musics.push(@ViewBag.list)*@
 
     </script>
-    <script src="/Assets/javaScript/main.js"></script>
+    <script src="/Assets/javaScript/SongInAlbum.js"></script>
 }
 <div id="main-content">
     <header>
@@ -164,7 +166,7 @@
             <p>50.000</p>
         </span>
     </div>
-    @Html.Action("MenuSP", "Home", null)
+    @Html.Action("MenuSonginAlbum", "Album", null)
     <div class="play-song">
         <div class="play-control">
             <div class="play-control__act">

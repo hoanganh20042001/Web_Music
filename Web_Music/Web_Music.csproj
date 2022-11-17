@@ -164,6 +164,7 @@
     <Compile Include="Controllers\TrendController.cs" />
     <Compile Include="Function\BaiHatF.cs" />
     <Compile Include="Function\KhachHangF.cs" />
+    <Compile Include="Function\listAlbum.cs" />
     <Compile Include="Function\NgheSiF.cs" />
     <Compile Include="Function\resetSong.cs" />
     <Compile Include="Function\SanPhamF.cs" />
@@ -440,6 +441,7 @@
     <Content Include="Assets\Index.html" />
     <Content Include="Assets\javaScript\Login.js" />
     <Content Include="Assets\javaScript\main.js" />
+    <Content Include="Assets\javaScript\resetSong.js" />
     <Content Include="Assets\javaScript\sb-admin-2.js" />
     <Content Include="Assets\javaScript\sb-admin-2.min.js" />
     <Content Include="Assets\javaScript\slide.js" />
@@ -2815,6 +2817,8 @@
     <Content Include="Views\Album\createAlbum.cshtml" />
     <Content Include="Views\Album\listSong.cshtml" />
     <Content Include="Views\Album\newSong.cshtml" />
+    <Content Include="Views\Album\MenuSonginAlbum.cshtml" />
+    <Content Include="Views\Album\MenuAddSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
