@@ -95,9 +95,13 @@ for (var i = 0; i < musics.length; i++) {
         `<div class="playlist playlist--hover ${i === indexSong ? 'active' : ''}" data-index=${musics[i].id}>
             <p class=" playlist__number">${i === indexSong ? '<i class="fas fa-volume-up"></i>' : `${musics[i].number}`}</p>
             <p class=" playlist__title">${musics[i].title}</p>
-            <p class=" playlist__artist">${musics[i].artist}</p>          
+            <p class=" playlist__artist">${musics[i].artist}</p>
+           
+
             <p class=" playlist__time">${musics[i].time}</p>
-              <a href="/Album/deleteSong?MaSP=${musics[i].MaSP}">x</a>
+           
+            <a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">+</a>
+            <a href="/Album/deleteSong?MaSP=${musics[i].MaSP}">x</a>
 
 
         </div>`)
@@ -120,9 +124,12 @@ function resetSong(dir) {
             <p class=" playlist__number">${j === dir ? '<i class="fas fa-volume-up"></i>' : `${musics[j].number}`}</p>
             <p class=" playlist__title">${musics[j].title}</p>
             <p class=" playlist__artist">${musics[j].artist}</p>
+            
                
             <p class=" playlist__time">${musics[j].time}</p>
-            <a href="/Album/deleteSong?MaSP=${musics[j].MaSP}">x</a>
+            <a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">+</a>
+
+            <a href="/Album/deleteSong?MaSP=${musics[j].MaSP}">x<a>
 
 
         </div>`)
