@@ -55,6 +55,12 @@ namespace Web_Music.Controllers
             }
             return View("Index");
         }
-        
+
+        public ActionResult Logout()
+        {
+            Session.Clear();//remove session
+            return RedirectToAction("Login");
         }
+
+    }
 }
