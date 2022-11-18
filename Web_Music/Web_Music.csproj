@@ -2583,14 +2583,11 @@
     <Content Include="Areas\Admin\Views\NGHESI\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\NGHESI\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\KHACHHANG\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\KHACHHANG\Details.cshtml" />
     <Content Include="Areas\Admin\Views\KHACHHANG\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\KHACHHANG\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\TINMOI\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\TINMOI\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\TINMOI\Details.cshtml" />
     <Content Include="Areas\Admin\Views\TINMOI\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TINMOI\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\LayoutAd.cshtml" />
@@ -2770,6 +2767,9 @@
     <Content Include="Assets\scss\_utilities.scss" />
     <Content Include="Assets\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\KHACHHANG\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\KHACHHANG\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SANPHAM\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SANPHAM\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
