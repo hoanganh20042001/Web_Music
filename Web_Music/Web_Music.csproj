@@ -163,6 +163,7 @@
     <Compile Include="Controllers\NotableController.cs" />
     <Compile Include="Controllers\TrendController.cs" />
     <Compile Include="Function\BaiHatF.cs" />
+    <Compile Include="Function\FavoriteSong.cs" />
     <Compile Include="Function\KhachHangF.cs" />
     <Compile Include="Function\listAlbum.cs" />
     <Compile Include="Function\NgheSiF.cs" />
@@ -439,6 +440,7 @@
     <Content Include="Assets\img\đăng nhập và đăng kí\mẫu đăng ký.png" />
     <Content Include="Assets\img\đăng nhập và đăng kí\mẫu đăng nhập %281%29.png" />
     <Content Include="Assets\Index.html" />
+    <Content Include="Assets\javaScript\FavoriteSong.js" />
     <Content Include="Assets\javaScript\Login.js" />
     <Content Include="Assets\javaScript\main.js" />
     <Content Include="Assets\javaScript\resetSong.js" />
@@ -2819,6 +2821,7 @@
     <Content Include="Views\Album\newSong.cshtml" />
     <Content Include="Views\Album\MenuSonginAlbum.cshtml" />
     <Content Include="Views\Album\MenuAddSong.cshtml" />
+    <Content Include="Views\Favorite\FavoriteSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,7 +46,7 @@ namespace Web_Music.Controllers
             model.MaKH = makh;
                 db.ALbums.Add(model);
                 db.SaveChanges();
-                return View("Index", "Home");
+            return RedirectToAction("Album", "Album");
             
 
         }

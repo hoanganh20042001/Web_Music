@@ -97,7 +97,8 @@ for (var i = 0; i < musics.length; i++) {
             <p class=" playlist__title">${musics[i].title}</p>
             <p class=" playlist__artist">${musics[i].artist}</p>          
             <p class=" playlist__time">${musics[i].time}</p>
-              <a href="/Album/AddToAlbum?MaSP=${musics[i].MaSP}">+</a>
+           
+            <a href="/Album/AddToAlbum?MaSP=${musics[i].MaSP}">+</a>
 
 
         </div>`)
