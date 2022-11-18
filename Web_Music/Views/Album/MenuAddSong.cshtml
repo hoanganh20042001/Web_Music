@@ -5,9 +5,11 @@
     }*@
 <div class="my-playlist">
     <div class="playlist-head">
-        <h4> My Playlist</h4>
-        <a class="btn-hover">Show all</a>
+        <h4> @Session["tenAlbum"]</h4>
+          
     </div>
+    <h3> All Song</h3>
+    
     <div class="playlist-list">
         <div class="playlist playlist-list__title">
             <p class="playlist__number">#</p>
@@ -15,7 +17,7 @@
             <p class="playlist__artist">ARTIST</p>
             <p class="playlist__time">TIME</p>
         </div>
-      
+
         @*<p>@ViewBag.i.SP.SP_URL</p>*@
     </div>
 </div>

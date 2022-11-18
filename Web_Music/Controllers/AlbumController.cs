@@ -12,13 +12,27 @@ namespace Web_Music.Controllers
     public class AlbumController : Controller
     {
         // GET: Album
-       MyDBConect db = new MyDBConect();
+      
         public ActionResult Album()
 
         {
 
-            List<ALbum> list = db.ALbums.ToList();
-            return View(list);
+            MyDBConect db = new MyDBConect();
+            if (Session["MaKH"] == null)
+            {
+                return RedirectToAction("Index", "LoginClient");
+            }
+            else
+            {
+
+                //List<ALbum> list = db.ALbums.ToList();
+                string makh = Session["MaKH"].ToString();
+               var list = (from al in db.ALbums
+                         where al.MaKH == makh
+                           select al).ToList();
+                //var list = db.ALbums.Find(Session["MaKH"]);
+                return View(list);
+            }
         }
         public ActionResult createAlbum()
         {
@@ -27,24 +41,18 @@ namespace Web_Music.Controllers
         [HttpPost]
         public ActionResult createAlbum(ALbum model)
         {
-          
-            if (db.ALbums.Any(x => x.TenAlbum == model.TenAlbum))
-            {
-                ViewBag.thongbao = " this album is readly. Create new album!";
-                return View();
-            }
-            else
-            {
+            MyDBConect db = new MyDBConect();
+            string makh = Session["MaKH"].ToString();
+            model.MaKH = makh;
                 db.ALbums.Add(model);
                 db.SaveChanges();
-
-                return RedirectToAction("Album", "Album");
-            }
+            return RedirectToAction("Album", "Album");
+            
 
         }
         public ActionResult Delete(string MaAlbum)
         {
-           
+            MyDBConect db = new MyDBConect();
             var ds = (from sp in db.DS_SP
                       where sp.MaAL == MaAlbum
                       select sp).ToList();
@@ -61,7 +69,9 @@ namespace Web_Music.Controllers
         public ActionResult listSong(string MaAl)
         {
             // thanh
+            MyDBConect db = new MyDBConect();
             Session["MaAl"] = MaAl;
+            Session["tenAlbum"] = db.ALbums.Find(MaAl).TenAlbum.ToString();
 
             var list = new SongInAlbum().SP(MaAl.ToString());
             ViewBag.list = list;
@@ -69,39 +79,42 @@ namespace Web_Music.Controllers
             return View();
 
         }
-        public ActionResult newSong( string MaAl)
+        public ActionResult newSong()
         {
-
-            var list = new resetSong().SP(MaAl);
+            
+            var list = new resetSong().SP(Session["MaAl"].ToString());
             ViewBag.list = list;
             ViewBag.size = list.Count;
+          
+
+
             return View();
 
 
         }
         public ActionResult AddToAlbum(String MaSP)
         {
-           
+
+            MyDBConect db = new MyDBConect();
             DS_SP model = new DS_SP();
             model.MaSP = MaSP;
+<<<<<<< HEAD
             model.MaAL = (string)Session["MaAL"];
             if (db.DS_SP.Any(x => x.MaSP != model.MaSP))
             {
                 ViewBag.thongbao = " this song is readly";
                 return View("listSong", Session["MaAl"]);
+=======
+            model.MaAl = Session["MaAl"].ToString();
+            db.DS_SP.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("newSong", "Album");
+>>>>>>> origin/thanh2
 
-            }
-            else
-            {
-
-                db.DS_SP.Add(model);
-                db.SaveChanges();
-                return RedirectToAction("newSong", "Album");
-            }
         }
         public ActionResult DeleteSong(string MaSP)
         {
-         
+            MyDBConect db = new MyDBConect();
             //var ab = (from ds in db.DS_SP
             //          where ds.MaAl == Session["MaAl"] && ds.MaSP == MaSP
             //          select ds).FirstOrDefault();
@@ -110,6 +123,49 @@ namespace Web_Music.Controllers
             db.SaveChanges();
             return RedirectToAction("Album", "Album");
         }
+        public ActionResult MenuSonginAlbum()
+        {
+            //var list = (from sp in db.SAN_PHAM.ToList()
+            //                //            join tb in db.TRINH_BAY.ToList()
+            //                //            on sp.masp equals tb.MaNS
+            //                //            join ns in db.NGHE_SI.ToList()
+            //                //            on tb.MaNS equals ns.mans
+            //            select sp).ToList();
+            //var list = db.SAN_PHAMs.ToList();
+            var list = new SanPhamF().SP();
+            int i = 0;
+            ViewBag.list = list;
+            foreach (var item in list)
+            {
+                ViewBag.i = item;
+                i++;
+            }
+            ViewBag.size = i;
+            //var list = db.SAN_PHAMs.SqlQuery("select * from san_pham").ToList();
+            return PartialView();
+        }
+        public ActionResult MenuAddSong()
+        {
+            //var list = (from sp in db.SAN_PHAM.ToList()
+            //                //            join tb in db.TRINH_BAY.ToList()
+            //                //            on sp.masp equals tb.MaNS
+            //                //            join ns in db.NGHE_SI.ToList()
+            //                //            on tb.MaNS equals ns.mans
+            //            select sp).ToList();
+            //var list = db.SAN_PHAMs.ToList();
+            var list = new SanPhamF().SP();
+            int i = 0;
+            ViewBag.list = list;
+            foreach (var item in list)
+            {
+                ViewBag.i = item;
+                i++;
+            }
+            ViewBag.size = i;
+            //var list = db.SAN_PHAMs.SqlQuery("select * from san_pham").ToList();
+            return PartialView();
+        }
+
 
     }
 }

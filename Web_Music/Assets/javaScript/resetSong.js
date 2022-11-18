@@ -1,4 +1,4 @@
-const playBtn = document.querySelector('.play-inner');
+﻿const playBtn = document.querySelector('.play-inner');
 const nextBtn = document.querySelector('.play-forward');
 const prevBtn = document.querySelector('.play-backward');
 const song = document.getElementById('song');
@@ -238,7 +238,7 @@ playList.onclick = function (e) {
     indexSong = songNoteindex;
     isPlaying = false;
 
-    playBtn.innerHTML = `<i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i>`;
+     playBtn.innerHTML = `<i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i>`;
     song.setAttribute('src', `../Assets/mp3/${musics[indexSong].file}`);
     song.play();
     resetSong(songNoteindex);

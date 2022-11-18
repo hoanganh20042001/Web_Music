@@ -27,6 +27,7 @@ namespace Web_Music.Controllers
 
         public ActionResult Login(LoginClientModel model)
         {
+            MyDBConect db = new MyDBConect();
             if (ModelState.IsValid)
             {
                 
@@ -37,7 +38,7 @@ namespace Web_Music.Controllers
                 {
                     var userKH = dao.GetBymaKH(model.UserName);
                     var userSessionKH = new UserLogin();
-                    Session["MaKH"] = model.UserName.ToString();
+                    //
                     return RedirectToAction("Index", "Home");
                 }
                 else if (resultKH == 0)

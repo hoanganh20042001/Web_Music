@@ -24,13 +24,14 @@ namespace Web_Music.Function
 
 
         }
-        public BaiHatF(int stt,string number,SAN_PHAM SP, string TrinhBay,string Time)
+        public BaiHatF(int stt,string number,SAN_PHAM SP, string TrinhBay,string Time,string MaSP)
         {
             this.stt = stt;
             this.SP = SP;
             this.TrinhBay = TrinhBay;
             this.number = number;
             this.Time = Time;
+            this.MaSP = MaSP;
             
 
         }

@@ -28,7 +28,11 @@ namespace Web_Music.Function
 
                 bh.SP = db.SAN_PHAM.Find(item);
                 List<string> casi = new List<string>();
+<<<<<<< HEAD
                 casi = db.Database.SqlQuery<string>("select nghedanh from nghe_si ns join trinh_bay tb on tb.mans=ns.mans where masp=@masp", new SqlParameter("@masp", item)).ToList();
+=======
+                casi = db.Database.SqlQuery<string>("select nghedanh from Nghe_si ns join trinh_bay tb on tb.mans=ns.mans where masp=@masp", new SqlParameter("@masp", item)).ToList();
+>>>>>>> origin/thanh2
                 bh.number = index.ToString();
                 foreach(string i in casi)
                 {
