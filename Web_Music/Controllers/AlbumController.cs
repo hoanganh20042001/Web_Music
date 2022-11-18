@@ -98,19 +98,20 @@ namespace Web_Music.Controllers
             MyDBConect db = new MyDBConect();
             DS_SP model = new DS_SP();
             model.MaSP = MaSP;
-<<<<<<< HEAD
+
             model.MaAL = (string)Session["MaAL"];
             if (db.DS_SP.Any(x => x.MaSP != model.MaSP))
             {
                 ViewBag.thongbao = " this song is readly";
                 return View("listSong", Session["MaAl"]);
-=======
-            model.MaAl = Session["MaAl"].ToString();
-            db.DS_SP.Add(model);
-            db.SaveChanges();
-            return RedirectToAction("newSong", "Album");
->>>>>>> origin/thanh2
 
+                model.MaAL = Session["MaAl"].ToString();
+                db.DS_SP.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("newSong", "Album");
+
+            }
+            else return View();
         }
         public ActionResult DeleteSong(string MaSP)
         {
