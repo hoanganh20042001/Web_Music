@@ -58,10 +58,30 @@ namespace Web_Music.Models
                 .IsFixedLength()
                 .IsUnicode(false);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 815059874ca72f3099d73534b6df15432f51588a
             modelBuilder.Entity<ALbum>()
                 .HasMany(e => e.SAN_PHAM)
                 .WithMany(e => e.ALbums)
                 .Map(m => m.ToTable("DS_SP").MapLeftKey("MaAL").MapRightKey("MaSP"));
+<<<<<<< HEAD
+=======
+=======
+        
+
+            modelBuilder.Entity<DS_SP>()
+                .Property(e => e.MaAl)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<DS_SP>()
+                .Property(e => e.MaSP)
+                .IsFixedLength()
+                .IsUnicode(false);
+>>>>>>> thanh
+>>>>>>> 815059874ca72f3099d73534b6df15432f51588a
 
             modelBuilder.Entity<KHACH_HANG>()
                 .Property(e => e.UserName)

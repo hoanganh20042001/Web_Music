@@ -11,11 +11,21 @@ namespace Web_Music.Models
         [Key]
         [Column(Order = 0)]
         [StringLength(10)]
+<<<<<<< HEAD
         public string MaAL { get; set; }
+=======
+        public string MaAl { get; set; }
+>>>>>>> 815059874ca72f3099d73534b6df15432f51588a
 
         [Key]
         [Column(Order = 1)]
         [StringLength(10)]
         public string MaSP { get; set; }
+<<<<<<< HEAD
+=======
+        public virtual ALbum ALbum{ get; set; }
+
+        public virtual SAN_PHAM SAN_PHAM { get; set; }
+>>>>>>> 815059874ca72f3099d73534b6df15432f51588a
     }
 }
