@@ -2820,13 +2820,7 @@
     <Content Include="Views\Album\createAlbum.cshtml" />
     <Content Include="Views\Album\listSong.cshtml" />
     <Content Include="Views\Album\newSong.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Home\Search.cshtml" />
-=======
-    <Content Include="Views\Album\MenuSonginAlbum.cshtml" />
-    <Content Include="Views\Album\MenuAddSong.cshtml" />
-    <Content Include="Views\Favorite\FavoriteSong.cshtml" />
->>>>>>> origin/thanh2
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
