@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Web_Music.Models.TIN_MOI>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MyLayout.cshtml";
@@ -29,106 +29,112 @@
     </header>
     <div class="row">
         <div class="col-lg-6">
-            <div class="card shadow mb-4">
-                <a href="https://www.nme.com/news/music/kanye-west-apologises-to-kim-kardashian-for-any-stress-that-i-have-caused-3315344"
-                   class="content-link"></a>
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Kanye West apologises to Kim Kardashian
-                        for “any stress I have caused”
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="card-body__img"
-                         style="background-image: url('/Assets/img/imgMain/imgFeed/1.jpg')">
+            @{
+                var item = Model;
+            }
+            @for (int i = 0; i < item.Count(); i = i + 2)
+            
+            {
+                
+                <div class="card shadow mb-4">
+                    <a href="@item.URL_link"
+                       class="content-link"></a>
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            @item.TenTM
+                        </h6>
                     </div>
-                    <p>
-                        The former couple, who got married in 2014, were reportedly living “separate lives”
-                        by
-                        early 2021 before Kardashian filed for divorce the following month. They share four
-                        children: North, Saint, Chicago and Psalm.
-                    </p>
-                </div>
-            </div>
-            <div class="card shadow mb-4">
-                <a href="https://www.nme.com/news/music/ozzy-osbourne-says-13-wasnt-really-a-black-sabbath-album-3315264"
-                   class="content-link"></a>
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Ozzy Osbourne says '13' “wasn't really a Black Sabbath album”
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="card-body__img"
-                         style="background-image: url('/Assets/img/imgMain/imgFeed/2.jpg')">
+                    <div class="card-body">
+                        <div class="card-body__img"
+                             style="background-image: url('@item.URL_img')">
+                        </div>
+                        <p>
+                            @item.GhiChu
+                            @*The former couple, who got married in 2014, were reportedly living "separate lives" by early 2021 before Kardashian filed for divorce the following month. They share four children: North, Saint, Chicago and Psalm.*@
+                        </p>
                     </div>
-                    <p>
-                        The former Black Sabbath singer was discussing his new solo album 'Patient Number 9'
-                        in
-                        an interview when he was asked to reflect on the group's seemingly final ever
-                        record,
-                        which was released in 2013.
-                    </p>
                 </div>
+            }
+
+            @*<div class="card shadow mb-4">
+            <a href="https://www.nme.com/news/music/ozzy-osbourne-says-13-wasnt-really-a-black-sabbath-album-3315264"
+               class="content-link"></a>
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Ozzy Osbourne says '13' “wasn't really a Black Sabbath album”
+                </h6>
             </div>
-            <div class="card shadow mb-4">
-                <a href="https://www.nme.com/news/music/queens-of-the-stone-age-reissue-debut-album-alongside-like-clockwork-and-villains-with-limited-edition-vinyl-and-more-3315219"
-                   class="content-link"></a>
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Queens Of The Stone Age reissue debut album alongside 'Like Clockwork' and
-                        'Villains' with limited edition vinyl and more
-                    </h6>
+            <div class="card-body">
+                <div class="card-body__img"
+                     style="background-image: url('/Assets/img/imgMain/imgFeed/2.jpg')">
                 </div>
-                <div class="card-body">
-                    <div class="card-body__img"
-                         style="background-image: url('/Assets/img/imgMain/imgFeed/3.jpg')">
-                    </div>
-                    <p>
-                        'Like Clockwork'
-                        will be a fresh recut from its original master tapes with alternate artwork and
-                        obi-strip from Boneface with a limited opaque aqua vinyl pressing available direct
-                        from Queens Of The Stone Age and Matador Records, as well as a limited red vinyl
-                        pressing available at other retailers.
-                    </p>
-                </div>
+                <p>
+                    The former Black Sabbath singer was discussing his new solo album 'Patient Number 9'
+                    in
+                    an interview when he was asked to reflect on the group's seemingly final ever
+                    record,
+                    which was released in 2013.
+                </p>
             </div>
-            <div class="card shadow mb-4">
-                <a href="https://www.nme.com/news/gaming-news/indie-game-publisher-wired-productions-announces-music-label-3315210"
-                   class="content-link"></a>
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Indie game publisher Wired Productions announces music label
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="card-body__img"
-                         style="background-image: url('/Assets/img/imgMain/imgFeed/4.jpg')">
-                    </div>
-                    <p>
-                        Wired Productions has announced the launch of Black Razor Records, a music label
-                        that
-                        will raise money for mental health charity Safe In Our World with its first EP.
-                    </p>
-                </div>
+        </div>
+        <div class="card shadow mb-4">
+            <a href="https://www.nme.com/news/music/queens-of-the-stone-age-reissue-debut-album-alongside-like-clockwork-and-villains-with-limited-edition-vinyl-and-more-3315219"
+               class="content-link"></a>
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Queens Of The Stone Age reissue debut album alongside 'Like Clockwork' and
+                    'Villains' with limited edition vinyl and more
+                </h6>
             </div>
-            <div class="card shadow mb-4">
-                <a href="https://www.nme.com/news/music/bjork-releases-new-single-ancestress-listen-video-watch-3315199"
-                   class="content-link"></a>
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Björk shares personal new single 'Ancestress': “This song is a letter to my mother”
-                    </h6>
+            <div class="card-body">
+                <div class="card-body__img"
+                     style="background-image: url('/Assets/img/imgMain/imgFeed/3.jpg')">
                 </div>
-                <div class="card-body">
-                    <div class="card-body__img"
-                         style="background-image: url('/Assets/img/imgMain/imgFeed/5.jpg')">
-                    </div>
-                    <p>
-                        The latest preview of 'Fossora' contains vocals by Björk's son, Sindri Eldon
-                    </p>
-                </div>
+                <p>
+                    'Like Clockwork'
+                    will be a fresh recut from its original master tapes with alternate artwork and
+                    obi-strip from Boneface with a limited opaque aqua vinyl pressing available direct
+                    from Queens Of The Stone Age and Matador Records, as well as a limited red vinyl
+                    pressing available at other retailers.
+                </p>
             </div>
+        </div>
+        <div class="card shadow mb-4">
+            <a href="https://www.nme.com/news/gaming-news/indie-game-publisher-wired-productions-announces-music-label-3315210"
+               class="content-link"></a>
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Indie game publisher Wired Productions announces music label
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="card-body__img"
+                     style="background-image: url('/Assets/img/imgMain/imgFeed/4.jpg')">
+                </div>
+                <p>
+                    Wired Productions has announced the launch of Black Razor Records, a music label
+                    that
+                    will raise money for mental health charity Safe In Our World with its first EP.
+                </p>
+            </div>
+        </div>
+        <div class="card shadow mb-4">
+            <a href="https://www.nme.com/news/music/bjork-releases-new-single-ancestress-listen-video-watch-3315199"
+               class="content-link"></a>
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Björk shares personal new single 'Ancestress': “This song is a letter to my mother”
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="card-body__img"
+                     style="background-image: url('/Assets/img/imgMain/imgFeed/5.jpg')">
+                </div>
+                <p>
+                    The latest preview of 'Fossora' contains vocals by Björk's son, Sindri Eldon
+                </p>
+            </div>
+        </div>*@
         </div>
 
         <div class="col-lg-6">

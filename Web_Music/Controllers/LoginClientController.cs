@@ -37,7 +37,6 @@ namespace Web_Music.Controllers
                 {
                     var userKH = dao.GetBymaKH(model.UserName);
                     var userSessionKH = new UserLogin();
-                    Session["MaKH"] = model.UserName.ToString();
                     return RedirectToAction("Index", "Home");
                 }
                 else if (resultKH == 0)

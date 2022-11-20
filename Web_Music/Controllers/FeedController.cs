@@ -3,87 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Music.Common;
+using Web_Music.Function;
 
 namespace Web_Music.Controllers
 {
-    public class FeedController : Controller
+    public class FeedController : BaseController
     {
         // GET: Feed
         public ActionResult Index()
         {
             return View();
         }
-
-        // GET: Feed/Details/5
-        public ActionResult Details(int id)
+        public void SetViewBag(int? selectedID = null)
         {
-            return View();
+            var dao = new FeedDao();
+            ViewBag.MaTM = new SelectList(dao.ListAll(),"MaTM", "TenTM", selectedID );
         }
-
-        // GET: Feed/Create
-        public ActionResult Create()
+        public ActionResult Feed(string id, int page = 1, int pageSize = 5)
         {
-            return View();
-        }
+            var feed = new FeedDao().ViewDetail(id);
+            ViewBag.TIN_MOI = feed;
+            int totalRecord = 0;
+            var model = new FeedDetalDao().ListByCategoryId(id, ref totalRecord);
 
-        // POST: Feed/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+            ViewBag.Total = totalRecord;
+            ViewBag.Page = page;
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            int maxPage = 5;
+            int totalPage = 0;
 
-        // GET: Feed/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = page + 1;
+            ViewBag.Prev = page - 1;
 
-        // POST: Feed/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Feed/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Feed/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(model);
         }
     }
 }
