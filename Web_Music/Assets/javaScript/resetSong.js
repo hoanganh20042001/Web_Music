@@ -123,7 +123,7 @@ function resetSong(dir) {
             <p class=" playlist__artist">${musics[j].artist}</p>
                
             <p class=" playlist__time">${musics[j].time}</p>
-            <a href="/Album/AddToAlbum?MaSP=${musics[j].MaSP}">+</a>
+            <a href="/Album/AddToAlbum?MaSP=${musics[j].MaSP}">+ </a>
 
 
         </div>`)
