@@ -28,7 +28,9 @@ namespace Web_Music.Function
 
                 bh.SP = db.SAN_PHAM.Find(item);
                 List<string> casi = new List<string>();
-                casi = db.Database.SqlQuery<string>("select nghedanh from Nghe_si ns join trinh_bay tb on tb.mans=ns.mans where masp=@masp", new SqlParameter("@masp", item)).ToList();
+
+                casi = db.Database.SqlQuery<string>("select nghedanh from nghe_si ns join trinh_bay tb on tb.mans=ns.mans where masp=@masp", new SqlParameter("@masp", item)).ToList();
+
                 bh.number = index.ToString();
                 foreach(string i in casi)
                 {
@@ -42,6 +44,46 @@ namespace Web_Music.Function
                 ListAll.Add(bh);
             }
             return ListAll;
+        }
+        /*sp join trinh_bay tb on tb.masp=sp.masp join nghe_si ns on ns.mans=tb.mans */
+        /*or nghedanh like @value*/
+        public List<BaiHatF> Search(string Ma)
+        {
+            if (Ma !="")
+            {
+                string value = "%" + Ma + "%";
+                List<string> masp = new List<string>();
+                masp = db.Database.SqlQuery<string>("select sp.masp from san_pham sp join trinh_bay tb on tb.masp=sp.masp join nghe_si ns on ns.mans=tb.mans where tensp like @value or nghedanh like @value ", new SqlParameter("@value", value)).ToList();
+                foreach (string item in masp)
+                {
+                    BaiHatF bh = new BaiHatF();
+                    int index = int.Parse(db.Database.SqlQuery<string>("SELECT RIGHT(MAsp, 8) FROM san_pham where masp=@masp", new SqlParameter("@masp", item)).FirstOrDefault().ToString());
+                    bh.stt = index - 1;
+                    bh.Time = db.Database.SqlQuery<TimeSpan>("select thoigian FROM san_pham where masp=@masp", new SqlParameter("@masp", item)).FirstOrDefault().ToString().Substring(4);
+
+                    bh.SP = db.SAN_PHAM.Find(item);
+                    List<string> casi = new List<string>();
+                    casi = db.Database.SqlQuery<string>("select nghedanh from nghe_si ns join trinh_bay tb on tb.mans=ns.mans where masp=@masp", new SqlParameter("@masp", item)).ToList();
+                    bh.number = index.ToString();
+                    foreach (string i in casi)
+                    {
+                        if (bh.TrinhBay == "")
+                        {
+                            bh.TrinhBay = i;
+                        }
+                        else
+                            bh.TrinhBay = bh.TrinhBay + "," + i;
+                    }
+                    ListAll.Add(bh);
+                }
+                return ListAll;
+            }
+            else
+            {
+                var list = new SanPhamF();
+
+                return list.SP();
+            }
         }
         public List<SAN_PHAM> ListSP(string id)
         {

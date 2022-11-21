@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,10 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -186,6 +185,7 @@
     <Compile Include="Models\NGHE.cs" />
     <Compile Include="Models\NGHE_SI.cs" />
     <Compile Include="Models\SAN_PHAM.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\THEO_DOI.cs" />
     <Compile Include="Models\TIN_MOI.cs" />
     <Compile Include="Models\TRINH_BAY.cs" />
@@ -2587,14 +2587,11 @@
     <Content Include="Areas\Admin\Views\NGHESI\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\NGHESI\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\KHACHHANG\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\KHACHHANG\Details.cshtml" />
     <Content Include="Areas\Admin\Views\KHACHHANG\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\KHACHHANG\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\TINMOI\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\TINMOI\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\TINMOI\Details.cshtml" />
     <Content Include="Areas\Admin\Views\TINMOI\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TINMOI\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\LayoutAd.cshtml" />
@@ -2773,6 +2770,10 @@
     <Content Include="Assets\scss\_navs.scss" />
     <Content Include="Assets\scss\_utilities.scss" />
     <Content Include="Assets\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\KHACHHANG\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\KHACHHANG\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SANPHAM\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SANPHAM\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2819,9 +2820,7 @@
     <Content Include="Views\Album\createAlbum.cshtml" />
     <Content Include="Views\Album\listSong.cshtml" />
     <Content Include="Views\Album\newSong.cshtml" />
-    <Content Include="Views\Album\MenuSonginAlbum.cshtml" />
-    <Content Include="Views\Album\MenuAddSong.cshtml" />
-    <Content Include="Views\Favorite\FavoriteSong.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2892,11 +2891,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

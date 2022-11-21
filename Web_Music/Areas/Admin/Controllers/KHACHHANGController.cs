@@ -25,6 +25,12 @@ namespace Web_Music.Areas.Admin.Controllers
             var list = new KhachHangF().ListAll();
             return View(list);
         }
+        [HttpPost]
+        public ActionResult Index(string ma)
+        {
+            var list = new KhachHangF().Search(ma);
+            return View(list);
+        }
 
         // GET: Admin/KHACH_HANG/Details/5
         public ActionResult Detail(string id)
@@ -88,8 +94,8 @@ namespace Web_Music.Areas.Admin.Controllers
             var result = item.Insert(Model);
             return RedirectToAction("Index");
         }
-        [HttpGet]
-
+     
+      
         public ActionResult Edit(string id)
         {
             var item = new KhachHangF();
@@ -104,7 +110,7 @@ namespace Web_Music.Areas.Admin.Controllers
             return View(result);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult Edit(KHACH_HANG Model)
         {
             try
@@ -126,40 +132,27 @@ namespace Web_Music.Areas.Admin.Controllers
             }
         }
 
-
-        // GET: Admin/KHACH_HANG/Delete/5
-        public async Task<ActionResult> Delete(string id)
+        public ActionResult Delete(string ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            KHACH_HANG kHACH_HANG = await db.KHACH_HANG.FindAsync(id);
-            if (kHACH_HANG == null)
-            {
-                return HttpNotFound();
-            }
-            return View(kHACH_HANG);
-        }
-
-        // POST: Admin/KHACH_HANG/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
-        {
-            KHACH_HANG kHACH_HANG = await db.KHACH_HANG.FindAsync(id);
-            db.KHACH_HANG.Remove(kHACH_HANG);
-            await db.SaveChangesAsync();
+            var item = new KhachHangF();
+            //var result = item.Find(ID);
+            //if (result == null)
+            //{
+            //    Response.StatusCode = 404;
+            //    return null;
+            //}
+            //return View(result);
+            var result = item.Delete(ID);
             return RedirectToAction("Index");
+            //if (result == true)
+            //    return RedirectToAction("Index");
+            //else
+            //{
+            //    ModelState.AddModelError("", "Edit item Unsucessfully");
+            //    return RedirectToAction("Index");
+            //}
+
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

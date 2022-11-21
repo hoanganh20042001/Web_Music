@@ -1,123 +1,331 @@
 ﻿@model Web_Music.Models.KHACH_HANG
 
+
 @{
     ViewBag.Title = "Detail";
-    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Profile</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">User Profile</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-<h2>Detail</h2>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3" style="max-width:45%">
 
-<div>
-    <h4>KHACH_HANG</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenKH)
-        </dt>
+                    <!-- Profile Image -->
+                    <div class="card card-primary card-outline">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle"
+                                     src="@Url.Content(Model.URL_img)"
+                                     alt="User profile picture">
+                            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenKH)
-        </dd>
+                            <h3 class="profile-username text-center">@Model.TenKH</h3>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.URL_img)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.URL_img)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>CCCD</b> <a class="float-right">@Model.CCCD</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Date of brith</b> <a class="float-right">@(Model.NgaySinh.ToString().Substring(0,10))</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Address</b> <a class="float-right">@Model.DiaChi/a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Sex</b> <a class="float-right">@((Model.GT.ToString()=="True")? "Male" : "Female")</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Note</b> <a class="float-right">@Model.GhiChu</a>
+                                </li>
+                            </ul>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+                            <a href="@Url.Content("~/Admin/KHACHHANG/Index")" class="btn btn-primary btn-block"><b>Home</b></a>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <!-- About Me Box -->
+                    <!--<div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">About Me</h3>
+                        </div>-->
+                    <!-- /.card-header -->
+                    <!--<div class="card-body">
+                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Pass)
-        </dt>
+                        <p class="text-muted">
+                            B.S. in Computer Science from the University of Tennessee at Knoxville
+                        </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Pass)
-        </dd>
+                        <hr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
+                        <p class="text-muted">Malibu, California</p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SDT)
-        </dt>
+                        <hr>
 
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
+                        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgaySinh)
-        </dt>
+                        <p class="text-muted">
+                            <span class="tag tag-danger">UI Design</span>
+                            <span class="tag tag-success">Coding</span>
+                            <span class="tag tag-info">Javascript</span>
+                            <span class="tag tag-warning">PHP</span>
+                            <span class="tag tag-primary">Node.js</span>
+                        </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgaySinh)
-        </dd>
+                        <hr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
+                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
 
-        <dd>
-            @Html.DisplayFor(model => model.TrangThai)
-        </dd>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                    </div>-->
+                    <!-- /.card-body -->
+                    <!--</div>-->
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GT)
-        </dt>
+                <div class="col-md-9">
+                    <div class="card" style="overflow-y:scroll;">
+                        @*<div class="card-header">
 
-        <dd>
-            @Html.DisplayFor(model => model.GT)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CCCD)
-        </dt>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>*@
+                        <div class="card-body p-0">
+                            <table class="table table-striped projects">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 1%">
+                                            #
+                                        </th>
+                                        <th style="width:15%">
+                                            Image
+                                        </th>
+                                        <th style="width: 25%">
+                                            Name
+                                        </th>
+                                        <th>
+                                            Composed
+                                        </th>
+                                        <th style="width: 10%" class="text-center">
+                                            Follower
+                                        </th>
+                                        @*<th style="width: 30%">
+                                            </th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-        <dd>
-            @Html.DisplayFor(model => model.CCCD)
-        </dd>
+                                    @foreach (var item in ViewBag.sp)
+                                    {
+                                        <tr>
+                                            <td>
+                                                #
+                                            </td>
+                                            <td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                                                <li class="list-inline-item">
+                                                    <img alt="Avatar" class="table-avatar" src="@Url.Content(item.URL_img)">
+                                                </li>
+                                            </td>
+                                            <td>
+                                                <ul class="list-inline">
+                                                    @item.TenSP
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                                                </ul>
+                                            </td>
+                                            <td class="project_progress">
+                                                <div class="progress progress-sm">
+                                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                                        </div>
+                                                    </div>
+                                                    <small>
+                                                        57% Complete
+                                                    </small>
+                                                @item.SangTac
+                                            </td>
+                                            <td class="project-state">
+                                                @item.LuotNghe
+                                                <span class="badge badge-success">Success</span>
+                                            </td>
+                                            <td class="project-actions text-right">
+                                                    <a class="btn btn-primary btn-sm" href='/Admin/NGHESI/Detail?id=@item.mans'>
+                                                        <i class="fas fa-folder">
+                                                        </i>
+                                                        View
+                                                    </a>
+                                                    <a class="btn btn-info btn-sm" href='/Admin/NGHESI/Edit?id=@item.mans'>
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href='/Admin/NGHESI/Delete?id=@item].mans'}">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Delete
+                                                    </a>
+                                                </td>
+                                        </tr>
+                                    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GhiChu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID)
-        </dd>
-
-    </dl>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaKH }) |
+<!--<div>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>SINGER</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-3" style="background-color:palevioletred;flex-direction:column;">-->
+<!-- Profile Image -->
+<!--<div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle"
+                 src="../../dist/img/user4-128x128.jpg"
+                 alt="User profile picture">
+        </div>
+
+        <h3 class="profile-username text-center">Nina Mcintire</h3>
+
+        <p class="text-muted text-center">Software Engineer</p>
+
+        <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+                <b>Followers</b> <a class="float-right">1,322</a>
+            </li>
+            <li class="list-group-item">
+                <b>Following</b> <a class="float-right">543</a>
+            </li>
+            <li class="list-group-item">
+                <b>Friends</b> <a class="float-right">13,287</a>
+            </li>
+        </ul>
+
+        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+    </div>-->
+<!-- /.card-body -->
+<!--</div>-->
+<!-- /.card -->
+<!-- About Me Box -->
+<!--<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">About Me</h3>
+    </div>-->
+<!-- /.card-header -->
+<!--<div class="card-body">
+    <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+    <p class="text-muted">
+        B.S. in Computer Science from the University of Tennessee at Knoxville
+    </p>
+
+    <hr>
+
+    <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+    <p class="text-muted">Malibu, California</p>
+
+    <hr>
+
+    <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+    <p class="text-muted">
+        <span class="tag tag-danger">UI Design</span>
+        <span class="tag tag-success">Coding</span>
+        <span class="tag tag-info">Javascript</span>
+        <span class="tag tag-warning">PHP</span>
+        <span class="tag tag-primary">Node.js</span>
+    </p>
+
+    <hr>
+
+    <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+</div>-->
+<!-- /.card-body -->
+<!--</div>-->
+<!-- /.card -->
+<!--</div>
+</div>-->
+<!--<div>
+    <h>SINGER=>Detail</h>
+    <hr />
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>
+                Name
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Sex
+            </th>
+            <th>
+                Stage Name
+            </th>
+            <th>Follower</th>-->
+@*<th>@ViewBag.qs</th>*@
+<!--</tr>
+
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>-->

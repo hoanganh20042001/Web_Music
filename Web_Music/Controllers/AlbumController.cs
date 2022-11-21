@@ -54,7 +54,7 @@ namespace Web_Music.Controllers
         {
             MyDBConect db = new MyDBConect();
             var ds = (from sp in db.DS_SP
-                      where sp.MaAl == MaAlbum
+                      where sp.MaAL == MaAlbum
                       select sp).ToList();
             foreach (var i in ds)
             {
@@ -98,11 +98,20 @@ namespace Web_Music.Controllers
             MyDBConect db = new MyDBConect();
             DS_SP model = new DS_SP();
             model.MaSP = MaSP;
-            model.MaAl = Session["MaAl"].ToString();
-            db.DS_SP.Add(model);
-            db.SaveChanges();
-            return RedirectToAction("newSong", "Album");
 
+            model.MaAL = (string)Session["MaAL"];
+            if (db.DS_SP.Any(x => x.MaSP != model.MaSP))
+            {
+                ViewBag.thongbao = " this song is readly";
+                return View("listSong", Session["MaAl"]);
+
+                model.MaAL = Session["MaAl"].ToString();
+                db.DS_SP.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("newSong", "Album");
+
+            }
+            else return View();
         }
         public ActionResult DeleteSong(string MaSP)
         {

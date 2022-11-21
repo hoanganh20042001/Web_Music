@@ -1,94 +1,144 @@
-﻿@model IEnumerable<Web_Music.Models.SAN_PHAM>
+﻿@model Web_Music.Function.SanPhamF
+@section Head{
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
+}
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
 
+@{
+    var list = ViewBag.list;
 
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenSP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SangTac)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SP_URL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Theloai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LuotNghe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.YeuThich)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KhongYeuThich)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TGPhatHanh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThoiGian)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SangTac)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SP_URL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Theloai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LuotNghe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GhiChu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.YeuThich)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KhongYeuThich)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TGPhatHanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThoiGian)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaSP }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaSP }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaSP })
-        </td>
-    </tr>
 }
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>SINGER</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Projects</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <div class="sidebar-search" style="display:inline-flex;margin:10px">
+        <form class="input-group custom-search-form" action="~/Admin/SANPHAM/Index" method="post">
+            <input type="text" class="form-control" placeholder="Search..." name="search">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </form>
+        <div>
+            <button class="btn btn-primary btn-sm" style="font-size:17px; margin:2px 150px;" onclick="if ( true) { location.href='/Admin/SANPHAM/Create' }">Create</button>
+        </div>
+    </div>
 
-</table>
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card" style="overflow-y:scroll;">
+            @*<div class="card-header">
+
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>*@
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">
+                                #
+                            </th>
+                            <th style="width:20%">
+                                Name
+                            </th>
+                            <th style="width: 15%"class="text-center">
+                                Composed
+                            </th>
+                            <th style="width: 15%"class="text-center">
+                                Category
+                            </th>
+                            <th style="width: 15%" class="text-center">
+                                Singers
+                            </th>
+                            <th style="width: 5%" class="text-center">
+                                Time
+                            </th>
+                            <th style="width: 30%">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in ViewBag.list)
+                        {
+                        <tr>
+                            <td>
+                                #
+                            </td>
+                            <td>
+
+                                @item.SP.TenSP
+                            </td>
+                            <td>
+                                <ul class="list-inline">
+                                    @item.SP.SangTac
+
+                                </ul>
+                            </td>
+                            <td>
+
+                                @item.SP.Theloai
+                            </td>
+                            <td class="text-center">
+                          
+                                @item.TrinhBay
+                            </td>
+                            <td class="project-state">
+                                @item.Time
+                                @*<span class="badge badge-success">Success</span>*@
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-primary btn-sm" href='/Admin/NGHESI/Detail?id=@item.SP.MaSP'>
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href='/Admin/NGHESI/Edit?id=@item.SP.MaSP'>
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href = '/Admin/NGHESI/Delete?id=@item.SP.MaSP' }">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

@@ -47,6 +47,7 @@ namespace Model.Dao
         {
             var result = db.ADMINs.SingleOrDefault(x => x.UserName == userName);
             var resultKH = db.KHACH_HANG.SingleOrDefault(x => x.UserName == userName);
+           
             if (result == null && resultKH == null)
             {
                 return 0;

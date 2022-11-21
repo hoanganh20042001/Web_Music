@@ -41,6 +41,7 @@
                             <label for="inputName">Name</label>
                             <input type="text" id="inputName" class="form-control" name="TenKH">
                         </div>
+
                         <div class="form-group">
                             <label for="inputName">User name</label>
                             <input type="text" id="inputName" class="form-control" name="UserName">
@@ -51,18 +52,26 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputStatus">Status</label>
+                            <label for="inputStatus">Sex</label>
                             <select id="inputStatus" class="form-control custom-select" name="GT">
-                                <option selected disabled value="True">Nam</option>
-                                <option value="False">Nu</option>
+                                <option selected disabled value="True">Male</option>
+                                <option value="False">Female</option>
 
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="inputName">CCCD</label>
-                            <input type="text" id="inputName" class="form-control" name="CCCD">
+                            <label for="inputStatus">Status</label>
+                            <select id="inputStatus" class="form-control custom-select" name="TrangThai">
+                                <option selected disabled value="True">On</option>
+                                <option value="False">Off</option>
+
+                            </select>
                         </div>
-                        
+                        <div class="form-group">
+                            <label for="inputName">Stage name</label>
+                            <input type="text" id="inputName" class="form-control" name="NgheDanh">
+                        </div>
+
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -86,23 +95,23 @@
                         </div>
                         <div class="form-group">
                             <label for="inputSpentBudget">Phone</label>
-                            <input type="number" id="inputSpentBudget" class="form-control" name="SDT">
+                            <input type="number" id="inputSpentBudget" class="form-control" name="Phone">
                         </div>
                         <div class="form-group">
-                            <label for="inputStatus">Status</label>
-                            <select id="inputStatus" class="form-control custom-select" name="Trangthai">
-                                <option value="True">On</option>
-                                <option value="False">Off</option>
-
-                            </select>
+                            <label for="inputSpentBudget">CCCD</label>
+                            <input type="number" id="inputSpentBudget" class="form-control" name="CCCD">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Date of birth </label>
+                            <input type="date" id="inputSpentBudget" class="form-control" name="NgaySinh">
                         </div>
                         <div class="form-group">
                             <label for="inputEstimatedBudget">Email</label>
                             <input type="text" id="inputEstimatedBudget" class="form-control" name="Email">
                         </div>
-                      
+
                         <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
+                            <label for="exampleInputFile">Avartar</label>
 
                             <div class="input-group">
                                 <img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
@@ -110,36 +119,36 @@
                                     <input type="file" class="custom-file-input" id="exampleInputFile">
                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
-                                
+
                             </div>
                             @*<div class="form-group">
 
-                                <label for="exampleInputFile">File input</label>
-                                <div class="input-group">
+                <label for="exampleInputFile">File input</label>
+                <div class="input-group">
 
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Upload</span>
+                    </div>
 
-                                </div>
-                            </div>*@
+                </div>
+            </div>*@
 
                         </div>
                         <!-- /.card-body -->
                     </div>
-                <!-- /.card -->
+                    <!-- /.card -->
+                </div>
             </div>
-        </div>
-        <div class="row ">
-            <div class="col-12">
-                <a href="~/Admin/KHACHHANG/Index" class="btn btn-secondary" style="margin-right:400px;">Cancel</a>
-                <input type="submit" value="Create" class="btn btn-success float-right">
+            <div class="row ">
+                <div class="col-12">
+                    <a href="~/Admin/KHACHHANG/Index" class="btn btn-secondary" style="margin-right:400px;">Cancel</a>
+                    <input type="submit" value="Create" class="btn btn-success float-right">
+                </div>
             </div>
-        </div>
     </section>
     <!-- /.content -->
 </form>

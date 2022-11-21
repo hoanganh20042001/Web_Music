@@ -1,10 +1,11 @@
-namespace Web_Music.Models
+﻿namespace Web_Music.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web;
 
     public partial class TIN_MOI
     {
@@ -12,6 +13,7 @@ namespace Web_Music.Models
         public TIN_MOI()
         {
             TRUY_CAP_TM = new HashSet<TRUY_CAP_TM>();
+            URL_img = "~/Assets/img/tin mới/add.png";
         }
 
         [StringLength(200)]
@@ -36,5 +38,7 @@ namespace Web_Music.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRUY_CAP_TM> TRUY_CAP_TM { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

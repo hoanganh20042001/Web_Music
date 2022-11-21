@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Music.Models;
+using Web_Music.Function;
 
 namespace Web_Music.Controllers
 {
@@ -11,7 +13,10 @@ namespace Web_Music.Controllers
         // GET: Feed
         public ActionResult Index()
         {
-            return View();
+            var list = new TinMoiF().ListAll();
+            ViewBag.list = list;
+            ViewBag.size = list.Count();
+            return View(list);
         }
 
         // GET: Feed/Details/5

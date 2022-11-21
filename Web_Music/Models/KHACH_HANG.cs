@@ -17,7 +17,7 @@ namespace Web_Music.Models
             THEO_DOI = new HashSet<THEO_DOI>();
             TRUY_CAP_TM = new HashSet<TRUY_CAP_TM>();
             YEU_THICH = new HashSet<YEU_THICH>();
-            URL_img= "~/Assets/img/KH/add.png";
+            URL_img = "~/Assets/img/KH/add.png";
         }
 
         [Required]
@@ -58,8 +58,10 @@ namespace Web_Music.Models
         [Key]
         [StringLength(10)]
         public string MaKH { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ALbum> ALbums { get; set; }
 

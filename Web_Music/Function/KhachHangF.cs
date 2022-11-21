@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Web_Music.Models;
+using System.Data.SqlClient;
 
 namespace Web_Music.Function
 {
@@ -49,6 +50,12 @@ namespace Web_Music.Function
         {
             var result = db.KHACH_HANG.ToList();
             return result;
+        }
+        public List<KHACH_HANG> Search(string ma)
+        {
+            string value = "%" + ma + "%";
+            var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where tenkh like @value", new SqlParameter("@value", value)).ToList();
+            return list;
         }
         public int Count()
         {

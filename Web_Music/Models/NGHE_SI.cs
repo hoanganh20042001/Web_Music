@@ -48,9 +48,6 @@ namespace Web_Music.Models
         [StringLength(10)]
         public string mans { get; set; }
 
-        [StringLength(10)]
-       
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THEO_DOI> THEO_DOI { get; set; }
 

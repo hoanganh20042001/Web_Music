@@ -10,11 +10,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="~/Assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/Assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="~/Assets/vendor/animate/animate.css">
-    <link rel="stylesheet" type="text/css" href="~/Assets/vendor/css-hamburgers/hamburgers.min.css">
-    <link rel="stylesheet" type="text/css" href="~/Assets/vendor/select2/select2.min.css">
     <link rel="stylesheet" type="text/css" href="~/Assets/css/until.css">
     <link rel="stylesheet" type="text/css" href="~/Assets/css/admin1.css" asp-append-version="true">
     <link href="~/Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -112,9 +107,10 @@
                     <button type="submit" class="container-login100-form-btn">
                         Login
                     </button>
-                    <button class="container-login100-form-btn">
-                        @Html.ActionLink("SignUp", "Create", "CreateAcc")
-                    </button>
+                    <div class="text-center">
+                        @Html.ActionLink("Don't have account? SignUp", "Create", "CreateAcc")
+                    </div>
+                        
                 }
 
 
@@ -123,12 +119,8 @@
         </div>
     </div>
     <!--Javascript-->
-    <script src="~/Assets/javaScript/main.js"></script>
     <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
-    <script src="~/Assets/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script src="~/Assets/vendor/bootstrap/js/popper.js"></script>
     <script src="~/Assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/Assets/vendor/select2/select2.min.js"></script>
 </body>
 
 </html>

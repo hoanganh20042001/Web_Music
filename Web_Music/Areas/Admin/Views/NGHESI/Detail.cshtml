@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                        <li class="breadcrumb-item active">Singer Profile</li>
                     </ol>
                 </div>
             </div>
@@ -37,15 +37,13 @@
                                      src="@Url.Content(Model.URL_img)"
                                      alt="User profile picture">
                             </div>
-
                             <h3 class="profile-username text-center">@Model.NgheDanh</h3>
-
                             <p class="text-muted text-center">@Model.TenNS</p>
 
+
+
                             <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>Followers</b> <a class="float-right">@Model.TheoDoi</a>
-                                </li>
+                               
                                 <li class="list-group-item">
                                     <b>Date of brith</b> <a class="float-right">@(Model.NgaySinh.ToString().Substring(0,10))</a>
                                 </li>
@@ -53,14 +51,14 @@
                                     <b>Address</b> <a class="float-right">@Model.QueQuan</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Sex</b> <a class="float-right">@((Model.GT.ToString()=="True")? "Nam":"Nữ")</a>
+                                    <b>Sex</b> <a class="float-right">@((Model.GT.ToString()=="True")? "Male" : "Female")</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Note</b> <a class="float-right">@Model.GhiChu</a>
                                 </li>
                             </ul>
 
-                            <a href="@Url.Content("~/Admin/NGHESI/Index")" class="btn btn-primary btn-block"><b>Home</b></a>
+                            <a href="@Url.Content("~/Admin/KHACHHANG/Index")" class="btn btn-primary btn-block"><b>Home</b></a>
                         </div>
                         <!-- /.card-body -->
                     </div>
