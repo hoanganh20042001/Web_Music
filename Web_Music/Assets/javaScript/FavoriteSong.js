@@ -100,8 +100,8 @@ for (var i = 0; i < musics.length; i++) {
 
             <p class=" playlist__time">${musics[i].time}</p>
            
-            //<a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">+</a>
-            //<a href="/Favorite/DeleteSong?MaSP=${musics[i].MaSP}">x</a>
+            <a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">+</a>
+            <a href="/Favorite/DeleteSong?MaSP=${musics[i].MaSP}">x</a>
 
 
         </div>`)
@@ -127,9 +127,9 @@ function resetSong(dir) {
             
                
             <p class=" playlist__time">${musics[j].time}</p>
-            //<a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">+</a>
+            <a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">+</a>
 
-            //<a href="/Favorite/DeleteSong?MaSP=${musics[j].MaSP}">x<a>
+            <a href="/Favorite/DeleteSong?MaSP=${musics[j].MaSP}">x<a>
 
 
         </div>`)
