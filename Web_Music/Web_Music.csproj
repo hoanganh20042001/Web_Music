@@ -2820,7 +2820,8 @@
     <Content Include="Views\Album\createAlbum.cshtml" />
     <Content Include="Views\Album\listSong.cshtml" />
     <Content Include="Views\Album\newSong.cshtml" />
-
+    <Content Include="Views\Favorite\FavoriteSong.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
