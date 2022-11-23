@@ -48,13 +48,13 @@ namespace Web_Music.Function
         }
         public List<KHACH_HANG> ListAll()
         {
-            var result = db.KHACH_HANG.ToList();
-            return result;
+            var list= db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where trangthai=1 ").ToList();
+            return list;
         }
         public List<KHACH_HANG> Search(string ma)
         {
             string value = "%" + ma + "%";
-            var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where tenkh like @value", new SqlParameter("@value", value)).ToList();
+            var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where trangthai=1 and tenkh like @value", new SqlParameter("@value", value)).ToList();
             return list;
         }
         public int Count()
@@ -114,7 +114,8 @@ namespace Web_Music.Function
             var result = db.KHACH_HANG.Find(id);
             if (result != null)
             {
-                db.KHACH_HANG.Remove(result);
+                result.TrangThai = false;
+               
                 db.SaveChanges();
                 return true;
             }

@@ -138,6 +138,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\KHACHHANGController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\NGHESIController.cs" />
@@ -2774,6 +2775,8 @@
     <Content Include="Areas\Admin\Views\KHACHHANG\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SANPHAM\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SANPHAM\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Default\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\NewLayoutAdmin.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2820,7 +2823,6 @@
     <Content Include="Views\Album\createAlbum.cshtml" />
     <Content Include="Views\Album\listSong.cshtml" />
     <Content Include="Views\Album\newSong.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
