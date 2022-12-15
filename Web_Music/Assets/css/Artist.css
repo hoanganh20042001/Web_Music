@@ -20,7 +20,7 @@
 
 .box-scroll {
     width: 100%;
-    height: 645px;
+    height: 250px;
     overflow-y: scroll;
 }
 
@@ -43,10 +43,13 @@ col {
 img {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
+   /* border-radius: 50%;*/
 
 }
-.nameArtist{
+.img-list-artist {
+    border-radius: 50%;
+}
+.nameArtist {
     position: absolute;
     color: white;
     background-color: black;
@@ -56,12 +59,11 @@ img {
     line-height: 6;
     top: 50%;
     left: 40%;
-    font-size:13px;
+    font-size: 13px;
     text-align: center;
     transition: left 1s, top 1s, background-color 1s,height 1s, width 1s;
-  /* -moz-transition: margin-right 2s, background-color 2s, height 2s, width 2s; */
-  /* -webkit-transition: margin-right 2s, background-color 2s,height 2s, width 2s ; */
-
+    /* -moz-transition: margin-right 2s, background-color 2s, height 2s, width 2s; */
+    /* -webkit-transition: margin-right 2s, background-color 2s,height 2s, width 2s ; */
 }
 /* .col:hover .nameArtist{
    
@@ -116,4 +118,10 @@ button:focus  .want-play{
    
    
  }
+.gach{
+    border-width:0.5px;
+    border-style:solid;
+    border-color:#ffffff;
+    margin-bottom:20px;
+}
 
