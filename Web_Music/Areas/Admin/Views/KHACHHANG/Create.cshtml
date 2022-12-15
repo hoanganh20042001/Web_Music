@@ -3,19 +3,21 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
-
-<form class="content-wrapper" action="~/Admin/KHACHHANG/Create" method="post">
+@section Head{
+    <title>Add Custom</title>
+}
+<form class="content-wrapper" action="~/Admin/KHACHHANG/Create" method="post" enctype="multipart/form-data">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Project Add</h1>
+                    <h1>Customs Add</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Project Add</li>
+                        <li class="breadcrumb-item active">Customs Add</li>
                     </ol>
                 </div>
             </div>
@@ -67,10 +69,7 @@
 
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="inputName">Stage name</label>
-                            <input type="text" id="inputName" class="form-control" name="NgheDanh">
-                        </div>
+
 
                     </div>
                     <!-- /.card-body -->
@@ -116,26 +115,26 @@
                             <div class="input-group">
                                 <img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
 
                             </div>
                             @*<div class="form-group">
 
-                <label for="exampleInputFile">File input</label>
-                <div class="input-group">
+                                    <label for="exampleInputFile">File input</label>
+                                    <div class="input-group">
 
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                    </div>
-                    <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                    </div>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
 
-                </div>
-            </div>*@
+                                    </div>
+                                </div>*@
 
                         </div>
                         <!-- /.card-body -->
@@ -152,4 +151,3 @@
     </section>
     <!-- /.content -->
 </form>
-

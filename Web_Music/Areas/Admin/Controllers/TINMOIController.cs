@@ -9,7 +9,7 @@ using Web_Music.Areas.Admin.Controllers;
 using System.IO;
 
 namespace Web_Music.Areas.Admin.Controllers
-    
+
 {
     public class TINMOIController : BaseController
     {
@@ -101,7 +101,6 @@ namespace Web_Music.Areas.Admin.Controllers
 
         public ActionResult Create(TIN_MOI Model)
         {
-
             //var item = new NgheSiF();
             //Model.mans = item.AutoID();
             //db.NGHE_SIs.Add(Model);
@@ -116,7 +115,7 @@ namespace Web_Music.Areas.Admin.Controllers
             try
             {
 
-                
+
                 var item = new TinMoiF();
                 Model.MaTM = item.AutoID();
 

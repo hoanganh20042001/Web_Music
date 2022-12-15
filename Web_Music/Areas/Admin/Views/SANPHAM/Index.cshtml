@@ -1,7 +1,7 @@
 ﻿@model Web_Music.Function.SanPhamF
 @section Head{
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
+    <title>Song edit</title>
 }
 @{
     ViewBag.Title = "Index";
@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>SINGER</h1>
+                    <h1>PRODUCT</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -70,10 +70,10 @@
                             <th style="width:20%">
                                 Name
                             </th>
-                            <th style="width: 15%"class="text-center">
+                            <th style="width: 15%" class="text-center">
                                 Composed
                             </th>
-                            <th style="width: 15%"class="text-center">
+                            <th style="width: 15%" class="text-center">
                                 Category
                             </th>
                             <th style="width: 15%" class="text-center">
@@ -90,50 +90,50 @@
 
                         @foreach (var item in ViewBag.list)
                         {
-                        <tr>
-                            <td>
-                                #
-                            </td>
-                            <td>
+                            <tr>
+                                <td>
+                                    #
+                                </td>
+                                <td>
 
-                                @item.SP.TenSP
-                            </td>
-                            <td>
-                                <ul class="list-inline">
-                                    @item.SP.SangTac
+                                    @item.SP.TenSP
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        @item.SP.SangTac
 
-                                </ul>
-                            </td>
-                            <td>
+                                    </ul>
+                                </td>
+                                <td>
 
-                                @item.SP.Theloai
-                            </td>
-                            <td class="text-center">
-                          
-                                @item.TrinhBay
-                            </td>
-                            <td class="project-state">
-                                @item.Time
-                                @*<span class="badge badge-success">Success</span>*@
-                            </td>
-                            <td class="project-actions text-right">
-                                <a class="btn btn-primary btn-sm" href='/Admin/NGHESI/Detail?id=@item.SP.MaSP'>
-                                    <i class="fas fa-folder">
-                                    </i>
-                                    View
-                                </a>
-                                <a class="btn btn-info btn-sm" href='/Admin/NGHESI/Edit?id=@item.SP.MaSP'>
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Edit
-                                </a>
-                                <a class="btn btn-danger btn-sm" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href = '/Admin/NGHESI/Delete?id=@item.SP.MaSP' }">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Delete
-                                </a>
-                            </td>
-                        </tr>
+                                    @item.SP.Theloai
+                                </td>
+                                <td class="text-center">
+
+                                    @item.TrinhBay
+                                </td>
+                                <td class="project-state">
+                                    @item.Time
+                                    @*<span class="badge badge-success">Success</span>*@
+                                </td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href='/Admin/NGHESI/Detail?id=@item.SP.MaSP'>
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href='/Admin/NGHESI/Edit?id=@item.SP.MaSP'>
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href = '/Admin/NGHESI/Delete?id=@item.SP.MaSP' }">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
                         }
 
                     </tbody>

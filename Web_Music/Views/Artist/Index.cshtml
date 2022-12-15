@@ -3,7 +3,21 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
-
+<link href="~/Assets/css/Artist.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="~/Assets/css/styleMain.css">
+<link rel="stylesheet" href="~/Assets/css/responsiveMain.css">
+<link rel="stylesheet" href="~/Assets/css/imgMain/">
+<link rel="stylesheet" href="~/Assets/css/Artist.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet">
 
 <div id="main-content">
     <header>
@@ -25,24 +39,25 @@
                 <div class="contain mySlides">
                     <div class="row ">
                         <div class="col">
-                            <h4 class="contain nameArtist"> Charlie </h4>
 
-                            <img src="~/Assets/img/nghệ sĩ yêu thích/charlie-01.png" alt="">
+                            <h4 class="contain nameArtist"> Charlie </h4>
+                            <img src="~/Assets/img/Artist/charlie-01.png" />
+                            
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist">Sơn Tùng </h4>
 
-                            <img src="~/Assets/img/nghệ sĩ yêu thích/Son_Tung_M-TP.png" alt="">
+                            <img src="~/Assets/img/Artist/download.jpg">
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist">Taylor  </h4>
 
-                            <img src="~/Assets/img/nghệ sĩ yêu thích/taylor switf.png" alt="">
+                            <img src="~/Assets/img/Artist/taylor switf.png">
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist">Tóc Tiên </h4>
 
-                            <img src="~/Assets/img/nghệ sĩ yêu thích/taylor switf.png" alt="">
+                            <img src="~/Assets/img/Artist/tóc-tiên.jpg">
                         </div>
                     </div>
                 </div>
@@ -51,23 +66,23 @@
 
                         <div class="col">
                             <h4 class="contain nameArtist">Sơn Tùng </h4>
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
+                            <img src="~/Assets/img/Artist/download.jpg">
 
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist">Taylor  </h4>
 
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
+                            <img src="~/Assets/img/Artist/taylor switf.png">
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist">Tóc Tiên </h4>
 
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
+                            <img src="~/Assets/img/Artist/tóc-tiên.jpg">
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist"> Charlie </h4>
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
 
+                            <img src="~/Assets/img/Artist/charlie-01.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -78,21 +93,21 @@
                         <div class="col">
                             <h4 class="contain nameArtist">Taylor  </h4>
 
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
+                            <img src="~/Assets/img/Artist/taylor switf.png">
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist">Tóc Tiên </h4>
 
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
+                            <img src="~/Assets/img/Artist/tóc-tiên.jpg">
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist"> Charlie </h4>
 
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
+                            <img src="~/Assets/img/Artist/charlie-01.png" alt="">
                         </div>
                         <div class="col">
                             <h4 class="contain nameArtist">Sơn Tùng </h4>
-                            <img src="~/Assets/img/singer/hieuthuhai.jpg">
+                            <img src="~/Assets/img/Artist/download.jpg">
 
                         </div>
                     </div>
@@ -114,62 +129,26 @@
 
         </div>
 
-        <div class="footers">
-            <div class="play-song">
-                <div class="play-control">
-                    <div class="play-control__act">
-                        <i class="far fa-heart" id='heart'></i>
-                        <i class="fas fa-music"></i>
-                        <i class="fas fa-expand-alt"></i>
-                    </div>
-                    <div class="play-control__main">
-                        <i class="fas fa-redo-alt play-repeat"></i>
-                        <i class="fas fa-fast-backward play-backward main-icon"></i>
-                        <!-- <i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i> -->
-                        <span class="play-inner">
-                            <i class="fas fa-play-circle play-icon main-icon main-icon--big"></i>
-                        </span>
-                        <i class="fas fa-fast-forward play-forward main-icon"></i>
-                        <i class="fas fa-random shuffle-song"></i>
-                    </div>
-                    <div class="play-control__volume">
-                        <i class="fas fa-volume-mute"></i>
-                        <input type="range" id="volume" class="volume" value="1" min="0" max="1" step="0.1">
-                        <i class="fas fa-volume-up"></i>
-                    </div>
-                </div>
-                <div class="play-seekbar">
-                    <div class="timer__left">0:00</div>
-                    <input type="range" name="range" id="range" class="range" />
-                    <audio src="/mp3/assests_mp3_ntt.mp3" id="song"></audio>
-                    <div class="timer__right">3.00</div>
-                </div>
-            </div>
 
-        </div>
 
     </body>
 
 </div>
-
-     
 <script>
         var slideIndex = 1;
         showDivs(slideIndex);
 
         function plusDivs(n) {
-          showDivs(slideIndex += n);
+            showDivs(slideIndex += n);
         }
-
         function showDivs(n) {
-          var i;
-          var x = document.getElementsByClassName("mySlides");
-          if (n > x.length) {slideIndex = 1}
-          if (n < 1) {slideIndex = x.length}
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-          }
-          x[slideIndex-1].style.display = "block";
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
         }
-</script>
-
+    </script>

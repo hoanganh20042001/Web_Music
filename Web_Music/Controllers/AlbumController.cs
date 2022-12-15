@@ -36,13 +36,23 @@ namespace Web_Music.Controllers
         }
         public ActionResult createAlbum()
         {
-            return View(new ALbum());
+            //if (Session["MaKH"] == null)
+            //{
+            //    return RedirectToAction("Index", "LoginClient");
+            //}
+            //else
+            //{
+                return View(new ALbum());
+            //}
         }
         [HttpPost]
         public ActionResult createAlbum(ALbum model)
         {
             MyDBConect db = new MyDBConect();
             string makh = Session["MaKH"].ToString();
+            int id = db.ALbums.ToList().Count + 1;
+            model.MaAl = id.ToString();
+
             model.MaKH = makh;
                 db.ALbums.Add(model);
                 db.SaveChanges();
@@ -52,9 +62,10 @@ namespace Web_Music.Controllers
         }
         public ActionResult Delete(string MaAlbum)
         {
+         
             MyDBConect db = new MyDBConect();
             var ds = (from sp in db.DS_SP
-                      where sp.MaAL == MaAlbum
+                      where sp.MaAl == MaAlbum
                       select sp).ToList();
             foreach (var i in ds)
             {
@@ -69,26 +80,39 @@ namespace Web_Music.Controllers
         public ActionResult listSong(string MaAl)
         {
             // thanh
-            MyDBConect db = new MyDBConect();
-            Session["MaAl"] = MaAl;
-            Session["tenAlbum"] = db.ALbums.Find(MaAl).TenAlbum.ToString();
+            if (Session["MaKH"] == null)
+            {
+                return RedirectToAction("Index", "LoginClient");
+            }
+            else
+            {
+                MyDBConect db = new MyDBConect();
+                Session["MaAl"] = MaAl;
+                Session["tenAlbum"] = db.ALbums.Find(MaAl).TenAlbum.ToString();
 
-            var list = new SongInAlbum().SP(MaAl.ToString());
-            ViewBag.list = list;
-            ViewBag.size = list.Count;
-            return View();
+                var list = new SongInAlbum().SP(MaAl.ToString());
+                ViewBag.list = list;
+                ViewBag.size = list.Count;
+                return View();
+            }
 
         }
         public ActionResult newSong()
         {
-            
-            var list = new resetSong().SP(Session["MaAl"].ToString());
-            ViewBag.list = list;
-            ViewBag.size = list.Count;
-          
+            if (Session["MaKH"] == null)
+            {
+                return RedirectToAction("Index", "LoginClient");
+            }
+            else
+            {
+                var list = new resetSong().SP(Session["MaAl"].ToString());
+                ViewBag.list = list;
+                ViewBag.size = list.Count;
 
 
-            return View();
+
+                return View();
+            }
 
 
         }
@@ -99,19 +123,12 @@ namespace Web_Music.Controllers
             DS_SP model = new DS_SP();
             model.MaSP = MaSP;
 
-            model.MaAL = (string)Session["MaAL"];
-            if (db.DS_SP.Any(x => x.MaSP != model.MaSP))
-            {
-                ViewBag.thongbao = " this song is readly";
-                return View("listSong", Session["MaAl"]);
-
-                model.MaAL = Session["MaAl"].ToString();
-                db.DS_SP.Add(model);
-                db.SaveChanges();
-                return RedirectToAction("newSong", "Album");
-
-            }
-            else return View();
+            model.MaAl =Session["MaAL"].ToString();
+            db.DS_SP.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("newSong", "Album");
+            
+               
         }
         public ActionResult DeleteSong(string MaSP)
         {

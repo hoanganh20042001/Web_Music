@@ -3,7 +3,9 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
-
+@section Head{
+    <title>Add New</title>
+}
 <form class="content-wrapper" action="~/Admin/TINMOI/Create" method="post">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -51,8 +53,8 @@
                             <input type="text" id="inputName" class="form-control" name="URL_link">
                         </div>
 
-                       
-                        
+
+
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -85,17 +87,16 @@
 
                         </div>
                         <!-- /.card-body -->
-                    <!--</div>-->
-                    <!-- /.card -->
-                <!--</div>
-            </div>-->
-            <div class="row ">
-                <div class="col-12">
-                    <a href="~/Admin/TINMOI/Index" class="btn btn-secondary" style="margin-right:400px;">Cancel</a>
-                    <input type="submit" value="Create" class="btn btn-success float-right">
-                </div>
-            </div>
+                        <!--</div>-->
+                        <!-- /.card -->
+                        <!--</div>
+                        </div>-->
+                        <div class="row ">
+                            <div class="col-12">
+                                <a href="~/Admin/TINMOI/Index" class="btn btn-secondary" style="margin-right:400px;">Cancel</a>
+                                <input type="submit" value="Create" class="btn btn-success float-right">
+                            </div>
+                        </div>
     </section>
     <!-- /.content -->
 </form>
-

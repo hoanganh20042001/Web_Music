@@ -1,5 +1,7 @@
 ﻿@model Web_Music.Models.KHACH_HANG
-
+@section Head{
+    <title>Custom Profile</title>
+}
 
 @{
     ViewBag.Title = "Detail";
@@ -16,7 +18,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                        <li class="breadcrumb-item active">Custom Profile</li>
                     </ol>
                 </div>
             </div>
@@ -50,7 +52,7 @@
                                     <b>Date of brith</b> <a class="float-right">@(Model.NgaySinh.ToString().Substring(0,10))</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Address</b> <a class="float-right">@Model.DiaChi/a>
+                                    <b>Address</b> <a class="float-right">@Model.DiaChi</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Sex</b> <a class="float-right">@((Model.GT.ToString()=="True")? "Male" : "Female")</a>
@@ -64,47 +66,7 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
-                    <!-- About Me Box -->
-                    <!--<div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">About Me</h3>
-                        </div>-->
-                    <!-- /.card-header -->
-                    <!--<div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
-                        <p class="text-muted">
-                            B.S. in Computer Science from the University of Tennessee at Knoxville
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                        <p class="text-muted">Malibu, California</p>
-
-                        <hr>
-
-                        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                        <p class="text-muted">
-                            <span class="tag tag-danger">UI Design</span>
-                            <span class="tag tag-success">Coding</span>
-                            <span class="tag tag-info">Javascript</span>
-                            <span class="tag tag-warning">PHP</span>
-                            <span class="tag tag-primary">Node.js</span>
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                    </div>-->
-                    <!-- /.card-body -->
-                    <!--</div>-->
-                    <!-- /.card -->
                 </div>
                 <!-- /.col -->
 
@@ -130,24 +92,19 @@
                                             #
                                         </th>
                                         <th style="width:15%">
-                                            Image
+                                            Album
                                         </th>
                                         <th style="width: 25%">
-                                            Name
+                                            Sing
                                         </th>
-                                        <th>
-                                            Composed
-                                        </th>
-                                        <th style="width: 10%" class="text-center">
-                                            Follower
-                                        </th>
+
                                         @*<th style="width: 30%">
                                             </th>*@
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var item in ViewBag.sp)
+                                    @foreach (var item in ViewBag.al)
                                     {
                                         <tr>
                                             <td>
@@ -156,30 +113,17 @@
                                             <td>
 
                                                 <li class="list-inline-item">
-                                                    <img alt="Avatar" class="table-avatar" src="@Url.Content(item.URL_img)">
+                                                    @item.TenAL
                                                 </li>
                                             </td>
                                             <td>
                                                 <ul class="list-inline">
-                                                    @item.TenSP
+                                                    @item.BH
 
                                                 </ul>
                                             </td>
-                                            <td class="project_progress">
-                                                <div class="progress progress-sm">
-                                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                                                        </div>
-                                                    </div>
-                                                    <small>
-                                                        57% Complete
-                                                    </small>
-                                                @item.SangTac
-                                            </td>
-                                            <td class="project-state">
-                                                @item.LuotNghe
-                                                <span class="badge badge-success">Success</span>
-                                            </td>
-                                            <td class="project-actions text-right">
+
+                                            @*<td class="project-actions text-right">
                                                     <a class="btn btn-primary btn-sm" href='/Admin/NGHESI/Detail?id=@item.mans'>
                                                         <i class="fas fa-folder">
                                                         </i>
@@ -195,7 +139,7 @@
                                                         </i>
                                                         Delete
                                                     </a>
-                                                </td>
+                                                </td>*@
                                         </tr>
                                     }
 
@@ -203,8 +147,10 @@
                             </table>
                         </div>
                     </div>
+
                     <!-- /.card -->
                 </div>
+
                 <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -269,63 +215,3 @@
     <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
     <p class="text-muted">
-        B.S. in Computer Science from the University of Tennessee at Knoxville
-    </p>
-
-    <hr>
-
-    <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-    <p class="text-muted">Malibu, California</p>
-
-    <hr>
-
-    <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-    <p class="text-muted">
-        <span class="tag tag-danger">UI Design</span>
-        <span class="tag tag-success">Coding</span>
-        <span class="tag tag-info">Javascript</span>
-        <span class="tag tag-warning">PHP</span>
-        <span class="tag tag-primary">Node.js</span>
-    </p>
-
-    <hr>
-
-    <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-</div>-->
-<!-- /.card-body -->
-<!--</div>-->
-<!-- /.card -->
-<!--</div>
-</div>-->
-<!--<div>
-    <h>SINGER=>Detail</h>
-    <hr />
-
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>
-                Name
-            </th>
-            <th>
-                Date of Birth
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                Sex
-            </th>
-            <th>
-                Stage Name
-            </th>
-            <th>Follower</th>-->
-@*<th>@ViewBag.qs</th>*@
-<!--</tr>
-
-    @Html.ActionLink("Back to List", "Index")
-</div>-->

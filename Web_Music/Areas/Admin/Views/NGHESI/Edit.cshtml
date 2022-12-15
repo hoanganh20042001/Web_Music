@@ -1,8 +1,11 @@
 ﻿@model Web_Music.Models.NGHE_SI
- 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
+}
+@section Head{
+    <title>Singer Edit</title>
 }
 
 <form class="content-wrapper" action="~/Admin/NGHESI/Edit" method="post">
@@ -86,15 +89,14 @@
                             <input type="date" id="inputSpentBudget" class="form-control" name="NgaySinh" value="@Model.NgaySinh">
                         </div>
 
-                       
+
 
                         <div class="form-group">
                             <label for="exampleInputFile">File input</label>
-
                             <div class="input-group">
                                 <img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
 
@@ -130,4 +132,3 @@
     </section>
     <!-- /.content -->
 </form>
-

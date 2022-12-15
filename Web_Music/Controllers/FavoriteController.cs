@@ -28,13 +28,31 @@ namespace Web_Music.Controllers
         }
         public ActionResult AddSong(String MaSP)
         {
-            MyDBConect db = new MyDBConect();
-            YEU_THICH model = new YEU_THICH();
-            model.masp = MaSP;
-            model.makh = Session["MaKH"].ToString();
-            db.YEU_THICH.Add(model);
-            db.SaveChanges();
-            return RedirectToAction("FavoriteSong", "Favorite");
+            if (Session["MaKH"] == null)
+            {
+                return RedirectToAction("Index", "LoginClient");
+            }
+            else
+            {
+                MyDBConect db = new MyDBConect();
+                YEU_THICH model = new YEU_THICH();
+                string makh = Session["MaKH"].ToString();
+                model.masp = MaSP;
+                model.makh = Session["MaKH"].ToString();
+                var list = (from yt in db.YEU_THICH
+                            where yt.masp == MaSP && yt.makh == makh
+                            select yt).ToList();
+                if (list.Count() != 0)
+                {
+                    return RedirectToAction("FavoriteSong", "Favorite");
+                }
+                else
+                {
+                    db.YEU_THICH.Add(model);
+                    db.SaveChanges();
+                    return RedirectToAction("FavoriteSong", "Favorite");
+                }
+            }
 
         }
         public ActionResult DeleteSong(string MaSP)
@@ -47,6 +65,27 @@ namespace Web_Music.Controllers
             db.YEU_THICH.Remove(sp);
             db.SaveChanges();
             return RedirectToAction("FavoriteSong", "Favorite");
+        }
+        public ActionResult MenuSP()
+        {
+            //var list = (from sp in db.SAN_PHAM.ToList()
+            //                //            join tb in db.TRINH_BAY.ToList()
+            //                //            on sp.masp equals tb.MaNS
+            //                //            join ns in db.NGHE_SI.ToList()
+            //                //            on tb.MaNS equals ns.mans
+            //            select sp).ToList();
+            //var list = db.SAN_PHAMs.ToList();
+            var list = new SanPhamF().SP();
+            int i = 0;
+            ViewBag.list = list;
+            foreach (var item in list)
+            {
+                ViewBag.i = item;
+                i++;
+            }
+            ViewBag.size = i;
+            //var list = db.SAN_PHAMs.SqlQuery("select * from san_pham").ToList();
+            return PartialView();
         }
     }
 }

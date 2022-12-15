@@ -14,17 +14,17 @@ namespace Web_Music.Models
 
         public virtual DbSet<ADMIN> ADMINs { get; set; }
         public virtual DbSet<ALbum> ALbums { get; set; }
+        public virtual DbSet<DS_SP> DS_SP { get; set; }
         public virtual DbSet<KHACH_HANG> KHACH_HANG { get; set; }
         public virtual DbSet<NGHE> NGHEs { get; set; }
         public virtual DbSet<NGHE_SI> NGHE_SI { get; set; }
         public virtual DbSet<SAN_PHAM> SAN_PHAM { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<THEO_DOI> THEO_DOI { get; set; }
         public virtual DbSet<TIN_MOI> TIN_MOI { get; set; }
         public virtual DbSet<TRINH_BAY> TRINH_BAY { get; set; }
         public virtual DbSet<TRUY_CAP_TM> TRUY_CAP_TM { get; set; }
         public virtual DbSet<YEU_THICH> YEU_THICH { get; set; }
-        public virtual DbSet<DS_SP> DS_SP { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ADMIN>()
@@ -58,10 +58,17 @@ namespace Web_Music.Models
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ALbum>()
-                .HasMany(e => e.SAN_PHAM)
-                .WithMany(e => e.ALbums)
-                .Map(m => m.ToTable("DS_SP").MapLeftKey("MaAL").MapRightKey("MaSP"));
+
+
+            modelBuilder.Entity<DS_SP>()
+                .Property(e => e.MaAl)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<DS_SP>()
+                .Property(e => e.MaSP)
+                .IsFixedLength()
+                .IsUnicode(false);
 
             modelBuilder.Entity<KHACH_HANG>()
                 .Property(e => e.UserName)
@@ -83,7 +90,6 @@ namespace Web_Music.Models
                 .Property(e => e.MaKH)
                 .IsFixedLength()
                 .IsUnicode(false);
-
             modelBuilder.Entity<KHACH_HANG>()
                 .HasMany(e => e.ALbums)
                 .WithRequired(e => e.KHACH_HANG)
@@ -113,15 +119,7 @@ namespace Web_Music.Models
                 .Property(e => e.MaSP)
                 .IsFixedLength()
                 .IsUnicode(false);
-            modelBuilder.Entity<DS_SP>()
-               .Property(e => e.MaAL)
-               .IsFixedLength()
-               .IsUnicode(false);
 
-            modelBuilder.Entity<DS_SP>()
-                .Property(e => e.MaSP)
-                .IsFixedLength()
-                .IsUnicode(false);
             modelBuilder.Entity<NGHE>()
                 .Property(e => e.MaKH)
                 .IsFixedLength()

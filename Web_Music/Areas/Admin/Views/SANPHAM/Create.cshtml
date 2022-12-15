@@ -3,7 +3,9 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
-
+@section Head{
+    <title>Add song</title>
+}
 <form class="content-wrapper" action="~/Admin/SANPHAM/Create" method="post">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -15,7 +17,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Product Add</li>
+                        <li class="breadcrumb-item active">Song Add</li>
                     </ol>
                 </div>
             </div>
@@ -59,7 +61,7 @@
 
                             </select>
                         </div>
-                      
+
                         <div class="form-group">
                             <label for="inputName">Note</label>
                             <input type="text" id="inputName" class="form-control" name="GhiChu">
@@ -90,7 +92,7 @@
                             <label for="inputSpentBudget">Release</label>
                             <input type="number" id="inputSpentBudget" class="form-control" name="TGPhatHanh">
                         </div>
-                        
+
 
                         <div class="form-group">
                             <label for="exampleInputFile">File</label>
@@ -134,4 +136,3 @@
     </section>
     <!-- /.content -->
 </form>
-

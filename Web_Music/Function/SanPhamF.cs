@@ -32,7 +32,9 @@ namespace Web_Music.Function
                 casi = db.Database.SqlQuery<string>("select nghedanh from nghe_si ns join trinh_bay tb on tb.mans=ns.mans where masp=@masp", new SqlParameter("@masp", item)).ToList();
 
                 bh.number = index.ToString();
-                foreach(string i in casi)
+                bh.MaSP = item.ToString();
+
+                foreach (string i in casi)
                 {
                     if (bh.TrinhBay == "")
                     {

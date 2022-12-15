@@ -19,27 +19,26 @@ namespace Web_Music.Areas.Admin.Controllers
         MyDBConect db = new MyDBConect();
         // GET: Admin/NGHESI
         public List<NGHE_SI> list_ns;
-        
+
         public ActionResult Index()
         {
             var list = new NgheSiF().ListAll();
+            ViewBag.list = list;
             return View(list);
         }
-       
-        //[HttpPost]
+
+        [HttpPost]
         public ActionResult Search(string search)
         {
-            ViewBag.search = search;
-            if(search=="")
+
+            if (search == "")
             {
                 return RedirectToAction("Index");
             }
             string se = "%" + search + "%";
-            //var list = nghesi.ListAll();
-            //ViewBag.size = nghesi.Count();
-            //ViewBag.result = list.Remove(list[0]);
-            //ViewBag.list = list;
+
             var list = db.NGHE_SI.SqlQuery("select * from NGhe_si where nghedanh like @se", new SqlParameter("@se", se)).ToList();
+            ViewBag.list = list;
             return View(list);
 
 
@@ -51,12 +50,12 @@ namespace Web_Music.Areas.Admin.Controllers
         public ActionResult Create()
         {
             NGHE_SI ns = new NGHE_SI();
-           
+
             return View(ns);
         }
         [HttpPost]
 
-       
+
         public ActionResult Create(NGHE_SI Model)
         {
 
@@ -73,21 +72,21 @@ namespace Web_Music.Areas.Admin.Controllers
 
             try
             {
-              
-                    //ViewBag.MaNhom = new SelectList(db.NHOMs, "MaNhom", "TenNhom");
-                    var item = new NgheSiF();
-                    Model.mans = item.AutoID();
 
-                    if (Model.ImageUpload != null)
-                    {
-                        string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
-                        string extension = Path.GetExtension(Model.ImageUpload.FileName);
-                        Model.URL_img = "~/Assets/img/singer/" + fileName + extension;
-                        Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/singer/"), fileName));
-                    }
-                    var result = item.Insert(Model);
-                    return RedirectToAction("Index");
-                
+                //ViewBag.MaNhom = new SelectList(db.NHOMs, "MaNhom", "TenNhom");
+                var item = new NgheSiF();
+                Model.mans = item.AutoID();
+
+                if (Model.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
+                    string extension = Path.GetExtension(Model.ImageUpload.FileName);
+                    Model.URL_img = "~/Assets/img/singer/" + fileName + extension;
+                    Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/singer/"), fileName + extension));
+                }
+                var result = item.Insert(Model);
+                return RedirectToAction("Index");
+
 
                 //if (url_img!=null && url_img.ContentLength > 0)
                 //{
@@ -127,19 +126,19 @@ namespace Web_Music.Areas.Admin.Controllers
             return View(result);
         }
         [HttpPost]
-        
+
         public ActionResult Edit(NGHE_SI Model)
         {
             try
             {
-                    var item = new NgheSiF();
-                    var result = item.Edit(Model);
-                    if (result == true) return RedirectToAction("Index");
-                    else
-                    {
-                        ModelState.AddModelError("", "Edit item Unsucessfully");
-                    }
-                
+                var item = new NgheSiF();
+                var result = item.Edit(Model);
+                if (result == true) return RedirectToAction("Index");
+                else
+                {
+                    ModelState.AddModelError("", "Edit item Unsucessfully");
+                }
+
                 //ViewBag.Category = new SelectList(db.NGHE_SIs.ToList(), "Id", "Name", Model.mans);
                 return View(Model);
             }
@@ -149,7 +148,7 @@ namespace Web_Music.Areas.Admin.Controllers
             }
         }
 
-       
+
         public ActionResult Delete(string ID)
         {
             var item = new NgheSiF();
@@ -188,7 +187,7 @@ namespace Web_Music.Areas.Admin.Controllers
         //}
         public ActionResult Detail(string id)
         {
-          
+
             var item = new NgheSiF();
             //var qs = db.Database.SqlQuery<string>("SELECT max(RIGHT(mans, 8)) FROM nghe_si").SingleOrDefault();
             ////string val = qs.ToString();
@@ -243,6 +242,6 @@ namespace Web_Music.Areas.Admin.Controllers
     //        return View();
     //    }
     //}
-  
-  
+
+
 }

@@ -3,7 +3,9 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
-
+@section Head{
+    <title>New Edit</title>
+}
 <form class="content-wrapper" action="~/Admin/TINMOI/Create" method="post">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -98,4 +100,3 @@
     </section>
     <!-- /.content -->
 </form>
-

@@ -3,7 +3,9 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
-
+@section Head{
+    <title>Song edit</title>
+}
 <form class="content-wrapper" action="~/Admin/SANPHAM/Edit" method="post">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -134,4 +136,3 @@
     </section>
     <!-- /.content -->
 </form>
-

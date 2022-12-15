@@ -98,7 +98,7 @@ for (var i = 0; i < musics.length; i++) {
             <p class=" playlist__artist">${musics[i].artist}</p>          
             <p class=" playlist__time">${musics[i].time}</p>
            
-            <a href="/Album/AddToAlbum?MaSP=${musics[i].MaSP}">+</a>
+             <a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">&#9825;</a>
 
 
         </div>`)
@@ -123,8 +123,7 @@ function resetSong(dir) {
             <p class=" playlist__artist">${musics[j].artist}</p>
                
             <p class=" playlist__time">${musics[j].time}</p>
-            <a href="/Album/AddToAlbum?MaSP=${musics[j].MaSP}">+</a>
-
+              <a href="/Favorite/AddSong?MaSP=${musics[i].MaSP}">&#9825;</a>
 
         </div>`)
     }

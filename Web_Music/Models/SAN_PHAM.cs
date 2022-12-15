@@ -11,10 +11,10 @@ namespace Web_Music.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SAN_PHAM()
         {
+            DS_SP = new HashSet<DS_SP>();
             NGHEs = new HashSet<NGHE>();
             TRINH_BAY = new HashSet<TRINH_BAY>();
             YEU_THICH = new HashSet<YEU_THICH>();
-            ALbums = new HashSet<ALbum>();
         }
 
         [Required]
@@ -52,6 +52,9 @@ namespace Web_Music.Models
         public TimeSpan? ThoiGian { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DS_SP> DS_SP { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NGHE> NGHEs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -59,8 +62,5 @@ namespace Web_Music.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<YEU_THICH> YEU_THICH { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ALbum> ALbums { get; set; }
     }
 }

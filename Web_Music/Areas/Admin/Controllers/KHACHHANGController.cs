@@ -11,6 +11,7 @@ using System.IO;
 using Web_Music.Function;
 using System.Collections.Generic;
 using Web_Music.Areas.Admin.Controllers;
+using Web_Music.Areas.Admin.Model;
 
 
 namespace Web_Music.Areas.Admin.Controllers
@@ -20,10 +21,17 @@ namespace Web_Music.Areas.Admin.Controllers
         private MyDBConect db = new MyDBConect();
 
         // GET: Admin/KHACH_HANG
-      public ActionResult Index()
+        public ActionResult Index()
         {
-            var list = new KhachHangF().ListAll();
-            return View(list);
+            //if (Session["MaAD"] == null)
+            //{
+            //    return RedirectToAction("Login", "Login");
+            //}
+            //else
+            //{
+                var list = new KhachHangF().ListAll();
+                return View(list);
+            //}
         }
         [HttpPost]
         public ActionResult Index(string ma)
@@ -41,8 +49,8 @@ namespace Web_Music.Areas.Admin.Controllers
             ////string val = qs.ToString();
             //ViewBag.qs = qs.ToString();
             var result = item.ListBrand(id);
-            //ViewBag.img = item.Find(id).URL_img;
-            //ViewBag.NgheSi = result;
+            Album al = new Album();
+            ViewBag.al = al.DS(id);
             return View(result);
         }
 
@@ -57,8 +65,8 @@ namespace Web_Music.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
-        public ActionResult Create(KHACH_HANG Model,HttpPostedFileBase img)
+
+        public ActionResult Create(KHACH_HANG Model, HttpPostedFileBase img)
         {
             //if (ModelState.IsValid)
             //{
@@ -78,24 +86,23 @@ namespace Web_Music.Areas.Admin.Controllers
             //        var result = item.Insert(Model);
             //        return RedirectToAction("Index");
             //    }
-
             //    return View();
             //}
             var item = new KhachHangF();
-               Model.MaKH = item.AutoID();
+            Model.MaKH = item.AutoID();
             if (Model.ImageUpload != null)
             {
                 string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
                 string extension = Path.GetExtension(Model.ImageUpload.FileName);
                 Model.URL_img = "~/Assets/img/KH/" + fileName + extension;
-                Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/KH/"), fileName));
+                Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/KH/"), fileName + extension));
             }
-            
+
             var result = item.Insert(Model);
             return RedirectToAction("Index");
         }
-     
-      
+
+
         public ActionResult Edit(string id)
         {
             var item = new KhachHangF();
@@ -110,26 +117,30 @@ namespace Web_Music.Areas.Admin.Controllers
             return View(result);
         }
         [HttpPost]
-       
+
         public ActionResult Edit(KHACH_HANG Model)
         {
-            try
+            //         try
+            //{
+            var item = new KhachHangF();
+            var result = item.Edit(Model);
+            if (result == true) return RedirectToAction("Index");
+            else
             {
-                var item = new KhachHangF();
-                var result = item.Edit(Model);
-                if (result == true) return RedirectToAction("Index");
-                else
-                {
-                    ModelState.AddModelError("", "Edit item Unsucessfully");
-                }
-
-                //ViewBag.Category = new SelectList(db.NGHE_SIs.ToList(), "Id", "Name", Model.mans);
+                ModelState.AddModelError("", "Edit item Unsucessfully");
                 return View(Model);
+
             }
-            catch
-            {
-                return View();
-            }
+            //var id = db.SaveChanges();
+            //             if (id > 0) return RedirectToAction("Index");
+            //             else return View(Model);
+            ////ViewBag.Category = new SelectList(db.NGHE_SIs.ToList(), "Id", "Name", Model.mans);
+            //return View(Model);
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
 
         public ActionResult Delete(string ID)

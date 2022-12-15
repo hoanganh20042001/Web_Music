@@ -3,6 +3,10 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
+@section Head{
+    <title>Customs Edit</title>
+}
+
 
 <form class="content-wrapper" action="~/Admin/KHACHHANG/Edit" method="post">
     <!-- Content Header (Page header) -->
@@ -38,6 +42,10 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
+
+                            <input type="hidden" id="inputName" class="form-control" name="MaKH" value="@Model.MaKH">
+                        </div>
+                        <div class="form-group">
                             <label for="inputName">Name</label>
                             <input type="text" id="inputName" class="form-control" name="TenKH" value="@Model.TenKH">
                         </div>
@@ -53,7 +61,7 @@
 
                         <div class="form-group">
                             <label for="inputStatus">Sex</label>
-                            <select id="inputStatus" class="form-control custom-select" name="GT" >
+                            <select id="inputStatus" class="form-control custom-select" name="GT">
                                 <option selected disabled value="True">Male</option>
                                 <option value="False">Female</option>
 
@@ -67,7 +75,7 @@
 
                             </select>
                         </div>
-                      
+
 
                     </div>
                     <!-- /.card-body -->
@@ -149,4 +157,3 @@
     </section>
     <!-- /.content -->
 </form>
-

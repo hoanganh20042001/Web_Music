@@ -131,5 +131,10 @@ namespace Web_Music.Controllers
                 return View();
             }
         }
+        public ActionResult Artists()
+        {
+            List<NGHE_SI> list = db.NGHE_SI.ToList();
+            return View(list);
+        }
     }
 }

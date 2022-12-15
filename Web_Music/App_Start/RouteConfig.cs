@@ -16,7 +16,7 @@ namespace Web_Music
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Introduce", action = "Index", id = UrlParameter.Optional },
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] {"Web_Music.Controllers"}
             );
         }

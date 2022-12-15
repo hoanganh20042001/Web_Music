@@ -1,0 +1,133 @@
+﻿@model List<Web_Music.Models.NGHE_SI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+<link href="~/Assets/css/Artist.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="~/Assets/css/styleMain.css">
+<link rel="stylesheet" href="~/Assets/css/responsiveMain.css">
+<link rel="stylesheet" href="~/Assets/css/imgMain/">
+<link rel="stylesheet" href="~/Assets/css/Artist.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+      rel="stylesheet">
+
+<div id="main-content">
+    <header>
+        <nav class="main-content__header-nav">
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-right"></i>
+        </nav>
+        <div class="main-content__search-form">
+            <i class="fas fa-search search-btn"></i>
+            <input type="text" class="search-input" placeholder="Search for artist, songs.....">
+        </div>
+    </header>
+
+    <body>
+        <div class="box-scroll">
+            <h1 class="contain pt-5 header-content">Artist</h1>
+            <div class="w3-content display-container">
+                @{
+                    var item = Model;
+                }
+                @for (int i = 0; i < item.Count()-4; i++){
+                    <div class="contain mySlides">
+                        <div class="row ">
+                            <div class="col">
+
+                                <a href="/Home/index">
+                                    <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+
+                                </a>
+                                <img src=@item[i].URL_img.TrimStart('~') />
+
+
+
+                            </div>
+                            <div class="col">
+                                
+                                <a>
+                                    <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
+
+                                </a>
+                                <img src=@item[i+1].URL_img.TrimStart('~') />
+
+
+                                @*<img src="~/Assets/img/Artist/download.jpg">*@
+                            </div>
+                            <div class="col">
+                                <a>
+                                    <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
+
+                                </a>
+                                <img src=@item[i+2].URL_img.TrimStart('~') />
+
+
+
+                                @*<img src="~/Assets/img/Artist/taylor switf.png">*@
+                            </div>
+                            <div class="col">
+                                <a>
+                                    <h4 class="contain nameArtist">@item[i + 3].NgheDanh </h4>
+
+                                </a>
+                                <img src=@item[i+3].URL_img.TrimStart('~') />
+
+
+
+                                @*<img src="~/Assets/img/Artist/tóc-tiên.jpg">*@
+                            </div>
+                        </div>
+                    </div>
+                }
+              
+
+
+
+
+
+                <div class="contain display ">
+                    <button class=" want-dislay display-left" onclick="plusDivs(-1)" style="height: 40px;">&#10094;</button>
+                    <button class=" want-display display-right" onclick="plusDivs(1)" style="height: 40px;">&#10095;</button>
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </body>
+
+</div>
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+</script>

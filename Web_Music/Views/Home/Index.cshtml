@@ -27,17 +27,18 @@
     var size = ViewBag.size;
     for (var i = 0; i < size; i++)
     {
-        <script>
+    <script>
              musics.push({
                 id:@list[0].stt,
                 number:"@list[0].number",
                 file:"@list[0].SP.SP_URL",
                 title:"@list[0].SP.TenSP",
                 artist:"@list[0].TrinhBay",
-                time:"@list[0].Time",
+                 time: "@list[0].Time",
+                 MaSP:"@list[0].MaSP",
                 active:false,
              })
-        </script>
+    </script>
             {
                 list.Remove(list[0]);
             }
@@ -243,7 +244,7 @@
         </div>
 
         <div class="sidebar__favorite">
-            <p class="sidebar__favorite-title">Favorite Artists</p>
+            <a href="/Home/Artists" class="sidebar__favorite-title">Favorite Artists</a>
             ARTIST 1
             <div class="sidebar__favorite-list">
                 <div class="artist-info__avt">
