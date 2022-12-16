@@ -98,7 +98,7 @@ for (var i = 0; i < musics.length; i++) {
             <p class=" playlist__artist">${musics[i].artist}</p>          
             <p class=" playlist__time">${musics[i].time}</p>
            
-             <a href="/Album/AddToAlbum?MaSP=${musics[i].MaSP}">+</a>
+            <a href="/Album/AddToAlbum?MaSP=${musics[i].MaSP}">+</a>
 
 
         </div>`)
@@ -123,7 +123,8 @@ function resetSong(dir) {
             <p class=" playlist__artist">${musics[j].artist}</p>
                
             <p class=" playlist__time">${musics[j].time}</p>
-             <a href="/Album/AddToAlbum?MaSP=${musics[i].MaSP}">+</a>
+            <a href="/Album/AddToAlbum?MaSP=${musics[j].MaSP}">+</a>
+
 
         </div>`)
     }
@@ -237,7 +238,7 @@ playList.onclick = function (e) {
     indexSong = songNoteindex;
     isPlaying = false;
 
-     playBtn.innerHTML = `<i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i>`;
+    playBtn.innerHTML = `<i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i>`;
     song.setAttribute('src', `../Assets/mp3/${musics[indexSong].file}`);
     song.play();
     resetSong(songNoteindex);

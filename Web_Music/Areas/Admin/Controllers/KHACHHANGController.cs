@@ -24,16 +24,16 @@ namespace Web_Music.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //if (Session["MaAD"] == null)
-            //{
-            //    return RedirectToAction("Login", "Login");
-            //}
-            //else
-            //{
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
                 var list = new KhachHangF().ListAll();
             ViewBag.list = list;
                 return View();
-            //}
+            }
         }
         [HttpPost]
         public ActionResult Index(string search)
@@ -50,22 +50,35 @@ namespace Web_Music.Areas.Admin.Controllers
         // GET: Admin/KHACH_HANG/Details/5
         public ActionResult Detail(string id)
         {
-
-            var item = new KhachHangF();
-            //var qs = db.Database.SqlQuery<string>("SELECT max(RIGHT(mans, 8)) FROM nghe_si").SingleOrDefault();
-            ////string val = qs.ToString();
-            //ViewBag.qs = qs.ToString();
-            var result = item.ListBrand(id);
-            Album al = new Album();
-            ViewBag.al = al.DS(id);
-            return View(result);
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                var item = new KhachHangF();
+                //var qs = db.Database.SqlQuery<string>("SELECT max(RIGHT(mans, 8)) FROM nghe_si").SingleOrDefault();
+                ////string val = qs.ToString();
+                //ViewBag.qs = qs.ToString();
+                var result = item.ListBrand(id);
+                Album al = new Album();
+                ViewBag.al = al.DS(id);
+                return View(result);
+            }
         }
 
         // GET: Admin/KHACH_HANG/Create
         public ActionResult Create()
         {
-            KHACH_HANG kh = new KHACH_HANG();
-            return View(kh);
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                KHACH_HANG kh = new KHACH_HANG();
+                return View(kh);
+            }
         }
 
         // POST: Admin/KHACH_HANG/Create
@@ -112,16 +125,23 @@ namespace Web_Music.Areas.Admin.Controllers
 
         public ActionResult Edit(string id)
         {
-            var item = new KhachHangF();
-            var result = item.Find(id);
-            if (result == null)
+            if (Session["MaAD"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("Login", "Login");
             }
-            //var Cate = new CategoryF();
-            //ViewBag.Category = Cate.ListAll();
-            return View(result);
+            else
+            {
+                var item = new KhachHangF();
+                var result = item.Find(id);
+                if (result == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                //var Cate = new CategoryF();
+                //ViewBag.Category = Cate.ListAll();
+                return View(result);
+            }
         }
         [HttpPost]
 
@@ -152,23 +172,30 @@ namespace Web_Music.Areas.Admin.Controllers
 
         public ActionResult Delete(string ID)
         {
-            var item = new KhachHangF();
-            //var result = item.Find(ID);
-            //if (result == null)
-            //{
-            //    Response.StatusCode = 404;
-            //    return null;
-            //}
-            //return View(result);
-            var result = item.Delete(ID);
-            return RedirectToAction("Index");
-            //if (result == true)
-            //    return RedirectToAction("Index");
-            //else
-            //{
-            //    ModelState.AddModelError("", "Edit item Unsucessfully");
-            //    return RedirectToAction("Index");
-            //}
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                var item = new KhachHangF();
+                //var result = item.Find(ID);
+                //if (result == null)
+                //{
+                //    Response.StatusCode = 404;
+                //    return null;
+                //}
+                //return View(result);
+                var result = item.Delete(ID);
+                return RedirectToAction("Index");
+                //if (result == true)
+                //    return RedirectToAction("Index");
+                //else
+                //{
+                //    ModelState.AddModelError("", "Edit item Unsucessfully");
+                //    return RedirectToAction("Index");
+                //}
+            }
 
         }
 
