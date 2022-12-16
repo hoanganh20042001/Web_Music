@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Album";
     Layout = "~/Views/Shared/MyLayout.cshtml";
-   
+
 
 }
 
@@ -85,8 +85,26 @@
                                 <a class="card-title" href="/Album/listSong?MaAl=@item[i].MaAl">@item[i].TenAlbum</a>
 
                             </div>
-                            <a class="want-alter  " onclick="if (confirm('Do you want deletet?') == true) { location.href = '/Album/Delete?MaAlbum=@item[i].MaAl' }">&#8230;</a>
+                            <div class="dropdown">
+                                @*@{
+                                    var name = item[i].TenAlbum;
+                                    var kh = item[i].MaKH;
 
+                                        }*@
+                                <div class="dropdown">
+
+                                    <a class="want-alter  " onclick="hamDropdown()">&#8230;</a>
+                                    <div class="content_dropdown">
+                                        <a href="/Album/Delete?MaAlbum=@item[i].MaAl" class="want-delete dropdown-menu">Delete</a>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
 
 
                         </div>
@@ -105,8 +123,26 @@
                                     <a class="card-title" href="/Album/listSong?MaAl=@item[i+1].MaAl">@item[i + 1].TenAlbum</a>
 
                                 </div>
-                                <a class="want-alter  " onclick="if (confirm('Do you want deletet?') == true) { location.href = '/Album/Delete?MaAlbum=@item[i+1].MaAl' }">&#8230;</a>
+                                <div class="dropdown">
+                                    @*@{
+                                        var name = item[i+1].TenAlbum;
+                                        var kh = item[i+1].MaKH;
 
+                                            }*@
+                                    <div class="dropdown">
+
+                                        <a class="want-alter  " onclick="hamDropdown()">&#8230;</a>
+                                        <div class="content_dropdown">
+                                            <a href="/Album/Delete?MaAlbum=@item[i+1].MaAl" class="want-delete dropdown-menu">Delete</a>
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
 
 
                             </div>
