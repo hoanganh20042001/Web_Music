@@ -32,7 +32,7 @@
             </span>
         </form>
         <div>
-            <button class="btn btn-primary btn-sm" style="font-size:17px; margin:2px 150px;" onclick="if ( true) { location.href='/Admin/KHACHHANG/Create' }">Create</button>
+            <button class="btn btn-primary btn-sm" style="font-size:17px; margin:2px 150px;" onclick="if ( true) { location.href='/Admin/TINMOI/Create' }">Create</button>
         </div>
     </div>
 
@@ -106,17 +106,17 @@
                                 </td>
 
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href='/Admin/KHACHHANG/Detail?id=@item.MaTM'>
+                                    @*<a class="btn btn-primary btn-sm" href='/Admin/KHACHHANG/Detail?id=@item.MaTM'>
                                         <i class="fas fa-folder">
                                         </i>
                                         View
-                                    </a>
-                                    <a class="btn btn-info btn-sm" href='/Admin/KHACHHANG/Edit?id=@item.MaTM'>
+                                    </a>*@
+                                    <a class="btn btn-info btn-sm" href='/Admin/TINMOI/Edit?id=@item.MaTM'>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit
                                     </a>
-                                    <a class="btn btn-danger btn-sm" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href = '/Admin/KHACHHANG/Delete?id=@item.MaTM' }">
+                                    <a class="btn btn-danger btn-sm" onclick="if (confirm('Are you sure you want to delete?') == true) { location.href = '/Admin/TINMOI/Delete?id=@item.MaTM' }">
                                         <i class="fas fa-trash">
                                         </i>
                                         Delete

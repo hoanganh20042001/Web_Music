@@ -132,15 +132,17 @@ namespace Web_Music.Function
             var result = db.SAN_PHAM.Find(Model.MaSP);
             if (result != null)
             {
-                //result.MaSP = Model.MaSP;
-                //result.TenSP = Model.TenSP;
-                //result.SangTac = Model.SangTac;
-                //result.URL_img = Model.URL_img;
-                //result.QueQuan = Model.QueQuan;
+				result.MaSP = Model.MaSP;
+				result.TenSP = Model.TenSP;
+				result.SangTac = Model.SangTac;
+				result.SP_URL = Model.SP_URL;
+				result.TGPhatHanh = Model.TGPhatHanh;
 
-                //result.NS_URL = Model.NS_URL;
-                //result.NgheDanh = Model.NgheDanh;
-                result = Model;
+				result.Theloai = Model.Theloai;
+				result.ThoiGian = Model.ThoiGian;
+                result.TrangThai = Model.TrangThai;
+                result.YeuThich = Model.YeuThich;
+				//result = Model;
                 db.SaveChanges();
                 return true;
             }

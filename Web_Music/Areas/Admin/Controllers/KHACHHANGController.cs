@@ -21,6 +21,7 @@ namespace Web_Music.Areas.Admin.Controllers
         private MyDBConect db = new MyDBConect();
 
         // GET: Admin/KHACH_HANG
+        [HttpGet]
         public ActionResult Index()
         {
             //if (Session["MaAD"] == null)
@@ -30,14 +31,20 @@ namespace Web_Music.Areas.Admin.Controllers
             //else
             //{
                 var list = new KhachHangF().ListAll();
-                return View(list);
+            ViewBag.list = list;
+                return View();
             //}
         }
         [HttpPost]
-        public ActionResult Index(string ma)
+        public ActionResult Index(string search)
         {
-            var list = new KhachHangF().Search(ma);
-            return View(list);
+			//if (search == "")
+			//{
+   //             return RedirectToAction("Index");
+   //         }
+            var list = new KhachHangF().Search(search);
+            ViewBag.list = list;
+            return View();
         }
 
         // GET: Admin/KHACH_HANG/Details/5

@@ -88,7 +88,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href=" ~/Admin/Login/Index" class="nav-link">
+                        <a @*href=" ~/Admin/Login/Index"*@ class="nav-link" onclick="if (confirm('Are you sure you want to sign out?') == true) { location.href = '~/Admin/Login/Index' }">
                             <i class="nav-icon fas fa-file"></i>
                             <p>
                                 Logout 

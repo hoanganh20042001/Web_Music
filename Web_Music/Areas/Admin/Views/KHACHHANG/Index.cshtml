@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Web_Music.Models.KHACH_HANG>
+﻿@*@model IEnumerable<Web_Music.Models.KHACH_HANG>*@
 
 @{
     ViewBag.Title = "Index";
@@ -26,7 +26,7 @@
         </div><!-- /.container-fluid -->
     </section>
     <div class="sidebar-search" style="display:inline-flex;margin:10px">
-        <form class="input-group custom-search-form" action="~/Admin/KHACHHANG/Index" method="post">
+        <form class="input-group custom-search-form" action="/KHACHHANG/Index" method="post">
             <input type="text" class="form-control" placeholder="Search..." name="search">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit">
@@ -80,7 +80,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model)
+                        @foreach (var item in ViewBag.list)
                         {
                             <tr>
                                 <td>
@@ -93,11 +93,11 @@
                                     </li>
                                 </td>
                                 <td>
-                                    <ul class="list-inline">
-                                        @item.TenKH
+									<ul class="list-inline">
+										@item.TenKH
 
 
-                                    </ul>
+									</ul>
                                 </td>
                                 <td class="project_progress">
                                     @*<div class="progress progress-sm">
@@ -124,7 +124,7 @@
                                         </i>
                                         Edit
                                     </a>
-                                    <a class="btn btn-danger btn-sm" onclick="if (confirm('Ban co chac chan muon xoa khong') == true) { location.href = '/Admin/KHACHHANG/Delete?id=@item.MaKH' }">
+                                    <a class="btn btn-danger btn-sm" onclick="if (confirm('Are you sure you want to delete?') == true) { location.href = '/Admin/KHACHHANG/Delete?id=@item.MaKH' }">
                                         <i class="fas fa-trash">
                                         </i>
                                         Delete
