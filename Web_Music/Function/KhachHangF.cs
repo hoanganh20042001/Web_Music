@@ -48,18 +48,18 @@ namespace Web_Music.Function
         }
         public List<KHACH_HANG> ListAll()
         {
-            var result = db.KHACH_HANG.ToList();
+            var result = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where trangthai='true' ").ToList();
             return result;
         }
-        public List<KHACH_HANG> Search(string ma)
+        public List<KHACH_HANG> Search(string search)
         {
-            string value = "%" + ma + "%";
-            var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where tenkh like @value", new SqlParameter("@value", value)).ToList();
+            string value = "%" +search + "%";
+            var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where trangthai='true' and tenkh like @value", new SqlParameter("@value", value)).ToList();
             return list;
         }
         public int Count()
         {
-            int value = db.Database.SqlQuery<int>("SELECT count(*) FROM KHACH_HANG").SingleOrDefault();
+            int value = db.Database.SqlQuery<int>("SELECT count(*) FROM KHACH_HANG where trangthai='true'").SingleOrDefault();
             return value;
         }
         public KHACH_HANG ListBrand(string ID)
@@ -92,19 +92,21 @@ namespace Web_Music.Function
             var result = db.KHACH_HANG.Find(Model.MaKH);
             if (result != null)
             {
-                result = Model;
-                //result.MaKH = Model.MaKH;
-                //result.TenKH = Model.TenKH;
-                //result.GT = Model.GT;
-                //result.URL_img = Model.URL_img;
-                //result.DiaChi = Model.DiaChi;
-                //result.CCCD = Model.CCCD;
-                //result.Email = Model.Email;
-                //result.GhiChu = Model.GhiChu;
-                //result.NgaySinh = Model.NgaySinh;
-                //result.UserName = Model.UserName;
-                //result.Pass
-                db.SaveChanges();
+				//result = Model;
+				result.MaKH = Model.MaKH;
+				result.TenKH = Model.TenKH;
+				result.GT = Model.GT;
+				result.URL_img = Model.URL_img;
+				result.DiaChi = Model.DiaChi;
+				result.CCCD = Model.CCCD;
+				result.Email = Model.Email;
+				result.GhiChu = Model.GhiChu;
+				result.NgaySinh = Model.NgaySinh;
+				result.UserName = Model.UserName;
+                result.Pass = Model.Pass;
+                result.TrangThai = Model.TrangThai;
+
+				db.SaveChanges();
                 return true;
             }
             else return true;
@@ -114,7 +116,8 @@ namespace Web_Music.Function
             var result = db.KHACH_HANG.Find(id);
             if (result != null)
             {
-                db.KHACH_HANG.Remove(result);
+                //db.KHACH_HANG.Remove(result);
+                result.TrangThai = false;
                 db.SaveChanges();
                 return true;
             }
