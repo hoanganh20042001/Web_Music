@@ -166,12 +166,14 @@
     <Compile Include="Function\AlbumF.cs" />
     <Compile Include="Function\BaiHatF.cs" />
     <Compile Include="Function\FavoriteSong.cs" />
+    <Compile Include="Function\followArtists.cs" />
     <Compile Include="Function\KhachHangF.cs" />
     <Compile Include="Function\listAlbum.cs" />
     <Compile Include="Function\NgheSiF.cs" />
     <Compile Include="Function\resetSong.cs" />
     <Compile Include="Function\SanPhamF.cs" />
     <Compile Include="Function\SongInAlbum.cs" />
+    <Compile Include="Function\SongOfAritist.cs" />
     <Compile Include="Function\SP.cs" />
     <Compile Include="Function\TaiKhoan.cs" />
     <Compile Include="Function\TinMoiF.cs" />
@@ -2830,6 +2832,8 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Favorite\MenuSP.cshtml" />
     <Content Include="Views\Home\Artists.cshtml" />
+    <Content Include="Views\Home\DetailArtists.cshtml" />
+    <Content Include="Views\Artist\DetailArtists.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

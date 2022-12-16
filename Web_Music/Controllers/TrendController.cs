@@ -11,6 +11,7 @@ namespace Web_Music.Controllers
         // GET: Trend
         public ActionResult Index()
         {
+
             return View();
         }
 

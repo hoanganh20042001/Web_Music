@@ -1,9 +1,12 @@
 ﻿@model List<Web_Music.Models.NGHE_SI>
+    @using Web_Music.Models;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MyLayout.cshtml";
-}
+    MyDBConect db = new MyDBConect();
+   
+        }
 <link href="~/Assets/css/Artist.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -19,123 +22,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
       rel="stylesheet">
-@section Head{
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
-
-    <link href="~/Assets/css/responsiveMain.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="~/Assets/css/styleMain.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
-          rel="stylesheet">
-}
-@*@{
-        var list = ViewBag.list;
-        //int size = ViewBag.size;
-    }*@
-<script>
-    const musics = [];
-</script>
-@{
-    var list = ViewBag.list;
-    var size = ViewBag.size;
-    for (var i = 0; i < size; i++)
-    {
-        <script>
-             musics.push({
-                id:@list[0].stt,
-                number:"@list[0].number",
-                file:"@list[0].SP.SP_URL",
-                title:"@list[0].SP.TenSP",
-                artist:"@list[0].TrinhBay",
-                 time: "@list[0].Time",
-                 MaSP:"@list[0].MaSP",
-                active:false,
-             })
-        </script>
-        {
-            list.Remove(list[0]);
-        }
-    }
-}
-
-@section Script{
-
-
-    <script>
-        /*const musics = [];*/
-        //musics.push({
-        //    id: 0,
-        //    number: '01',
-        //    file: 'assests_mp3_ntt.mp3',
-        //    title: 'Ngày tận thế',
-        //    artist: 'Tóc Tiên',
-        //    time: '3:52',
-        //    active: false,
-        //})
-        @*@{
-            var list = ViewBag.list;
-            //int size = ViewBag.size;
-        }*@
-        @*var i = 0;
-            for ( i = 0; i < 5; i++) {
-             musics.push({
-                id:@list[0].stt,
-                number:"@list[0].number",
-                file:"@list[0].SP.SP_URL",
-                title:"@list[0].SP.TenSP",
-                artist:"@list[0].TrinhBay",
-                time:"@list[0].Time",
-                active:false,
-             })
-                @{list.Remove(list[0]); }
-
-
-   }*@
-    @*do {
-        musics.push({
-                id:@list[0].stt,
-                number:"@list[0].number",
-                file:"@list[0].SP.SP_URL",
-                title:"@list[0].SP.TenSP",
-                artist:"@list[0].TrinhBay",
-                time:"@list[0].Time",
-                active:false,
-             })
-    }*@
-    @*while (@list.Remove(list[0]));*@
-          @*musics.push({
-                id:@ViewBag.list[0].stt,
-                number:"@ViewBag.list[0].number",
-                file:"@ViewBag.list[0].SP.SP_URL",
-                title:"@ViewBag.list[0].SP.TenSP",
-                artist:"@ViewBag.list[0].TrinhBay",
-                time:"@ViewBag.list[0].Time",
-                active:false,
-          })
-         musics.push({
-                id:@ViewBag.list[1].stt,
-                number:"@ViewBag.list[1].number",
-                file:"@ViewBag.list[1].SP.SP_URL",
-                title:"@ViewBag.list[1].SP.TenSP",
-                artist:"@ViewBag.list[1].TrinhBay",
-                time:"@ViewBag.list[1].Time",
-                active:false,
-         })
-        musics.push({
-                id:@ViewBag.list[2].stt,
-                number:"@ViewBag.list[2].number",
-                file:"@ViewBag.list[2].SP.SP_URL",
-                title:"@ViewBag.list[2].SP.TenSP",
-                artist:"@ViewBag.list[2].TrinhBay",
-                time:"@ViewBag.list[2].Time",
-                active:false,
-          })*@
-        @*musics.push(@ViewBag.list)*@
-
-    </script>
-    <script src="/Assets/javaScript/main.js"></script>
-}
 
 <div id="main-content">
     <header>
@@ -156,56 +42,313 @@
                 @{
                     var item = Model;
                 }
-                @for (int i = 0; i < item.Count() - 4; i++)
+                @for (int i = 0; i < item.Count(); i++)
                 {
-                    <div class="contain mySlides">
-                        <div class="row list-row ">
-                            <div class="col">
+                    if (item.Count() == 1)
+                    {
+                        <div class="contain mySlides">
+                            <div class="row list-row ">
+                                <div class="col">
 
-                                <a href="/Home/index">
-                                    <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+                                    <a href="/Home/DetailArtists?mans=@item[i].mans">
+                                        <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
-                                </a>
-                                <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
-
-
-
-                            </div>
-                            <div class="col">
-
-                                <a>
-                                    <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
-
-                                </a>
-                                <img class="img-list-artist" src=@item[i+1].URL_img.TrimStart('~') />
-
-
-                                @*<img src="~/Assets/img/Artist/download.jpg">*@
-                            </div>
-                            <div class="col">
-                                <a>
-                                    <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
-
-                                </a>
-                                <img class="img-list-artist" src=@item[i+2].URL_img.TrimStart('~') />
+                                    </a>
+                                    <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
 
 
 
-                                @*<img src="~/Assets/img/Artist/taylor switf.png">*@
-                            </div>
-                            <div class="col">
-                                <a>
-                                    <h4 class="contain nameArtist">@item[i + 3].NgheDanh </h4>
 
-                                </a>
-                                <img class="img-list-artist" src=@item[i+3].URL_img.TrimStart('~') />
+                                </div>
 
-
-
-                                @*<img src="~/Assets/img/Artist/tóc-tiên.jpg">*@
                             </div>
                         </div>
-                    </div>
+                        break;
+                    }
+                    if (item.Count() == 2)
+                    {
+                        <div class="contain mySlides">
+                            <div class="row list-row ">
+                                <div class="col">
+
+                                    <a href="/Home/DetailArtists?mans=@item[i].mans">
+                                        <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+
+                                    </a>
+                                    <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
+
+
+
+
+                                </div>
+                                <div class="col">
+
+                                    <a href="/Home/DetailArtists?mans=@item[i+1].mans">
+                                        <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
+
+                                    </a>
+                                    <img class="img-list-artist" src=@item[i+1].URL_img.TrimStart('~') />
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        break;
+                    }
+                    if (item.Count() == 3)
+                    {
+                        <div class="contain mySlides">
+                            <div class="row list-row ">
+                                <div class="col">
+
+                                    <a href="/Home/DetailArtists?mans=@item[i].mans">
+                                        <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+
+                                    </a>
+                                    <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
+
+
+
+
+                                </div>
+                                <div class="col">
+
+                                    <a href="/Home/DetailArtists?mans=@item[i+1].mans">
+                                        <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
+
+                                    </a>
+                                    <img class="img-list-artist" src=@item[i+1].URL_img.TrimStart('~') />
+
+
+
+
+                                </div>
+                                <div class="col">
+
+                                    <a href="/Home/DetailArtists?mans=@item[i+2].mans">
+                                        <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
+
+                                    </a>
+                                    <img class="img-list-artist" src=@item[i+2].URL_img.TrimStart('~') />
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        break;
+                    }
+                    if (item.Count() >= 4)
+                    {
+
+                        if (i == item.Count() - 3)
+                        {
+                            <div class="contain mySlides">
+                                <div class="row list-row ">
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
+                                            <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
+
+
+
+
+                                    </div>
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[i + 1].mans">
+                                            <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i + 1].URL_img.TrimStart('~') />
+
+
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
+                                    </div>
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 2].mans">
+                                            <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i + 2].URL_img.TrimStart('~') />
+
+
+
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
+                                    </div>
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[0].mans">
+                                            <h4 class="contain nameArtist">@item[0].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[0].URL_img.TrimStart('~') />
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                        if (i == item.Count() - 2)
+                        {
+                            <div class="contain mySlides">
+                                <div class="row list-row ">
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
+                                            <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
+
+
+
+
+                                    </div>
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[i + 1].mans">
+                                            <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i + 1].URL_img.TrimStart('~') />
+
+
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
+                                    </div>
+
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[0].mans">
+                                            <h4 class="contain nameArtist">@item[0].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[0].URL_img.TrimStart('~') />
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
+                                    </div>
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[1].mans">
+                                            <h4 class="contain nameArtist">@item[1].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[1].URL_img.TrimStart('~') />
+
+
+
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                        if (i == item.Count() - 1)
+                        {
+                            <div class="contain mySlides">
+                                <div class="row list-row ">
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
+                                            <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
+
+
+
+
+                                    </div>
+
+
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[0].mans">
+                                            <h4 class="contain nameArtist">@item[0].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[0].URL_img.TrimStart('~') />
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
+                                    </div>
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[1].mans">
+                                            <h4 class="contain nameArtist">@item[1].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[1].URL_img.TrimStart('~') />
+
+
+
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
+                                    </div>
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[2].mans">
+                                            <h4 class="contain nameArtist">@item[2].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[2].URL_img.TrimStart('~') />
+
+
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                        if (i < item.Count() - 3)
+                        {
+                            <div class="contain mySlides">
+                                <div class="row list-row ">
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
+                                            <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i].URL_img.TrimStart('~') />
+
+
+
+
+                                    </div>
+                                    <div class="col">
+
+                                        <a href="/Home/DetailArtists?mans=@item[i + 1].mans">
+                                            <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i + 1].URL_img.TrimStart('~') />
+
+
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
+                                    </div>
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 2].mans">
+                                            <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i + 2].URL_img.TrimStart('~') />
+
+
+
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
+                                    </div>
+                                    <div class="col">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 3].mans">
+                                            <h4 class="contain nameArtist">@item[i + 3].NgheDanh </h4>
+
+                                        </a>
+                                        <img class="img-list-artist" src=@item[i + 3].URL_img.TrimStart('~') />
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
                 }
 
 
@@ -226,6 +369,7 @@
 
         </div>
         <div class="gach"></div>
+      
         <div class="detail_artists">
             <section class="content">
                 <div class="container-fluid">
@@ -234,12 +378,15 @@
 
                             <!-- Profile Image -->
                             <div class="artists_profile">
-                                <img class="img-artist" src="~/Assets/img/album/Adele_21.jpg" />
-                                <h3>ten nghe si  </h3>
-                                <h4>nghe danh</h4>
-                                <h5>que quan</h5>
-                                <h5>ngay sinh </h5>
-                                <
+                                <img class="img-artist"  src=@item[0].URL_img.TrimStart('~')  />
+                                <a href="@item[0].NS_URL" style="font-size:20px;">@item[0].NgheDanh</a>
+                               
+
+                                <h3>@item[0].TenNS</h3>
+
+                                <h4>@item[0].NgaySinh </h4>
+                                <h5>@item[0].QueQuan</h5>
+
 
                                 <!-- /.card-body -->
                             </div>
@@ -250,26 +397,29 @@
                         <div class="col-md-9">
                             <div class="my-playlist">
                                 <div class="playlist-head">
-                                    <h4>My Playlist</h4>
-                                    <a class="btn-hover">Show all</a>
+                                    <h4>@item[0].NgheDanh</h4>
+                                    <a href="/Home/FollowArtist?mans=@item[0].mans" class="btn-hover">Follow</a>
                                 </div>
                                 <div class="playlist-list" style="overflow-x:scroll;overflow-y:no-display; height:250px;">
+                                   
                                     <div class="playlist playlist-list__title">
                                         <p class="playlist__number">#</p>
                                         <p class="playlist__title">TITLE</p>
                                         <p class="playlist__artist">ARTIST</p>
                                         <p class="playlist__time">TIME</p>
+                                        
                                     </div>
+                                    
 
 
                                 </div>
                                 <!-- /.card -->
                             </div>
 
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div><!-- /.container-fluid -->
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div><!-- /.container-fluid -->
             </section>
 
         </div>

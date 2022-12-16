@@ -45,12 +45,10 @@
     padding: 5px;
     background: rgba(0,0,0,0);
     border: 0 rgba(0,0,0,0);
-    
-  
-
-   
-
-  }
+    background-color: white;
+    margin-top: 10px;
+    box-shadow: 3px 3px 3px rgba(212,196,227,0.2);
+}
  
 .card img {
     width:20% ;

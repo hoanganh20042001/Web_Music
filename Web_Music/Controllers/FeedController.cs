@@ -11,11 +11,10 @@ namespace Web_Music.Controllers
     public class FeedController : Controller
     {
         // GET: Feed
+        MyDBConect db = new MyDBConect();
         public ActionResult Index()
         {
-            var list = new TinMoiF().ListAll();
-            ViewBag.list = list;
-            ViewBag.size = list.Count();
+            List<TIN_MOI> list = db.TIN_MOI.ToList();
             return View(list);
         }
 

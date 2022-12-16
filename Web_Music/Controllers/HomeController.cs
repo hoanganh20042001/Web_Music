@@ -136,5 +136,18 @@ namespace Web_Music.Controllers
             List<NGHE_SI> list = db.NGHE_SI.ToList();
             return View(list);
         }
+        public ActionResult DetailArtists(string mans)
+        {
+            Session["MaNS"] = mans;
+            var list = new SongOfArtist().SP(mans.ToString());
+            ViewBag.list = list;
+            ViewBag.size = list.Count;
+
+            ViewBag.follow = (from fl in db.THEO_DOI
+                              where fl.MaNS == mans
+                              select fl).ToList().Count;
+            return View();
+
+        }
     }
 }

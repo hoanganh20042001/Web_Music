@@ -1,11 +1,13 @@
 ﻿@model List<Web_Music.Models.NGHE_SI>
 @using Web_Music.Models;
+@using Web_Music.Function;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MyLayout.cshtml";
     MyDBConect db = new MyDBConect();
-
+    var NS = db.NGHE_SI.Find(Session["MaNS"]);
+    var list1 = new followArtists().SP(Session["MaKH"].ToString());
 }
 <link href="~/Assets/css/Artist.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
@@ -22,6 +24,39 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
       rel="stylesheet">
+<script>
+    const musics = [];
+</script>
+@{
+    var list = ViewBag.list;
+    var size = ViewBag.size;
+    for (var i = 0; i < size; i++)
+    {
+        <script>
+             musics.push({
+                id:@list[0].stt,
+                number:"@list[0].number",
+                file:"@list[0].SP.SP_URL",
+                title:"@list[0].SP.TenSP",
+                artist:"@list[0].TrinhBay",
+                 time: "@list[0].Time",
+                 MaSP:"@list[0].MaSP",
+                active:false,
+             })
+        </script>
+        {
+            list.Remove(list[0]);
+        }
+    }
+}
+
+@section Script{
+
+
+
+    <script src="/Assets/javaScript/main.js"></script>
+}
+
 
 <div id="main-content">
     <header>
@@ -40,12 +75,10 @@
             <h1 class="contain pt-5 header-content">Artist</h1>
             <div class="w3-content display-container">
                 @{
-                    var item = Model;
+                    var item = list1;
                 }
-                
                 @for (int i = 0; i < item.Count(); i++)
                 {
-                    
                     if (item.Count() == 1)
                     {
                         <div class="contain mySlides">
@@ -380,14 +413,13 @@
 
                             <!-- Profile Image -->
                             <div class="artists_profile">
-                                <img class="img-artist"src=@item[0].URL_img.TrimStart('~') />
-                                <a href="@item[0].NS_URL" style="font-size:20px;">@item[0].NgheDanh</a>
+                                <img class="img-artist" src=@NS.URL_img.TrimStart('~') />
+                                <a href="@NS.NS_URL" style="font-size:20px;">@NS.NgheDanh</a>
 
+                                <h3>@NS.TenNS</h3>
 
-                                <h3>@item[0].TenNS</h3>
-
-                                <h4>@item[0].NgaySinh </h4>
-                                <h5>@item[0].QueQuan</h5>
+                                <h4>@NS.NgaySinh </h4>
+                                <h5>@NS.QueQuan</h5>
 
 
                                 <!-- /.card-body -->
@@ -397,34 +429,73 @@
                         <!-- /.col -->
 
                         <div class="col-md-9">
+
+
+
+
                             <div class="my-playlist">
                                 <div class="playlist-head">
-                                    <h4>@item[0].NgheDanh</h4>
-                                    <a class="btn-hover">UnFollow</a>
+                                    <h4>@NS.NgheDanh</h4>
+                                    <a  href="/Artist/unFollow?mans=@NS.mans" class="btn-hover">UnFollow</a>
                                 </div>
                                 <div class="playlist-list" style="overflow-x:scroll;overflow-y:no-display; height:250px;">
-
                                     <div class="playlist playlist-list__title">
                                         <p class="playlist__number">#</p>
                                         <p class="playlist__title">TITLE</p>
                                         <p class="playlist__artist">ARTIST</p>
                                         <p class="playlist__time">TIME</p>
-
                                     </div>
 
 
-
                                 </div>
-                                <!-- /.card -->
+                            </div>
+                            <div class="play-song">
+                                <div class="play-control">
+                                    <div class="play-control__act">
+                                        <i class="far fa-heart" id='heart'></i>
+                                        <i class="fas fa-music"></i>
+                                        <i class="fas fa-expand-alt"></i>
+                                    </div>
+                                    <div class="play-control__main">
+                                        <i class="fas fa-redo-alt play-repeat"></i>
+                                        <i class="fas fa-fast-backward play-backward main-icon"></i>
+                                        <!-- <i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i> -->
+                                        <span class="play-inner">
+                                            <i class="fas fa-play-circle play-icon main-icon main-icon--big"></i>
+                                        </span>
+                                        <i class="fas fa-fast-forward play-forward main-icon"></i>
+                                        <i class="fas fa-random shuffle-song"></i>
+                                    </div>
+                                    <div class="play-control__volume">
+                                        <i class="fas fa-volume-mute"></i>
+                                        <input type="range" id="volume" class="volume" value="1" min="0" max="1" step="0.1">
+                                        <i class="fas fa-volume-up"></i>
+                                    </div>
+                                </div>
+                                <div class="play-seekbar">
+                                    <div class="timer__left">0:00</div>
+                                    <input type="range" name="range" id="range" class="range" />
+                                    <audio src="/Assets/mp3/assests_mp3_ntt.mp3" id="song"></audio>
+                                    <div class="timer__right">3.00</div>
+                                </div>
                             </div>
 
+
+
+
+
+                            <!--
+                                ====================SIDE-BAR=========================
+                            -->
                             <!-- /.col -->
                         </div>
+
                         <!-- /.row -->
                     </div><!-- /.container-fluid -->
             </section>
 
         </div>
+
 
 
 

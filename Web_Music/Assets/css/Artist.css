@@ -47,6 +47,8 @@ img {
 
 }
 .img-list-artist {
+     width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
 .nameArtist {
@@ -124,4 +126,17 @@ button:focus  .want-play{
     border-color:#ffffff;
     margin-bottom:20px;
 }
+.play-song {
+    margin-top: 2rem;
+}
+
+.follow {
+    margin-top: 13px;
+    margin-left: 40px;
+    text-align: center;
+    font-size: 15px;
+    background-color: aqua;
+    width: 60px;
+}
+
 

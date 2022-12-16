@@ -5,7 +5,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MyLayout.cshtml";
     MyDBConect db = new MyDBConect();
-
+    var NS = db.NGHE_SI.Find(Session["MaNS"]);
+    List<NGHE_SI> list1 = db.NGHE_SI.ToList();
 }
 <link href="~/Assets/css/Artist.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
@@ -22,6 +23,39 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
       rel="stylesheet">
+<script>
+    const musics = [];
+</script>
+@{
+    var list = ViewBag.list;
+    var size = ViewBag.size;
+    for (var i = 0; i < size; i++)
+    {
+        <script>
+             musics.push({
+                id:@list[0].stt,
+                number:"@list[0].number",
+                file:"@list[0].SP.SP_URL",
+                title:"@list[0].SP.TenSP",
+                artist:"@list[0].TrinhBay",
+                 time: "@list[0].Time",
+                 MaSP:"@list[0].MaSP",
+                active:false,
+             })
+        </script>
+        {
+            list.Remove(list[0]);
+        }
+    }
+}
+
+@section Script{
+
+
+
+    <script src="/Assets/javaScript/main.js"></script>
+}
+
 
 <div id="main-content">
     <header>
@@ -40,19 +74,17 @@
             <h1 class="contain pt-5 header-content">Artist</h1>
             <div class="w3-content display-container">
                 @{
-                    var item = Model;
+                    var item = list1;
                 }
-                
                 @for (int i = 0; i < item.Count(); i++)
                 {
-                    
                     if (item.Count() == 1)
                     {
                         <div class="contain mySlides">
                             <div class="row list-row ">
                                 <div class="col">
 
-                                    <a href="/Artist/DetailArtists?mans=@item[i].mans">
+                                    <a href="/Home/DetailArtists?mans=@item[i].mans">
                                         <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
                                     </a>
@@ -73,7 +105,7 @@
                             <div class="row list-row ">
                                 <div class="col">
 
-                                    <a href="/Artist/DetailArtists?mans=@item[i].mans">
+                                    <a href="/Home/DetailArtists?mans=@item[i].mans">
                                         <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
                                     </a>
@@ -85,7 +117,7 @@
                                 </div>
                                 <div class="col">
 
-                                    <a href="/Artist/DetailArtists?mans=@item[i+1].mans">
+                                    <a href="/Home/DetailArtists?mans=@item[i+1].mans">
                                         <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
 
                                     </a>
@@ -106,7 +138,7 @@
                             <div class="row list-row ">
                                 <div class="col">
 
-                                    <a href="/Artist/DetailArtists?mans=@item[i].mans">
+                                    <a href="/Home/DetailArtists?mans=@item[i].mans">
                                         <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
                                     </a>
@@ -118,7 +150,7 @@
                                 </div>
                                 <div class="col">
 
-                                    <a href="/Artist/DetailArtists?mans=@item[i+1].mans">
+                                    <a href="/Home/DetailArtists?mans=@item[i+1].mans">
                                         <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
 
                                     </a>
@@ -130,7 +162,7 @@
                                 </div>
                                 <div class="col">
 
-                                    <a href="/Artist/DetailArtists?mans=@item[i+2].mans">
+                                    <a href="/Home/DetailArtists?mans=@item[i+2].mans">
                                         <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
 
                                     </a>
@@ -154,7 +186,7 @@
                                 <div class="row list-row ">
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[i].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
                                             <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
                                         </a>
@@ -166,17 +198,17 @@
                                     </div>
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[i + 1].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 1].mans">
                                             <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[i + 1].URL_img.TrimStart('~') />
 
 
-                                        @*<img src="~/Assets/img/Artist/download.jpg">*@
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
                                     </div>
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[i + 2].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 2].mans">
                                             <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
 
                                         </a>
@@ -184,15 +216,15 @@
 
 
 
-                                        @*<img src="~/Assets/img/Artist/taylor switf.png">*@
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
                                     </div>
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[0].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[0].mans">
                                             <h4 class="contain nameArtist">@item[0].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[0].URL_img.TrimStart('~') />
-                                        @*<img src="~/Assets/img/Artist/tóc-tiên.jpg">*@
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +236,7 @@
                                 <div class="row list-row ">
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[i].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
                                             <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
                                         </a>
@@ -216,26 +248,26 @@
                                     </div>
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[i + 1].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 1].mans">
                                             <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[i + 1].URL_img.TrimStart('~') />
 
 
-                                        @*<img src="~/Assets/img/Artist/download.jpg">*@
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
                                     </div>
 
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[0].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[0].mans">
                                             <h4 class="contain nameArtist">@item[0].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[0].URL_img.TrimStart('~') />
-                                        @*<img src="~/Assets/img/Artist/tóc-tiên.jpg">*@
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
                                     </div>
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[1].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[1].mans">
                                             <h4 class="contain nameArtist">@item[1].NgheDanh </h4>
 
                                         </a>
@@ -243,7 +275,7 @@
 
 
 
-                                        @*<img src="~/Assets/img/Artist/taylor switf.png">*@
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
                                     </div>
                                 </div>
                             </div>
@@ -255,7 +287,7 @@
                                 <div class="row list-row ">
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[i].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
                                             <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
                                         </a>
@@ -268,15 +300,15 @@
 
 
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[0].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[0].mans">
                                             <h4 class="contain nameArtist">@item[0].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[0].URL_img.TrimStart('~') />
-                                        @*<img src="~/Assets/img/Artist/tóc-tiên.jpg">*@
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
                                     </div>
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[1].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[1].mans">
                                             <h4 class="contain nameArtist">@item[1].NgheDanh </h4>
 
                                         </a>
@@ -284,18 +316,18 @@
 
 
 
-                                        @*<img src="~/Assets/img/Artist/taylor switf.png">*@
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
                                     </div>
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[2].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[2].mans">
                                             <h4 class="contain nameArtist">@item[2].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[2].URL_img.TrimStart('~') />
 
 
-                                        @*<img src="~/Assets/img/Artist/download.jpg">*@
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +339,7 @@
                                 <div class="row list-row ">
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[i].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i].mans">
                                             <h4 class="contain nameArtist">@item[i].NgheDanh </h4>
 
                                         </a>
@@ -319,17 +351,17 @@
                                     </div>
                                     <div class="col">
 
-                                        <a href="/Artist/DetailArtists?mans=@item[i + 1].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 1].mans">
                                             <h4 class="contain nameArtist">@item[i + 1].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[i + 1].URL_img.TrimStart('~') />
 
 
-                                        @*<img src="~/Assets/img/Artist/download.jpg">*@
+                                        @*<img src="~/Assets/img/Home/download.jpg">*@
                                     </div>
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[i + 2].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 2].mans">
                                             <h4 class="contain nameArtist">@item[i + 2].NgheDanh </h4>
 
                                         </a>
@@ -337,22 +369,21 @@
 
 
 
-                                        @*<img src="~/Assets/img/Artist/taylor switf.png">*@
+                                        @*<img src="~/Assets/img/Home/taylor switf.png">*@
                                     </div>
                                     <div class="col">
-                                        <a href="/Artist/DetailArtists?mans=@item[i + 3].mans">
+                                        <a href="/Home/DetailArtists?mans=@item[i + 3].mans">
                                             <h4 class="contain nameArtist">@item[i + 3].NgheDanh </h4>
 
                                         </a>
                                         <img class="img-list-artist" src=@item[i + 3].URL_img.TrimStart('~') />
-                                        @*<img src="~/Assets/img/Artist/tóc-tiên.jpg">*@
+                                        @*<img src="~/Assets/img/Home/tóc-tiên.jpg">*@
                                     </div>
                                 </div>
                             </div>
                         }
                     }
                 }
-
 
 
 
@@ -371,7 +402,7 @@
 
         </div>
         <div class="gach"></div>
-
+     
         <div class="detail_artists">
             <section class="content">
                 <div class="container-fluid">
@@ -380,14 +411,14 @@
 
                             <!-- Profile Image -->
                             <div class="artists_profile">
-                                <img class="img-artist"src=@item[0].URL_img.TrimStart('~') />
-                                <a href="@item[0].NS_URL" style="font-size:20px;">@item[0].NgheDanh</a>
+                                <img class="img-artist" src=@NS.URL_img.TrimStart('~') />
+                                <a class="detail" href="@NS.NS_URL" style="font-size:20px;">@NS.NgheDanh</a>
+                                <h3 class="detail" style="color: #663366;">Followers:@ViewBag.follow</h3>
 
+                                <h3 class="detail">@NS.TenNS</h3>
 
-                                <h3>@item[0].TenNS</h3>
-
-                                <h4>@item[0].NgaySinh </h4>
-                                <h5>@item[0].QueQuan</h5>
+                                <h4 class="detail">@NS.NgaySinh </h4>
+                                <h5 class="detail">@NS.QueQuan</h5>
 
 
                                 <!-- /.card-body -->
@@ -397,34 +428,73 @@
                         <!-- /.col -->
 
                         <div class="col-md-9">
+
+
+
+
                             <div class="my-playlist">
                                 <div class="playlist-head">
-                                    <h4>@item[0].NgheDanh</h4>
-                                    <a class="btn-hover">UnFollow</a>
+                                    <h4>@NS.NgheDanh</h4>
+                                    <a href="/Artist/FollowArtist?mans=@NS.mans"class="btn-hover">Follow</a>
                                 </div>
                                 <div class="playlist-list" style="overflow-x:scroll;overflow-y:no-display; height:250px;">
-
                                     <div class="playlist playlist-list__title">
                                         <p class="playlist__number">#</p>
                                         <p class="playlist__title">TITLE</p>
                                         <p class="playlist__artist">ARTIST</p>
                                         <p class="playlist__time">TIME</p>
-
                                     </div>
 
 
-
                                 </div>
-                                <!-- /.card -->
+                            </div>
+                            <div class="play-song">
+                                <div class="play-control">
+                                    <div class="play-control__act">
+                                        <i class="far fa-heart" id='heart'></i>
+                                        <i class="fas fa-music"></i>
+                                        <i class="fas fa-expand-alt"></i>
+                                    </div>
+                                    <div class="play-control__main">
+                                        <i class="fas fa-redo-alt play-repeat"></i>
+                                        <i class="fas fa-fast-backward play-backward main-icon"></i>
+                                        <!-- <i class="fas fa-pause-circle pause-icon main-icon main-icon--big"></i> -->
+                                        <span class="play-inner">
+                                            <i class="fas fa-play-circle play-icon main-icon main-icon--big"></i>
+                                        </span>
+                                        <i class="fas fa-fast-forward play-forward main-icon"></i>
+                                        <i class="fas fa-random shuffle-song"></i>
+                                    </div>
+                                    <div class="play-control__volume">
+                                        <i class="fas fa-volume-mute"></i>
+                                        <input type="range" id="volume" class="volume" value="1" min="0" max="1" step="0.1">
+                                        <i class="fas fa-volume-up"></i>
+                                    </div>
+                                </div>
+                                <div class="play-seekbar">
+                                    <div class="timer__left">0:00</div>
+                                    <input type="range" name="range" id="range" class="range" />
+                                    <audio src="/Assets/mp3/assests_mp3_ntt.mp3" id="song"></audio>
+                                    <div class="timer__right">3.00</div>
+                                </div>
                             </div>
 
+
+
+
+
+                            <!--
+        ====================SIDE-BAR=========================
+    -->
                             <!-- /.col -->
                         </div>
+
                         <!-- /.row -->
                     </div><!-- /.container-fluid -->
             </section>
 
         </div>
+       
 
 
 
