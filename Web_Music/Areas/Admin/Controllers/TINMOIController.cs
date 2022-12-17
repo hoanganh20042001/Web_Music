@@ -16,9 +16,17 @@ namespace Web_Music.Areas.Admin.Controllers
         // GET: Admin/TINMOI
         MyDBConect db = new MyDBConect();
         public ActionResult Index()
+
         {
-            var item = db.TIN_MOI.ToList();
-            return View(item);
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                var item = db.TIN_MOI.ToList();
+                return View(item);
+            }
         }
         public ActionResult Detail(string id)
         {

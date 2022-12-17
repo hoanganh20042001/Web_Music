@@ -15,10 +15,17 @@ namespace Web_Music.Areas.Admin.Controllers
         // GET: Admin/SANPHAM
         public ActionResult Index()
         {
-            var list = new SanPhamF().SP();
-            //var list = db.SAN_PHAM.ToList();
-            ViewBag.list = list;
-            return View();
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                var list = new SanPhamF().SP();
+                //var list = db.SAN_PHAM.ToList();
+                ViewBag.list = list;
+                return View();
+            }
         }
         [HttpPost]
         public ActionResult Index(string ma)

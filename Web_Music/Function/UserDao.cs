@@ -82,6 +82,8 @@ namespace Model.Dao
                 {
                     if (result.Pass == passWord)
                     {
+                        HttpContext.Current.Session["MaAD"] = result.MaAD.ToString();
+                        HttpContext.Current.Session["TenAD"] = result.TenAD.ToString();
                         return 1;
                     }
                     else

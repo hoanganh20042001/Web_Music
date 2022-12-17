@@ -22,9 +22,16 @@ namespace Web_Music.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var list = new NgheSiF().ListAll();
-            ViewBag.list = list;
-            return View(list);
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                var list = new NgheSiF().ListAll();
+                ViewBag.list = list;
+                return View(list);
+            }
         }
 
         [HttpPost]
