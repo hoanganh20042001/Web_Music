@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Web_Music.Models;
 using Web_Music.Function;
+using System.IO;
 
 namespace Web_Music.Areas.Admin.Controllers
 {
@@ -72,11 +73,47 @@ namespace Web_Music.Areas.Admin.Controllers
                 return View();
             }
         }
-
-
+		public ActionResult test()
+		{
+			return View();
+		}
+		[HttpPost]
+        public ActionResult test(HttpPostedFileBase fileUpload)
+		{
+            return View();
+		}
         public ActionResult Create()
         {
-            return View();
+            SAN_PHAM sp = new SAN_PHAM();
+            NgheSiF ns = new NgheSiF();
+            ViewBag.ns = ns.ListAll();
+            return View(sp);
+            
+        }
+        [HttpPost]
+        public ActionResult Create(SAN_PHAM Model, HttpPostedFileBase fileUpload,string mans)
+        {
+            var item = new SanPhamF();
+            Model.MaSP = item.AutoID();
+            if (fileUpload != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(fileUpload.FileName);
+                string extension = Path.GetExtension(fileUpload.FileName);
+                Model.SP_URL=/* "~/Assets/img/KH/" +*/ fileName + extension;
+                fileUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/mp3/"), fileName + extension));
+            }
+
+            var result = item.Insert(Model);
+			if (mans != null)
+			{
+                TRINH_BAY tb = new TRINH_BAY();
+                tb.MaNS = mans;
+                tb.MaSP = Model.MaSP;
+                tb.GhiChu = Model.GhiChu;
+                db.TRINH_BAY.Add(tb);
+                db.SaveChanges();
+			}
+            return RedirectToAction("Index");
         }
         public ActionResult Delete(string ID)
         {

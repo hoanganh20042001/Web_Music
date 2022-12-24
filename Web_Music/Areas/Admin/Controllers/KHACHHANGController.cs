@@ -86,7 +86,7 @@ namespace Web_Music.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
 
-        public ActionResult Create(KHACH_HANG Model, HttpPostedFileBase img)
+        public ActionResult Create(KHACH_HANG Model)
         {
             //if (ModelState.IsValid)
             //{
