@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Web_Music.Models;
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -10,15 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
-
-@*<link href="~/Assets/css/responsiveMain.css" rel="stylesheet" />*@
-    @*<link rel="stylesheet" href="/Assets/img/imgMain/">*@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/Assets/css/styleMain.css">
-    <link rel="stylesheet" href="/Assets/css/responsiveMain.css">
+    <link rel="stylesheet" href="~/Assets/css/styleMain.css">
+
+    <link rel="stylesheet" href="~/Assets/css/responsiveMain.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
           rel="stylesheet">
+    <link href="~/Areas/Admin/AdminAssets/css/all.min.css" rel="stylesheet" />
+
+    <link href="~/Areas/Admin/AdminAssets/adminlte.min.css" rel="stylesheet" />
+    <script src="~/Assets/javaScript/uploadImg.js"></script>
+
     <title>CNTT2 MUSIC</title>
     @RenderSection("Head", required: false)
 </head>
@@ -74,7 +78,7 @@
                             <ul>
                                 <li class="navbar-content__icon btn-favorite">
 
-                                   
+
 
                                     <a href="/Favorite/FavoriteSong"><i class="fas fa-heart"></i>Favorite Songs</a>
 
@@ -96,9 +100,13 @@
                             <img src="~/Assets/img/imgMain/snow.png" />
                         </div>
                         <div class="user-name">
+                            
+                                    
                             @if (Session["MaKH"] != null)
                             {
-                                <p>@Session["TenKH"].ToString()</p>
+                                MyDBConect db = new MyDBConect();
+                                var item = db.KHACH_HANG.Find(Session["MaKH"]);
+                                <a href="/LoginClient/Edit">@item.TenKH</a>
                             }
                         </div>
                         <a href="@Url.Action("Logout","LoginClient")"><i class="fas fa-chevron-right"></i></a>
@@ -111,8 +119,10 @@
     -->
 
             @RenderBody()
+
         </div>
-        
+
+
     </div>
     @RenderSection("Script", required:false);
     @*<script src="/Assets/javaScript/main.js"></script>*@

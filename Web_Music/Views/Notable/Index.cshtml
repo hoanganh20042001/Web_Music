@@ -1,9 +1,13 @@
-﻿
+﻿@using Web_Music.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MyLayout.cshtml";
+    MyDBConect db = new MyDBConect();
+    List<NGHE_SI> listArtist = db.NGHE_SI.ToList();
 }
 @section Head{
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -12,9 +16,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/Assets/css/extraStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link href="~/Assets/css/styleMain.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Assets/css/responsiveMain.css">
+    <link rel="stylesheet" href="~/Assets/imgMain/">
+    <link rel="stylesheet" href="~/Assets/css/extraStyle.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+          rel="stylesheet">
 }
 @section Script{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -28,43 +38,32 @@
             <i class="fas fa-arrow-left"></i>
             <i class="fas fa-arrow-right"></i>
         </nav>
-        <div class="main-content__search-form">
+        <form class="main-content__search-form" action="/Home/index" method="post">
             <i class="fas fa-search search-btn"></i>
-            <input type="text" class="search-input" placeholder="Search for artist, songs.....">
-        </div>
+
+            <input type="text" class="search-input" placeholder="Search for artist, songs....." name="value">
+            <button type="submit"></button>
+        </form>
     </header>
     <!-- Slider -->
     <div class="Notable-slider">
         <div class="container">
             <h2>New Artits</h2>
             <section class="customer-logos slider">
-                <div class="slide">
-                    <img src="/Assets/img/imgMain/imgNotable/2022_billieeilish_youtube_2000x1270-696x442.jpg">
-                </div>
-                <div class="slide">
-                    <img src="/Assets/img/imgMain/imgNotable/2022_diplo_getty_2000x1270-696x442.jpg">
-                </div>
-                <div class="slide">
-                    <img src="/Assets/img/imgMain/imgNotable/2022_JessieReyez_ScottDudelson_Getty_2000x1270-696x442.jpg">
-                </div>
-                <div class="slide">
-                    <img src="/Assets/img/imgMain/imgNotable/ArcticMonkeys-Fallon-announce-696x442.jpg">
-                </div>
-                <div class="slide">
-                    <img src="/Assets/img/imgMain/imgNotable/bts-dynamite-conceptphoto-2020-696x442.jpeg">
-                </div>
-                <div class="slide">
-                    <img src="/Assets/img/imgMain/imgNotable/Frank-Iero-Gerard-Way-and-Mikey-Way-of-My-Chemical-Romance.-Credit-David-Wolff-PatrickRedferns-696x442.jpg">
-                </div>
-                <div class="slide">
-                    <img src="/Assets/img/imgMain/imgNotable/ghost@2000x1270-696x442.jpg">
-                </div>
+                @foreach (var item in listArtist)
+                {
+                    <a class="slide" href="/Home/DetailArtists?mans=@item.mans">
+                        <img src=@item.URL_img.TrimStart('~')>
+                    </a>
+                }
+
+
             </section>
         </div>
         <script>
             $(document).ready(function () {
                 $('.customer-logos').slick({
-                    slidesToShow: 3,
+                    slidesToShow: 4,
                     slidesToScroll: 1,
                     autoplay: true,
                     autoplaySpeed: 1500,
@@ -74,12 +73,12 @@
                     responsive: [{
                         breakpoint: 768,
                         settings: {
-                            slidesToShow: 4
+                            slidesToShow: 5
                         }
                     }, {
                         breakpoint: 520,
                         settings: {
-                            slidesToShow: 3
+                            slidesToShow: 4
                         }
                     }]
                 });

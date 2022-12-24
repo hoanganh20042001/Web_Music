@@ -136,6 +136,7 @@ namespace Web_Music.Controllers
             List<NGHE_SI> list = db.NGHE_SI.ToList();
             return View(list);
         }
+       
         public ActionResult DetailArtists(string mans)
         {
             Session["MaNS"] = mans;

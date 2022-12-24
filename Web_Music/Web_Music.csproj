@@ -162,6 +162,7 @@
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\LoginClientController.cs" />
     <Compile Include="Controllers\NotableController.cs" />
+    <Compile Include="Controllers\Search.cs" />
     <Compile Include="Controllers\TrendController.cs" />
     <Compile Include="Function\AlbumF.cs" />
     <Compile Include="Function\BaiHatF.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Function\SongOfAritist.cs" />
     <Compile Include="Function\SP.cs" />
     <Compile Include="Function\TaiKhoan.cs" />
+    <Compile Include="Function\TheLoaiBH.cs" />
     <Compile Include="Function\TinMoiF.cs" />
     <Compile Include="Function\UserDao.cs" />
     <Compile Include="Global.asax.cs">
@@ -465,6 +467,7 @@
     <Content Include="Assets\mp3\assests_mp3_ntt.mp3" />
     <Content Include="Assets\mp3\assests_mp3_ttbdty.mp3" />
     <Content Include="Assets\mp3\assests_mp3_vdcc.mp3" />
+    <Content Include="Assets\css\nghesi.css" />
     <Content Include="Assets\Notable.html" />
     <Content Include="Assets\themify-icons-font\themify-icons\demo-files\demo.css" />
     <Content Include="Assets\themify-icons-font\themify-icons\fonts\themify.svg" />
@@ -2834,6 +2837,9 @@
     <Content Include="Views\Home\Artists.cshtml" />
     <Content Include="Views\Home\DetailArtists.cshtml" />
     <Content Include="Views\Artist\DetailArtists.cshtml" />
+    <Content Include="Views\Trend\Details.cshtml" />
+    <Content Include="Views\LoginClient\Edit.cshtml" />
+    <Content Include="Views\Shared\layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

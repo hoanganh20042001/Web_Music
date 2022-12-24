@@ -1,0 +1,152 @@
+﻿@model Web_Music.Models.KHACH_HANG
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+@section Head{
+    <title>Customer Edit</title>
+}
+
+
+<form class="content-wrapper" action="/LoginClient/Edit" method="post">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                
+              
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">General</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+
+                            <input type="hidden" id="inputName" class="form-control" name="MaKH" value="@Model.MaKH">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Name</label>
+                            <input type="text" id="inputName" class="form-control" name="TenKH" value="@Model.TenKH">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputName">User name</label>
+                            <input type="text" id="inputName" class="form-control" name="UserName" value="@Model.UserName">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Password</label>
+                            <input type="text" id="inputName" class="form-control" name="Pass" value="@Model.Pass">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputStatus">Sex</label>
+                            <select id="inputStatus" class="form-control custom-select" name="GT">
+                                <option selected disabled value="True">Male</option>
+                                <option value="False">Female</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputStatus">Status</label>
+                            <select id="inputStatus" class="form-control custom-select" name="TrangThai">
+                                <option selected disabled value="True">On</option>
+                                <option value="False">Off</option>
+
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">General</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">Address</label>
+                            <input type="text" id="inputEstimatedBudget" class="form-control" name="DiaChi" value="@Model.DiaChi">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Phone</label>
+                            <input type="number" id="inputSpentBudget" class="form-control" name="SDT" value="@Model.SDT">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">CCCD</label>
+                            <input type="number" id="inputSpentBudget" class="form-control" name="CCCD" value="=@Model.CCCD">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Date of birth </label>
+                            <input type="date" id="inputSpentBudget" class="form-control" name="NgaySinh" value="@Model.NgaySinh">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">Email</label>
+                            <input type="text" id="inputEstimatedBudget" class="form-control" name="Email" value="@Model.Email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Avartar</label>
+
+                            <div class="input-group">
+                                <img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))>
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+
+                            </div>
+                            @*<div class="form-group">
+
+                                    <label for="exampleInputFile">File input</label>
+                                    <div class="input-group">
+
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
+
+                                    </div>
+                                </div>*@
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-12">
+                    <a href="/Home/Index" class="btn btn-secondary" style="margin-right:400px;">Cancel</a>
+                    <input type="submit" value="Save" class="btn btn-success float-right">
+                </div>
+            </div>
+    </section>
+    <!-- /.content -->
+</form>

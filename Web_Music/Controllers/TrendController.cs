@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Music.Function;
 
 namespace Web_Music.Controllers
 {
@@ -16,9 +17,13 @@ namespace Web_Music.Controllers
         }
 
         // GET: Trend/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string theloai)
         {
-            return View();
+            Session["theloai"] = theloai;
+            var list = new TheLoaiBH().SP(theloai.ToString());
+            ViewBag.list = list;
+            ViewBag.size = list.Count;
+            return View(list);
         }
 
         // GET: Trend/Create

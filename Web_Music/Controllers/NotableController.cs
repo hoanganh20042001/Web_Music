@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Music.Models;
 
 namespace Web_Music.Controllers
 {
     public class NotableController : Controller
     {
         // GET: Notable
+        MyDBConect db = new MyDBConect();
+     
         public ActionResult Index()
         {
+            List<NGHE_SI> listArtist = db.NGHE_SI.ToList();
+            ViewBag.listArtist = listArtist;
             return View();
         }
+       
 
-        // GET: Notable/Details/5
-        public ActionResult Details(int id)
+            // GET: Notable/Details/5
+            public ActionResult Details(int id)
         {
             return View();
         }

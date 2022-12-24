@@ -26,6 +26,15 @@ namespace Web_Music.Controllers
             }
            
         }
+        [HttpPost]
+        public ActionResult FavoriteSong(string value)
+        {
+
+            var list = new FavoriteSong().Search(value, Session["MaKH"].ToString());
+            ViewBag.list = list;
+            ViewBag.size = list.Count;
+            return View();
+        }
         public ActionResult AddSong(String MaSP)
         {
             if (Session["MaKH"] == null)

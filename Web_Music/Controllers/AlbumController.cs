@@ -97,6 +97,16 @@ namespace Web_Music.Controllers
             }
 
         }
+
+        [HttpPost]
+        public ActionResult listSong(string value,string MaAl)
+        {
+            MaAl = Session["MaAl"].ToString();
+            var list = new SongInAlbum().Search(value,MaAl);
+            ViewBag.list = list;
+            ViewBag.size = list.Count;
+            return View();
+        }
         public ActionResult newSong()
         {
             if (Session["MaKH"] == null)
@@ -115,6 +125,15 @@ namespace Web_Music.Controllers
             }
 
 
+        }
+        [HttpPost]
+        public ActionResult newSong(string value, string MaAl)
+        {
+            MaAl = Session["MaAl"].ToString();
+            var list = new resetSong().Search(value, MaAl);
+            ViewBag.list = list;
+            ViewBag.size = list.Count;
+            return View();
         }
         public ActionResult AddToAlbum(String MaSP)
         {
