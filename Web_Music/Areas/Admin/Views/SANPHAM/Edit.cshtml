@@ -1,6 +1,6 @@
 ﻿@model Web_Music.Models.SAN_PHAM
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
 @section Head{
@@ -38,36 +38,40 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="inputName">Name</label>
-                            <input type="text" id="inputName" class="form-control" name="TenSP" value="@Model.TenSP">
-                        </div>
+					<div class="card-body">
+						<div class="form-group">
 
-                        <div class="form-group">
-                            <label for="inputName">Composed</label>
-                            <input type="text" id="inputName" class="form-control" name="SangTac" value="@Model.SangTac">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputName">Type</label>
-                            <input type="text" id="inputName" class="form-control" name="TheLoai" value="@Model.Theloai">
-                        </div>
+							<input type="hidden" id="inputName" class="form-control" name="MaSP" value="@Model.MaSP">
+						</div>
+						<div class="form-group">
+							<label for="inputName">Name</label>
+							<input type="text" id="inputName" class="form-control" name="TenSP" value="@Model.TenSP">
+						</div>
 
-                        <div class="form-group">
-                            <label for="inputStatus">Status</label>
-                            <select id="inputStatus" class="form-control custom-select" name="TrangThai">
-                                <option selected disabled value="True">On</option>
-                                <option value="False">Off</option>
+						<div class="form-group">
+							<label for="inputName">Composed</label>
+							<input type="text" id="inputName" class="form-control" name="SangTac" value="@Model.SangTac">
+						</div>
+						<div class="form-group">
+							<label for="inputName">Type</label>
+							<input type="text" id="inputName" class="form-control" name="TheLoai" value="@Model.Theloai">
+						</div>
 
-                            </select>
-                        </div>
+						<div class="form-group">
+							<label for="inputStatus">Status</label>
+							<select id="inputStatus" class="form-control custom-select" name="TrangThai" value="@Model.TrangThai">
+								<option @*selected disabled*@ value="True">On</option>
+								<option value="False">Off</option>
 
-                        <div class="form-group">
-                            <label for="inputName">Note</label>
-                            <input type="text" id="inputName" class="form-control" name="GhiChu" value="@Model.GhiChu">
-                        </div>
+							</select>
+						</div>
 
-                    </div>
+						<div class="form-group">
+							<label for="inputName">Note</label>
+							<input type="text" id="inputName" class="form-control" name="GhiChu" value="@Model.GhiChu">
+						</div>
+
+					</div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -83,45 +87,68 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="inputEstimatedBudget">Time</label>
-                            <input type="text" id="inputEstimatedBudget" class="form-control" name="ThoiGian" value="@Model.ThoiGian">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputSpentBudget">Release</label>
-                            <input type="number" id="inputSpentBudget" class="form-control" name="TGPhatHanh" value="@Model.TGPhatHanh">
-                        </div>
+					<div class="card-body">
+						<div class="form-group">
+							<label for="inputEstimatedBudget">Time</label>
+							<input type="text" id="inputEstimatedBudget" class="form-control" name="ThoiGian" value="@Model.ThoiGian">
+						</div>
+						<div class="form-group">
+							<label for="inputSpentBudget">Release</label>
+							<input type="number" id="inputSpentBudget" class="form-control" name="TGPhatHanh" value="@Model.TGPhatHanh">
+						</div>
+						
+						<div class="form-group">
+							<label for="inputName">Singer</label>
+							@*<input type="text" id="inputName" class="form-control" name="TheLoai">*@
+							<select id="inputStatus" class="form-control custom-select" name="mans" @*value="@ViewBag.singer"*@>
+								<option selected disabled value="@ViewBag.singer_id">@ViewBag.singer</option>
+								@foreach (var item in ViewBag.ns)
+								{
+									<option value="@item.mans">@item.NgheDanh</option>
+								}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputFile">File</label>
 
+							<div class="input-group">
+								@*<img src="@Url.Content(Model.SP_URL)" class="profile-user-img img-fluid img-circle" id="previewImage" />*@
+								<div class="custom-file">
+									<input type="hidden" id="inputSpentBudget" class="form-control" name="SP_URL" value="@Model.SP_URL">
+									<input type="file" class="custom-file-input" @*id="exampleInputFile"*@ name="fileUpload" @*onchange="ShowImagePreview(this, document.getElementById('previewImage'))*@ >
+									<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+								</div>
+							</div>
+						</div>
 
-                        <!--<div class="form-group">
-                            <label for="exampleInputFile">File</label>
+						<!--<div class="form-group">
+		<label for="exampleInputFile">File</label>
 
-                            <div class="input-group">-->
-                                @*<img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />*@
-                                <!--<div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="URL_link">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
+		<div class="input-group">-->
+						@*<img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />*@
+						<!--<div class="custom-file">
+			<input type="file" class="custom-file-input" id="exampleInputFile" name="URL_link">
+			<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+		</div>
 
-                            </div>-->
-                            @*<div class="form-group">
+	</div>-->
+						@*<div class="form-group">
 
-                                    <label for="exampleInputFile">File input</label>
-                                    <div class="input-group">
+			<label for="exampleInputFile">File input</label>
+			<div class="input-group">
 
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
+					<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+				</div>
+				<div class="input-group-append">
+					<span class="input-group-text">Upload</span>
+				</div>
 
-                                    </div>
-                                </div>*@
+			</div>
+		</div>*@
 
-                        </div>
+					</div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
