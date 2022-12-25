@@ -5,8 +5,9 @@ namespace Web_Music.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+	using System.Web;
 
-    public partial class SAN_PHAM
+	public partial class SAN_PHAM
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SAN_PHAM()
@@ -62,5 +63,7 @@ namespace Web_Music.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<YEU_THICH> YEU_THICH { get; set; }
+        //[NotMapped]
+        //public HttpPostedFileBase fileUpload { get; set; }
     }
 }

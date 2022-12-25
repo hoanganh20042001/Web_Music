@@ -106,7 +106,8 @@ namespace Web_Music.Function
             var result = db.NGHE_SI.Find(id);
             if (result != null)
             {
-                db.NGHE_SI.Remove(result);
+				db.NGHE_SI.Remove(result);
+				
                 db.SaveChanges();
                 return true;
             }

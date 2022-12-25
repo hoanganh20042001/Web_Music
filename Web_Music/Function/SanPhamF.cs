@@ -11,13 +11,49 @@ namespace Web_Music.Function
 
     {
         MyDBConect db = new MyDBConect();
+        public string AutoID()
+        {
+            string result;
+            //string values = db.KHACH_HANGs.SqlQuery("SELECT max(RIGHT(MAns, 8)) FROM SAN_PHAM").SingleOrDefault().ToString();
+            int value = int.Parse(db.Database.SqlQuery<string>("SELECT max(RIGHT(MAsp, 8)) FROM SAN_PHAM").SingleOrDefault().ToString());
+            if (0 <= value && value < 9)
+            {
+                result = "SP0000000" + Convert.ToString(value + 1);
+            }
+            else if (9 <= value && value < 99)
+            {
+                result = "SP000000" + Convert.ToString(value + 1);
+            }
+            else if (99 <= value && value < 999)
+            {
+                result = "SP00000" + Convert.ToString(value + 1);
+            }
+            else if (999 <= value && value < 9999)
+            {
+                result = "SP0000" + Convert.ToString(value + 1);
+            }
+            else if (9999 <= value && value < 99999)
+            {
+                result = "SP000" + Convert.ToString(value + 1);
+            }
+            else if (99999 <= value && value < 999999)
+            {
+                result = "SP00" + Convert.ToString(value + 1);
+            }
+
+            else
+            {
+                result = "SP0" + Convert.ToString(value + 1);
+            }
+            return result;
+        }
         List<BaiHatF> ListAll = new List<BaiHatF>();
         public List<BaiHatF> SP()
         {
             List<string> masp = new List<string>();
-            masp = db.Database.SqlQuery<string>("select masp from san_pham").ToList();
+            masp = db.Database.SqlQuery<string>("select masp from san_pham where trangthai=1").ToList();
             //BaiHatF bh = new BaiHatF();
-            int sum = db.Database.SqlQuery<int>("select count(masp) from san_pham").SingleOrDefault();
+          //  int sum = db.Database.SqlQuery<int>("select count(masp) from san_pham").SingleOrDefault();
             //int value = int.Parse(db.Database.SqlQuery<string>("SELECT max(RIGHT(MAsp, 8)) FROM san_pham").SingleOrDefault().ToString());
             foreach(string item in masp)
             {
@@ -89,7 +125,7 @@ namespace Web_Music.Function
         }
         public List<SAN_PHAM> ListSP(string id)
         {
-            var list = db.SAN_PHAM.SqlQuery("select sp.* FROM san_pham sp join trinh_bay tb on sp.masp=tb.masp where sp.masp=@masp", new SqlParameter("@masp", id)).ToList();
+            var list = db.SAN_PHAM.SqlQuery("select tensp,sangtac,sp_url,theloai,trangthai,luotnghe,sp.GhiChu,yeuthich,khongyeuthich,tgphathanh,sp.masp,thoigian FROM san_pham sp join trinh_bay tb on sp.masp=tb.masp where mans=@mans", new SqlParameter("@mans", id)).ToList();
             return list;
         }
         public List<SAN_PHAM> ListAll1()
@@ -153,7 +189,8 @@ namespace Web_Music.Function
             var result = db.SAN_PHAM.Find(id);
             if (result != null)
             {
-                db.SAN_PHAM.Remove(result);
+                //db.SAN_PHAM.Remove(result);
+                result.TrangThai = false;
                 db.SaveChanges();
                 return true;
             }
