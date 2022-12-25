@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Music.Function;
 
 namespace Web_Music.Controllers
 {
@@ -62,6 +63,49 @@ namespace Web_Music.Controllers
             Session.Clear();//remove session
             return RedirectToAction("Login");
         }
+        public ActionResult Edit()
+        {
+          
+                var item = new KhachHangF();
+                var result = item.Find(Session["MaKH"].ToString());
+                if (result == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                //var Cate = new CategoryF();
+                //ViewBag.Category = Cate.ListAll();
+                return View(result);
+            
+        }
+        [HttpPost]
+
+        public ActionResult Edit(KHACH_HANG Model)
+        {
+            //         try
+            //{
+            var item = new KhachHangF();
+            var result = item.Edit(Model);
+            if (result == true) return RedirectToAction("Index", "Home");
+            else
+            {
+                Session["TenKH"] = Model.TenKH;
+                ModelState.AddModelError("", "Edit item Unsucessfully");
+                return View(Model);
+
+            }
+            //var id = db.SaveChanges();
+            //             if (id > 0) return RedirectToAction("Index");
+            //             else return View(Model);
+            ////ViewBag.Category = new SelectList(db.NGHE_SIs.ToList(), "Id", "Name", Model.mans);
+            //return View(Model);
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
+        }
+
 
     }
 }

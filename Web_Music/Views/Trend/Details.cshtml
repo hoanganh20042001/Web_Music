@@ -17,6 +17,11 @@
     <link href="~/Assets/css/styleMain.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
           rel="stylesheet">
+   
+    <link rel="stylesheet" href="~/Assets/css/responsiveMain.css">
+
+
+
 }
 @*@{
         var list = ViewBag.list;
@@ -51,8 +56,8 @@
 @section Script{
 
 
-   
-    <script src="~/Assets/javaScript/SongInAlbum.js"></script>
+
+    <script src="/Assets/javaScript/main.js"></script>
 }
 <div id="main-content">
     <header>
@@ -60,7 +65,7 @@
             <i class="fas fa-arrow-left"></i>
             <i class="fas fa-arrow-right"></i>
         </nav>
-        <form class="main-content__search-form" action="/Album/listSong?MaAl=@Session["MaAl"]" method="post">
+        <form class="main-content__search-form" action="/Home/index" method="post">
             <i class="fas fa-search search-btn"></i>
 
             <input type="text" class="search-input" placeholder="Search for artist, songs....." name="value">
@@ -77,24 +82,96 @@
     <div class="main-content__trend">
 
         <div class="main-content__trend-title">Trending</div>
-        <a href="/Album/Album" class="main-content__trend-more btn-hover">
+        <a href="/Trend/index" class="main-content__trend-more btn-hover">
             More
             <span><i class="fas fa-chevron-right"></i></span>
         </a>
     </div>
-    <div class="main-content__banner">
-        <h3 class="main-content__banner-artist">My Album</h3>
-        <h4 class="main-content__banner-des"> @Session["tenAlbum"] </h4>
-       
-        <span class="main-content__view" style="color:cadetblue">
-           sum song in Album
-            <p>@ViewBag.size</p>
-        </span>
-    </div>
+    @if (Session["theloai"].ToString() == "Nhạc trẻ")
+    {
+        <div class="main-content__banner"
+             style="background-image: url('/Assets/img/imgMain/imgtrend/1663751155543_org.jpg')">
+
+            <div class="card-body">
+                <h2 class="trend-title" style="color:white;margin-top:30px;">Nhạc trẻ </h2>
+                <p class="trend-des" style="color:white">
+                    Trong Mơ - Là vào một buổi sáng khi em nhìn vào mình trong gương Em chẳng thể
+                    nhận ra
+                </p>
+            </div>
+
+        </div>
+    }
+    @if (Session["theloai"].ToString() == "Kpop")
+    {
+        <div class="main-content__banner"
+             style="background-image: url('/Assets/img/imgMain/imgtrend/1663751593436_org.jpg')">
+            <div class="card-body">
+                <div style="color:white;margin-top:30px;">
+                    <h2 class="trend-title">Nhạc Kpop</h2>
+                    <p class="trend-des">
+                        Bao năm hẹn thề, sao bây giờ người
+                        <br> Se tơ duyên hạnh phúc quên thân bèo trôi
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+    @if (Session["theloai"].ToString() == "nước ngoài")
+    {
+        <div class="main-content__banner"
+             style="background-image: url('/Assets/img/imgMain/imgtrend/Drake\ Laptop\ Wallpapers\ -\ Wallpaper\ Cave.png')">
+            <div class="card-body">
+                <div style="color:white;margin-top:30px;">
+                    <h2 class="trend-title">Nhạc nước ngoài</h2>
+                </div>
+
+            </div>
+        </div>
+    }
+    @if (Session["theloai"].ToString() == "DaLab")
+    {
+        <div class="main-content__banner"
+             style="background-image: url('/Assets/img/imgMain/imgtrend/Fresh\ From\ The\ Dairy_\ Music.jpg')">
+            <div class="card-body">
+                <div style="color:white;margin-top:30px;">
+                    <h2 class="trend-title">Chill cùng DaLab</h2>
+                </div>
+
+            </div>
+        </div>
+    }
+    @if (Session["theloai"].ToString() == "trữ tình")
+    {
+        <div class="main-content__banner"
+             style="background-image: url('/Assets/img/imgMain/imgtrend/International\ Artist\ Feature_\ Peru.jpg')">
+            <div class="card-body">
+                <div style="color:white;margin-top:30px;">
+
+                    <h2 class="trend-title">Tuyển tập nhạc trữ tình hay nhất</h2>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Session["theloai"].ToString() == "Nhạc Vàng")
+    {
+        <div class="main-content__banner"
+             style="background-image: url('/Assets/img/imgMain/imgtrend/pngtree-purple-minimalist-music-note-banner-background-image_233650.jpg')">
+            <div class="card-body">
+                <div style="color:white;margin-top:30px;">
+                    <h2 class="trend-title">Bài hát đi cùng năm tháng dành cho bạn</h2>
+                    <p class="trend-des">77 năm Quốc khánh 2/9: Những ca khúc sục sôi hào khí cách mạng</p>
+                </div>
+            </div>
+        </div>
+    }
     <div class="my-playlist">
         <div class="playlist-head">
-            <h4>@Session["tenAlbum"]</h4>
-            <a  href="/Album/newSong"class="btn-hover">add</a>
+            <h4>My Playlist</h4>
+            <a class="btn-hover">Show all</a>
         </div>
         <div class="playlist-list" style="overflow-x:scroll;overflow-y:no-display; height:250px;">
             <div class="playlist playlist-list__title">

@@ -128,7 +128,7 @@
             <i class="fas fa-arrow-left"></i>
             <i class="fas fa-arrow-right"></i>
         </nav>
-        <form class="main-content__search-form" action="/Home/Index" method="post">
+        <form class="main-content__search-form" action="/Album/newSong?MaAl=@Session["MaAl"]" method="post">
             <i class="fas fa-search search-btn"></i>
 
             <input type="text" class="search-input" placeholder="Search for artist, songs....." name="value">

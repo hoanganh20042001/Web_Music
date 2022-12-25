@@ -4,13 +4,24 @@
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 @section Head{
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <link href="~/Assets/css/styleMain.css" rel="stylesheet" />
-        <link rel="stylesheet" href="/Assets/css/extraStyle.css">
+    <link href="~/Assets/css/styleMain.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Assets/css/extraStyle.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="~/Assets/css/responsiveMain.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+          rel="stylesheet">
 }
 @section Script{
 
@@ -24,75 +35,75 @@
             <i class="fas fa-arrow-left"></i>
             <i class="fas fa-arrow-right"></i>
         </nav>
-        <div class="main-content__search-form">
+        <form class="main-content__search-form" action="/Home/index" method="post">
             <i class="fas fa-search search-btn"></i>
-            <input type="text" class="search-input" placeholder="Search for artist, songs.....">
-        </div>
+
+            <input type="text" class="search-input" placeholder="Search for artist, songs....." name="value">
+            <button type="submit"></button>
+        </form>
     </header>
     <div class="col-lg-12">
+        <a style="text-decoration: none" href="/Trend/Details?theloai=Nhạc trẻ">
+            <div class="card mb-4 py-5 border-left-primary"
+                 style="background-image: url('/Assets/img/imgMain/imgtrend/1663751155543_org.jpg')">
+                <div class="card-body">
+                    <h2 class="trend-title">Nhạc trẻ </h2>
+                    <p class="trend-des">
+                        Trong Mơ - Là vào một buổi sáng khi em nhìn vào mình trong gương Em chẳng thể
+                        nhận ra
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a style="text-decoration: none" href="/Trend/Details?theloai=Kpop">
+            <div class="card mb-4 py-5 border-left-primary"
+                 style="background-image: url('/Assets/img/imgMain/imgtrend/1663751593436_org.jpg')">
+                <div class="card-body">
+                    <h2 class="trend-title">Nhạc Kpop</h2>
+                    <p class="trend-des">
+                        Bao năm hẹn thề, sao bây giờ người
+                        <br> Se tơ duyên hạnh phúc quên thân bèo trôi
+                    </p>
+                </div>
+            </div>
+        </a>
 
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/1663750379706_org.jpg')">
-            <div class="card-body">
-                <h2 class="trend-title"></h2>
-                <p class="trend-des"></p>
+        <a style="text-decoration: none" href="/Trend/Details?theloai=nước ngoài">
+            <div class="card mb-4 py-5 border-left-primary"
+                 style="background-image: url('/Assets/img/imgMain/imgtrend/Drake\ Laptop\ Wallpapers\ -\ Wallpaper\ Cave.png')">
+                <div class="card-body">
+                    <h2 class="trend-title">Nhạc nước ngoài</h2>
+                </div>
             </div>
-        </div>
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/1663751155543_org.jpg')">
-            <div class="card-body">
-                <h2 class="trend-title">Trong Mơ - Mỹ Mỹ</h2>
-                <p class="trend-des">
-                    Là vào một buổi sáng khi em nhìn vào mình trong gương Em chẳng thể
-                    nhận ra
-                </p>
+        </a>
+
+        <a style="text-decoration: none" href="/Trend/Details?theloai=DaLab">
+            <div class="card mb-4 py-5 border-left-primary"
+                 style="background-image: url('/Assets/img/imgMain/imgtrend/Fresh\ From\ The\ Dairy_\ Music.jpg')">
+                <div class="card-body">
+                    <h2 class="trend-title">Chill cùng DaLab</h2>
+                </div>
             </div>
-        </div>
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/1663751593436_org.jpg')">
-            <div class="card-body">
-                <h2 class="trend-title">Uống Chén Say - KHOA</h2>
-                <p class="trend-des">
-                    Bao năm hẹn thề, sao bây giờ người
-                    <br> Se tơ duyên hạnh phúc quên thân bèo trôi
-                </p>
+        </a>
+        <a style="text-decoration: none" href="/Trend/Details?theloai=trữ tình">
+            <div class="card mb-4 py-5 border-left-primary"
+                 style="background-image: url('/Assets/img/imgMain/imgtrend/International\ Artist\ Feature_\ Peru.jpg')">
+                <div class="card-body">
+                    <h2 class="trend-title">Tuyển tập nhạc trữ tình hay nhất</h2>
+                </div>
             </div>
-        </div>
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/Drake\ Laptop\ Wallpapers\ -\ Wallpaper\ Cave.png')">
-            <div class="card-body">
-                <h2 class="trend-title">Top 50 bài hát yêu thích tháng 9/2022</h2>
+        </a>
+
+        <a style="text-decoration: none" href="/Trend/Details?theloai=Nhạc Vàng">
+            <div class="card mb-4 py-5 border-left-primary"
+                 style="background-image: url('/Assets/img/imgMain/imgtrend/pngtree-purple-minimalist-music-note-banner-background-image_233650.jpg')">
+                <div class="card-body">
+                    <h2 class="trend-title">Bài hát đi cùng năm tháng dành cho bạn</h2>
+                    <p class="trend-des">77 năm Quốc khánh 2/9: Những ca khúc sục sôi hào khí cách mạng</p>
+                </div>
             </div>
-        </div>
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/Fresh\ From\ The\ Dairy_\ Music.jpg')">
-            <div class="card-body">
-                <h2 class="trend-title">Chill cùng DaLab</h2>
-            </div>
-        </div>
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/International\ Artist\ Feature_\ Peru.jpg')">
-            <div class="card-body">
-                <h2 class="trend-title">Tuyển tập nhạc trữ tình hay nhất</h2>
-            </div>
-        </div>
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/music-2021-08-26-23-57-09-utc-scaled.jpeg')">
-            <div class="card-body">
-                <h2 class="trend-title">Ca khúc mới phát hành</h2>
-                <p class="trend-des">
-                    I think I see confetti from this potion. Pillow fights and feathers,
-                    overdosin' Smells like a cologne and candy lotion
-                </p>
-            </div>
-        </div>
-        <div class="card mb-4 py-5 border-left-primary"
-             style="background-image: url('/Assets/img/imgMain/imgtrend/pngtree-purple-minimalist-music-note-banner-background-image_233650.jpg')">
-            <div class="card-body">
-                <h2 class="trend-title">Bài hát đi cùng năm tháng dành cho bạn</h2>
-                <p class="trend-des">77 năm Quốc khánh 2/9: Những ca khúc sục sôi hào khí cách mạng</p>
-            </div>
-        </div>
+        </a>
+
 
 
 
@@ -102,36 +113,9 @@
     ====================SIDE-BAR=========================
 -->
 <div id="sidebar">
-    <div class="sidebar__shortcuts">
-        <p class="sidebar__shortcuts-title">
-            Shortcuts
-            <i class="fas fa-stream js-hide-sidebar"></i>
-        </p>
-        <div class="sidebar__shortcuts-items">
-            <span class="sidebar__shortcuts-item">
-                Chill
-                <img src="/Assets/img/imgMain/snow.png" alt="">
-            </span>
-            <span class="sidebar__shortcuts-item">
-                Hot
-                <img src="/Assets/img/imgMain/star.png" alt="">
-            </span>
-            <span class="sidebar__shortcuts-item">
-                Piano instrumental
-                <img src="/Assets/img/imgMain/piano.png" alt="">
-            </span>
-            <span class="sidebar__shortcuts-item">
-                Jazz
-                <img src="/Assets/img/imgMain/jazz.png" alt="">
-            </span>
-            <span class="sidebar__shortcuts-item">
-                Acoustic
-                <img src="/Assets/img/imgMain/ghitar.png" alt="">
-            </span>
-        </div>
-    </div>
+   
 
-    <div class="sidebar__favorite">
+    <div style="margin-top:50px;" class="sidebar__favorite">
         <p class="sidebar__favorite-title">Favorite Artists</p>
         <!--    ARTIST 1    -->
         <div class="sidebar__favorite-list">

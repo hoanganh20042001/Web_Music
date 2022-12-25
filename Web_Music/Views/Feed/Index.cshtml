@@ -24,80 +24,82 @@
             <i class="fas fa-arrow-left"></i>
             <i class="fas fa-arrow-right"></i>
         </nav>
-        <div class="main-content__search-form">
+        <form class="main-content__search-form" action="/Home/index" method="post">
             <i class="fas fa-search search-btn"></i>
-            <input type="text" class="search-input" placeholder="Search for artist, songs.....">
-        </div>
+
+            <input type="text" class="search-input" placeholder="Search for artist, songs....." name="value">
+            <button type="submit"></button>
+        </form>
     </header>
-    @{ 
+    @{
         var item = Model;
         var count = item.Count();
         string thanh = "//gsjgkj";
 
+    }
+
+    <div class="row">
+
+
+
+        <div class="col-lg-6">
+            <!-- Dropdown Card Example -->
+            @for (int i = 0; i < count; i = i + 2)
+            {
+                <div class="card shadow mb-4">
+                    <a href="@item[i].URL_link"
+                       class="content-link"></a>
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            @item[i].TenTM
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body__img"
+                             style="background-image: url(@item[i].URL_img.TrimStart('~'))">
+                            <img src="@item[i].URL_img.TrimStart('~')" />
+                        </div>
+                        <p>
+                            @item[i].GhiChu
+                        </p>
+                    </div>
+                </div>
             }
-  
-<div class="row">
 
 
 
-    <div class="col-lg-6">
-        <!-- Dropdown Card Example -->
-        @for (int i = 0; i < count; i=i+2)
-        {
-            <div class="card shadow mb-4">
-                <a href="@item[i].URL_link"
-                   class="content-link"></a>
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                       @item[i].TenTM
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="card-body__img"
-                         style="background-image: url(@item[i].URL_img.TrimStart('~'))">
-                        <img src="@item[i].URL_img.TrimStart('~')" />
+        </div>
+        <div class="col-lg-6">
+            <!-- Dropdown Card Example -->
+            @for (int i = 1; i < count; i = i + 2)
+            {
+                <div class="card shadow mb-4">
+                    <a href="@item[i].URL_link"
+                       class="content-link"></a>
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            @item[i].TenTM
+                        </h6>
                     </div>
-                    <p>
-                       @item[i].GhiChu
-                    </p>
+                    <div class="card-body">
+                        <div class="card-body__img"
+                             style="background-image: url(@item[i].URL_img.TrimStart('~')">
+                            <img src="@item[i].URL_img.TrimStart('~')" />
+
+                        </div>
+                        <p>
+                            @item[i].GhiChu
+
+
+                        </p>
+                    </div>
                 </div>
-            </div>
-        }
+            }
 
 
+
+        </div>
 
     </div>
-    <div class="col-lg-6">
-        <!-- Dropdown Card Example -->
-        @for (int i = 1; i < count; i = i + 2)
-        {
-            <div class="card shadow mb-4">
-                <a href="@item[i].URL_link"
-                   class="content-link"></a>
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        @item[i].TenTM
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div class="card-body__img"
-                         style="background-image: url(@item[i].URL_img.TrimStart('~')">
-                        <img src="@item[i].URL_img.TrimStart('~')" />
-
-                    </div>
-                    <p>
-                        @item[i].GhiChu
-
-                        
-                    </p>
-                </div>
-            </div>
-        }
-
-
-
-    </div>
-
-</div>
 </div>
 
