@@ -108,7 +108,7 @@ namespace Web_Music.Areas.Admin.Controllers
             
         }
         [HttpPost]
-        public ActionResult Create(SAN_PHAM Model, HttpPostedFileBase fileUpload,string mans)
+        public ActionResult Create(SAN_PHAM Model, HttpPostedFileBase fileUpload, string mans)
         {
             var item = new SanPhamF();
             Model.MaSP = item.AutoID();
@@ -116,20 +116,20 @@ namespace Web_Music.Areas.Admin.Controllers
             {
                 string fileName = Path.GetFileNameWithoutExtension(fileUpload.FileName);
                 string extension = Path.GetExtension(fileUpload.FileName);
-                Model.SP_URL=/* "~/Assets/img/KH/" +*/ fileName + extension;
+                Model.SP_URL =/* "~/Assets/img/KH/" +*/ fileName + extension;
                 fileUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/mp3/"), fileName + extension));
             }
 
             var result = item.Insert(Model);
-			if (mans != null)
-			{
+            if (mans != null)
+            {
                 TRINH_BAY tb = new TRINH_BAY();
                 tb.MaNS = mans;
                 tb.MaSP = Model.MaSP;
                 tb.GhiChu = Model.GhiChu;
                 db.TRINH_BAY.Add(tb);
                 db.SaveChanges();
-			}
+            }
             return RedirectToAction("Index");
         }
         public ActionResult Delete(string ID)
