@@ -1,0 +1,17 @@
+﻿
+@{
+	Layout = null;
+	//Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
+
+}
+<div>
+
+	@using (Html.BeginForm("Context", "Test", FormMethod.Get))
+	{
+		<input type="text" name="user" />
+		<button type="submit">gui</button>
+	}
+	@Html.ActionLink("Context", "Context1",new { id=2})
+	@Html.RouteLink("Context",new {action="Context1"})
+</div>
+

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Web_Music.Models;
 using Web_Music.Function;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Web_Music.Controllers
 {
@@ -14,8 +16,20 @@ namespace Web_Music.Controllers
         MyDBConect db = new MyDBConect();
         public ActionResult Index()
         {
-            List<TIN_MOI> list = db.TIN_MOI.ToList();
-            return View(list);
+            //List<TIN_MOI> list = db.TIN_MOI.ToList();
+            //return View(list);
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44364/");
+            client.DefaultRequestHeaders.Accept.Add(new
+           MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync("api/TinMoi").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var model =
+               response.Content.ReadAsAsync<IEnumerable<TinMoi>>().Result;
+                return View(model);
+            }
+            return View();
         }
 
         // GET: Feed/Details/5

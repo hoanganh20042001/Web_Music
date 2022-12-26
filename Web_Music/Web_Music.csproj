@@ -138,11 +138,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BTLController.cs" />
     <Compile Include="Areas\Admin\Controllers\KHACHHANGController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\NGHESIController.cs" />
     <Compile Include="Areas\Admin\Controllers\SANPHAMController.cs" />
     <Compile Include="Areas\Admin\Controllers\SqlParameters.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestController.cs" />
     <Compile Include="Areas\Admin\Controllers\TINMOIController.cs" />
     <Compile Include="Areas\Admin\Model\Album.cs" />
     <Compile Include="Areas\Admin\Model\LoginModel.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Function\BaiHatF.cs" />
     <Compile Include="Function\FavoriteSong.cs" />
     <Compile Include="Function\followArtists.cs" />
+    <Compile Include="Function\KhachHang.cs" />
     <Compile Include="Function\KhachHangF.cs" />
     <Compile Include="Function\listAlbum.cs" />
     <Compile Include="Function\NgheSiF.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="Function\SP.cs" />
     <Compile Include="Function\TaiKhoan.cs" />
     <Compile Include="Function\TheLoaiBH.cs" />
+    <Compile Include="Function\TinMoi.cs" />
     <Compile Include="Function\TinMoiF.cs" />
     <Compile Include="Function\UserDao.cs" />
     <Compile Include="Global.asax.cs">
@@ -2787,6 +2791,16 @@
     <Content Include="Areas\Admin\Views\SANPHAM\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\NewLayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\SANPHAM\test.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\Context.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\Context1.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\par.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\app.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\testAIP.cshtml" />
+    <Content Include="Areas\Admin\Views\KHACHHANG\Search.cshtml" />
+    <Content Include="Areas\Admin\Views\SANPHAM\Search.cshtml" />
+    <Content Include="Areas\Admin\Views\TINMOI\Search.cshtml" />
+    <Content Include="Areas\Admin\Views\BTL\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

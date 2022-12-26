@@ -1,0 +1,103 @@
+﻿@using Web_Music.Function;
+@model List<KhachHang>
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>testAIP</title>
+</head>
+<body>
+	<p>
+		@Html.ActionLink("Create New", "Create")
+	</p>
+	<table class="table">
+		<tr>
+			<th>
+				
+			</th>
+			@*<th>
+				@Html.DisplayNameFor(model => model.SangTac)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.SP_URL)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Theloai)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TrangThai)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.LuotNghe)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.GhiChu)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.YeuThich)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.KhongYeuThich)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TGPhatHanh)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ThoiGian)
+			</th>*@
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					<p>@item.MaKH</p>
+				</td>
+				@*<td>
+					@Html.DisplayFor(modelItem => item.SangTac)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.SP_URL)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Theloai)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TrangThai)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.LuotNghe)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.GhiChu)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.YeuThich)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.KhongYeuThich)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TGPhatHanh)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ThoiGian)
+				</td>*@
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.MaKH }) |
+					@Html.ActionLink("Details", "Details", new { id = item.MaKH }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.MaKH })
+				</td>
+			</tr>
+		}
+
+	</table>
+</body>
+</html>

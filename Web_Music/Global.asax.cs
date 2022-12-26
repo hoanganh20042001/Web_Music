@@ -19,5 +19,9 @@ namespace Web_Music
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        protected void Sesdion_start()
+		{
+            Application["num"] = (int)Application["num"] + 1;
+		}
     }
 }

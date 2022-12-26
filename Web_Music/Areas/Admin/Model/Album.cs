@@ -41,13 +41,13 @@ namespace Web_Music.Areas.Admin.Model
                 bh = db.Database.SqlQuery<string>("select tensp from ds_sp ds join san_pham sp on ds.masp=sp.masp where maal=@maal", new SqlParameter("@maal", item)).ToList();
                 foreach (string i in bh)
                 {
-                    if (al.BH == "")
-                    {
-                        al.BH = i;
+					if (al.BH == null)
+					{
+						al.BH = i;
 
-                    }
-                    else
-                        al.BH = al.BH + ", " + i;
+					}
+					else
+						al.BH = al.BH + ", " + i;
                 }
                 list.Add(al);
             }
