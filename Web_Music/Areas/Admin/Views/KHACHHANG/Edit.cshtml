@@ -8,7 +8,7 @@
 }
 
 
-<form class="content-wrapper" action="~/Admin/KHACHHANG/Edit" method="post">
+<form class="content-wrapper" action="~/Admin/KHACHHANG/Edit" method="post" enctype="multipart/form-data">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="inputStatus">Sex</label>
                             <select id="inputStatus" class="form-control custom-select" name="GT">
-                                <option selected disabled value="True">Male</option>
+                                <option value="True">Male</option>
                                 <option value="False">Female</option>
 
                             </select>
@@ -70,7 +70,7 @@
                         <div class="form-group">
                             <label for="inputStatus">Status</label>
                             <select id="inputStatus" class="form-control custom-select" name="TrangThai">
-                                <option selected disabled value="True">On</option>
+                                <option value="True">On</option>
                                 <option value="False">Off</option>
 
                             </select>
@@ -115,34 +115,23 @@
                             <input type="text" id="inputEstimatedBudget" class="form-control" name="Email" value="@Model.Email">
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputFile">Avartar</label>
+						<div class="form-group">
+							<label for="exampleInputFile">File input</label>
 
-                            <div class="input-group">
-                                <img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))>
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
+							<div class="input-group">
 
-                            </div>
-                            @*<div class="form-group">
+								<img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+									<label class="custom-file-label" for="exampleInputFile">Choose file</label>
 
-                                    <label for="exampleInputFile">File input</label>
-                                    <div class="input-group">
+								</div>
 
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
 
-                                    </div>
-                                </div>*@
+							</div>
 
-                        </div>
+
+						</div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->

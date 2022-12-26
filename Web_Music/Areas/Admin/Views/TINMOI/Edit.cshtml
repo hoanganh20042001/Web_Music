@@ -6,7 +6,7 @@
 @section Head{
     <title>New Edit</title>
 }
-<form class="content-wrapper" action="~/Admin/TINMOI/Create" method="post">
+<form class="content-wrapper" action="~/Admin/TINMOI/Edit" method="post" enctype="multipart/form-data">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -38,24 +38,28 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="inputName">Name</label>
-                            <input type="text" id="inputName" class="form-control" name="TenTM" value="@Model.TenTM">
-                        </div>
+					<div class="card-body">
+						<div class="form-group">
 
-                        <div class="form-group">
-                            <label for="inputName">Time</label>
-                            <input type="text" id="inputName" class="form-control" name="ThoiGian" value="@Model.ThoiGian">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputName">Link</label>
-                            <input type="text" id="inputName" class="form-control" name="URL_link" value="@Model.URL_link">
-                        </div>
+							<input type="hidden" id="inputName" class="form-control" name="MaTM" value="@Model.MaTM">
+						</div>
+						<div class="form-group">
+							<label for="inputName">Name</label>
+							<input type="text" id="inputName" class="form-control" name="TenTM" value="@Model.TenTM">
+						</div>
+
+						<div class="form-group">
+							<label for="inputName">Time</label>
+							<input type="text" id="inputName" class="form-control" name="ThoiGian" value="@Model.ThoiGian">
+						</div>
+						<div class="form-group">
+							<label for="inputName">Link</label>
+							<input type="text" id="inputName" class="form-control" name="URL_link" value="@Model.URL_link">
+						</div>
 
 
 
-                    </div>
+					</div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -72,20 +76,19 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-							<label for="exampleInputFile">Picture</label>
+						<div class="form-group">
+							<label for="exampleInputFile">Avartar</label>
 
-                            <div class="input-group">
-                                <img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
+							<div class="input-group">
+								<img src="@Url.Content(Model.URL_img)" class="profile-user-img img-fluid img-circle" id="previewImage" />
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="exampleInputFile" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))">
+									<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+								</div>
 
-                            </div>
+							</div>
 
-
-                        </div>
+						</div>
                         <!-- /.card-body -->
                         <!--</div>-->
                         <!-- /.card -->
@@ -94,8 +97,9 @@
                         <div class="row ">
                             <div class="col-12">
                                 <a href="~/Admin/TINMOI/Index" class="btn btn-secondary" style="margin-right:400px;">Cancel</a>
-                                <input type="submit" value="Create" class="btn btn-success float-right">
+                                <input type="submit" value="Save" class="btn btn-success float-right">
                             </div>
+                        </div>
                         </div>
     </section>
     <!-- /.content -->

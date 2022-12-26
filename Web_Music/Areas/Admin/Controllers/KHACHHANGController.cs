@@ -1,27 +1,19 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Web_Music.Models;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.IO;
-using Web_Music.Function;
-using System.Collections.Generic;
-using Web_Music.Areas.Admin.Controllers;
+using System.Web.Mvc;
 using Web_Music.Areas.Admin.Model;
+using Web_Music.Function;
+using Web_Music.Models;
 
 
 namespace Web_Music.Areas.Admin.Controllers
 {
-    public class KHACHHANGController : BaseController
+	public class KHACHHANGController : BaseController
     {
         private MyDBConect db = new MyDBConect();
 
         // GET: Admin/KHACH_HANG
-        [HttpGet]
+        
         public ActionResult Index()
         {
             if (Session["MaAD"] == null)
@@ -32,19 +24,29 @@ namespace Web_Music.Areas.Admin.Controllers
             {
                 var list = new KhachHangF().ListAll();
             ViewBag.list = list;
-                return View();
+                return View(list);
             }
         }
         [HttpPost]
-        public ActionResult Index(string search)
+        public ActionResult Search(string search)
         {
-			//if (search == "")
-			//{
-   //             return RedirectToAction("Index");
-   //         }
-            var list = new KhachHangF().Search(search);
-            ViewBag.list = list;
-            return View();
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                if (search == "")
+                {
+                    return RedirectToAction("Index");
+                }
+                var list = new KhachHangF().Search(search);
+                //         string se = "%" + search + "%";
+
+                //         var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where trangthai=1 and tenKH like @se", new SqlParameter("@se", se)).ToList();
+                ViewBag.list = list;
+                return View(list);
+            }
         }
 
         // GET: Admin/KHACH_HANG/Details/5
@@ -88,38 +90,25 @@ namespace Web_Music.Areas.Admin.Controllers
 
         public ActionResult Create(KHACH_HANG Model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    if (ModelState.IsValid)
-            //    {
-            //        //ViewBag.MaNhom = new SelectList(db.NHOMs, "MaNhom", "TenNhom");
-            //        var item = new KhachHangF();
-            //        Model.MaKH = item.AutoID();
-
-            //        if (Model.ImageUpload != null)
-            //        {
-            //            string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
-            //            string extension = Path.GetExtension(Model.ImageUpload.FileName);
-            //            Model.URL_img = "~/Assets/img/KH/" + fileName + extension;
-            //            Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/KH/"), fileName));
-            //        }
-            //        var result = item.Insert(Model);
-            //        return RedirectToAction("Index");
-            //    }
-            //    return View();
-            //}
-            var item = new KhachHangF();
-            Model.MaKH = item.AutoID();
-            if (Model.ImageUpload != null)
+            if (Session["MaAD"] == null)
             {
-                string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
-                string extension = Path.GetExtension(Model.ImageUpload.FileName);
-                Model.URL_img = "~/Assets/img/KH/" + fileName + extension;
-                Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/KH/"), fileName + extension));
+                return RedirectToAction("Login", "Login");
             }
+            else
+            {
+                var item = new KhachHangF();
+                Model.MaKH = item.AutoID();
+                if (Model.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
+                    string extension = Path.GetExtension(Model.ImageUpload.FileName);
+                    Model.URL_img = "~/Assets/img/KH/" + fileName + extension;
+                    Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/KH/"), fileName + extension));
+                }
 
-            var result = item.Insert(Model);
-            return RedirectToAction("Index");
+                var result = item.Insert(Model);
+                return RedirectToAction("Index");
+            }
         }
 
 
@@ -147,16 +136,28 @@ namespace Web_Music.Areas.Admin.Controllers
 
         public ActionResult Edit(KHACH_HANG Model)
         {
-            //         try
-            //{
-            var item = new KhachHangF();
-            var result = item.Edit(Model);
-            if (result == true) return RedirectToAction("Index");
+            if (Session["MaAD"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             else
             {
-                ModelState.AddModelError("", "Edit item Unsucessfully");
-                return View(Model);
+                var item = new KhachHangF();
+                if (Model.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(Model.ImageUpload.FileName);
+                    string extension = Path.GetExtension(Model.ImageUpload.FileName);
+                    Model.URL_img = "~/Assets/img/KH/" + fileName + extension;
+                    Model.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Assets/img/KH/"), fileName + extension));
+                }
+                var result = item.Edit(Model);
+                if (result == true) return RedirectToAction("Index");
+                else
+                {
+                    ModelState.AddModelError("", "Edit item Unsucessfully");
+                    return View(Model);
 
+                }
             }
             //var id = db.SaveChanges();
             //             if (id > 0) return RedirectToAction("Index");

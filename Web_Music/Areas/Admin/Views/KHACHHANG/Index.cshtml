@@ -1,8 +1,8 @@
-﻿@*@model IEnumerable<Web_Music.Models.KHACH_HANG>*@
+﻿@model IEnumerable<Web_Music.Models.KHACH_HANG>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/NewLayoutAdmin.cshtml";
 }
 @section Head{
     <title>Customer</title>
@@ -26,7 +26,7 @@
         </div><!-- /.container-fluid -->
     </section>
     <div class="sidebar-search" style="display:inline-flex;margin:10px">
-        <form class="input-group custom-search-form" action="/KHACHHANG/Index" method="post">
+        <form class="input-group custom-search-form" action="~/Admin/KHACHHANG/Search" method="post">
             <input type="text" class="form-control" placeholder="Search..." name="search">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit">
@@ -60,7 +60,7 @@
                     <thead>
                         <tr>
                             <th style="width: 1%">
-                                #
+                                STT
                             </th>
                             <th style="width:10%">
                                 Image
@@ -79,13 +79,11 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        @foreach (var item in ViewBag.list)
-                        {
+                        @{int i = 1;
+							foreach (var item in Model)
+							{
                             <tr>
-                                <td>
-                                    #
-                                </td>
+                                <td scope="row">@(i++)</td>
                                 <td>
 
                                     <li class="list-inline-item">
@@ -110,7 +108,7 @@
                                     @item.SDT
                                 </td>
                                 <td class="project-state">
-                                    @((item.GT.ToString()=="True")? "Male":"Female")
+                                    @((item.GT.ToString() == "True") ? "Male" : "Female")
                                     @*<span class="badge badge-success">Success</span>*@
                                 </td>
                                 <td class="project-actions text-right">
@@ -131,8 +129,8 @@
                                     </a>
                                 </td>
                             </tr>
-                        }
-
+								}
+							}
                     </tbody>
                 </table>
             </div>

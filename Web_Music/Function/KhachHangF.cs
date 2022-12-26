@@ -54,7 +54,7 @@ namespace Web_Music.Function
         public List<KHACH_HANG> Search(string search)
         {
             string value = "%" +search + "%";
-            var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where trangthai='true' and tenkh like @value", new SqlParameter("@value", value)).ToList();
+            var list = db.Database.SqlQuery<KHACH_HANG>("select * from khach_hang where trangthai=1 and tenkh like @value", new SqlParameter("@value", value)).ToList();
             return list;
         }
         public int Count()

@@ -31,7 +31,7 @@ namespace Web_Music.Function
         {
             string result;
             //string values = db.NGHE_SIs.SqlQuery("SELECT max(RIGHT(MAns, 8)) FROM nghe_si").SingleOrDefault().ToString();
-            int value = int.Parse(db.Database.SqlQuery<string>("SELECT max(RIGHT(MAns, 8)) FROM tin_moi").SingleOrDefault().ToString());
+            int value = int.Parse(db.Database.SqlQuery<string>("SELECT max(RIGHT(MAtm, 8)) FROM tin_moi").SingleOrDefault().ToString());
             if (0 <= value && value < 9)
             {
                 result = "TM0000000" + Convert.ToString(value + 1);
